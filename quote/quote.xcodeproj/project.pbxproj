@@ -49,7 +49,6 @@
 		7CD79C94281844B2007A04DA /* Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD79C6D281844B2007A04DA /* Combine.swift */; };
 		7CD79C95281844B2007A04DA /* ResponseSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD79C6E281844B2007A04DA /* ResponseSerialization.swift */; };
 		7CD79C97281844B2007A04DA /* SessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD79C70281844B2007A04DA /* SessionDelegate.swift */; };
-		7CD79C98281844B2007A04DA /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 7CD79C71281844B2007A04DA /* .gitignore */; };
 		7CD79C99281844B2007A04DA /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7CD79C72281844B2007A04DA /* .travis.yml */; };
 /* End PBXBuildFile section */
 
@@ -98,7 +97,6 @@
 		7CD79C6D281844B2007A04DA /* Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Combine.swift; sourceTree = "<group>"; };
 		7CD79C6E281844B2007A04DA /* ResponseSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseSerialization.swift; sourceTree = "<group>"; };
 		7CD79C70281844B2007A04DA /* SessionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDelegate.swift; sourceTree = "<group>"; };
-		7CD79C71281844B2007A04DA /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		7CD79C72281844B2007A04DA /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .travis.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -156,7 +154,6 @@
 			isa = PBXGroup;
 			children = (
 				7CD79C4B281844B2007A04DA /* Source */,
-				7CD79C71281844B2007A04DA /* .gitignore */,
 				7CD79C72281844B2007A04DA /* .travis.yml */,
 			);
 			path = Alamofire;
@@ -264,7 +261,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CD79C99281844B2007A04DA /* .travis.yml in Resources */,
-				7CD79C98281844B2007A04DA /* .gitignore in Resources */,
 				7CD7997228183FD0007A04DA /* LaunchScreen.storyboard in Resources */,
 				7CD7996F28183FD0007A04DA /* Assets.xcassets in Resources */,
 				7CD7996D28183FCE007A04DA /* Main.storyboard in Resources */,
