@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C9FE97F281ADEF3005D64C0 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9FE97D281ADEF3005D64C0 /* SwiftyJSON.swift */; };
 		7CD7996628183FCE007A04DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7996528183FCE007A04DA /* AppDelegate.swift */; };
 		7CD7996828183FCE007A04DA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7996728183FCE007A04DA /* SceneDelegate.swift */; };
 		7CD7996A28183FCE007A04DA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7996928183FCE007A04DA /* ViewController.swift */; };
@@ -53,6 +54,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7C9FE97D281ADEF3005D64C0 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		7C9FE97E281ADEF3005D64C0 /* SwiftyJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyJSON.h; sourceTree = "<group>"; };
 		7CD7996228183FCE007A04DA /* quote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = quote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CD7996528183FCE007A04DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7CD7996728183FCE007A04DA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -111,6 +114,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7C9FE97C281ADEF3005D64C0 /* SwiftyJSON */ = {
+			isa = PBXGroup;
+			children = (
+				7C9FE97D281ADEF3005D64C0 /* SwiftyJSON.swift */,
+				7C9FE97E281ADEF3005D64C0 /* SwiftyJSON.h */,
+			);
+			path = SwiftyJSON;
+			sourceTree = "<group>";
+		};
 		7CD7995928183FCE007A04DA = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +157,7 @@
 		7CD79C49281844B2007A04DA /* library */ = {
 			isa = PBXGroup;
 			children = (
+				7C9FE97C281ADEF3005D64C0 /* SwiftyJSON */,
 				7CD79C4A281844B2007A04DA /* Alamofire */,
 			);
 			path = library;
@@ -277,6 +290,7 @@
 				7CD7996A28183FCE007A04DA /* ViewController.swift in Sources */,
 				7CD79C85281844B2007A04DA /* AlamofireExtended.swift in Sources */,
 				7CD79C92281844B2007A04DA /* HTTPHeaders.swift in Sources */,
+				7C9FE97F281ADEF3005D64C0 /* SwiftyJSON.swift in Sources */,
 				7CD79C8C281844B2007A04DA /* Notifications.swift in Sources */,
 				7CD7996628183FCE007A04DA /* AppDelegate.swift in Sources */,
 				7CD79C89281844B2007A04DA /* URLConvertible+URLRequestConvertible.swift in Sources */,
