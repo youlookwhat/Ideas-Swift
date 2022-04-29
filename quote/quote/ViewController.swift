@@ -17,13 +17,13 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         // 解析：https://juejin.cn/post/6875140053635432462
+        // https://stackoverflow.com/questions/51318926/swift-json-to-model-class
         let url = "http://v3.wufazhuce.com:8000/api/channel/one/0/0"
 //        let parameters = ["foo": "bar"]
         
 //        AF.request(url,parameters: parameters, encoder: JSONParameterEncoder.default).response { result in
             
         AF.request(url).responseData { response in
-            
             do {
                 let bean = try JSONDecoder().decode(Bean.self, from: response.value!) as Bean
                 print(bean.res==0)
