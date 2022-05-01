@@ -21,9 +21,9 @@ class OneModel {
                 // let url = "http://v3.wufazhuce.com:8000/api/channel/one/0/0"
 
                 // 注意 bean 名称不能轻易用Data名字
-                let bean = try JSONDecoder().decode(OneBean.self, from: response.value!) as OneBean
-                print(bean.res==0)
-                print(bean.data!.content_list?[1].category)
+                let bean = try JSONDecoder().decode(OneBean.self, from: response.value!) as OneBean?
+//                print(bean.res==0)
+//                print(bean.data!.content_list?[1].category)
                 listener.onData(bean: bean)
             } catch {
                 // print error here.
@@ -31,7 +31,24 @@ class OneModel {
         }
     }
     
+    // 实践：需要成员变量
+        // 成员变量，单独实现
+    //    var listener : OneGetDataImpl!
     
+    //        listener = OneGetDataImpl()
+    //        OneModel().getOneData(listener: listener)
+    
+    
+    //    class OneGetDataImpl : OneGetDataListener {
+    //        func onData(bean: OneBean?) {
+    //            if bean != nil {
+    //                print(bean!.res==0)
+    //                print(bean!.data!.content_list?[1].category)
+    //            }
+    //
+    //        }
+    //    }
+    //
 
 }
 

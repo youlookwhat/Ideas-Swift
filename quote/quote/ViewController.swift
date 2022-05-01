@@ -9,20 +9,26 @@
 import UIKit
 
 
-class ViewController: UIViewController, OneGetDataListener {
+class ViewController: UIViewController, OneNavigation {
     
+    var present:OnePresent?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        OneModel().getOneData(listener: self)
-        
-}
-    func onData(bean: OneBean) {
-        print(bean.res==0)
-        print(bean.data!.content_list?[1].category)
-        
+        present = OnePresent(navigation: self)
+        present?.getOneData()
+    }
+
+    
+    func onDataSuccess(bean: OneBean?) {
+        if bean != nil {
+            print(bean!.res==0)
+            print(bean!.data!.content_list?[1].category)
+        } else {
+            // 无内容
+        }
     }
     
 

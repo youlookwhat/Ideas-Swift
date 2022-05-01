@@ -54,6 +54,8 @@
 		7CF8D529281D78FF00B83EDC /* OneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D528281D78FF00B83EDC /* OneModel.swift */; };
 		7CF8D52C281D797C00B83EDC /* OneBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D52B281D797C00B83EDC /* OneBean.swift */; };
 		7CF8D530281D840C00B83EDC /* interfaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D52F281D840C00B83EDC /* interfaces.swift */; };
+		7CF8D537281E544D00B83EDC /* OnePresent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D536281E544D00B83EDC /* OnePresent.swift */; };
+		7CF8D539281E549300B83EDC /* OneNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D538281E549300B83EDC /* OneNavigation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -107,6 +109,8 @@
 		7CF8D528281D78FF00B83EDC /* OneModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneModel.swift; sourceTree = "<group>"; };
 		7CF8D52B281D797C00B83EDC /* OneBean.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneBean.swift; sourceTree = "<group>"; };
 		7CF8D52F281D840C00B83EDC /* interfaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = interfaces.swift; sourceTree = "<group>"; };
+		7CF8D536281E544D00B83EDC /* OnePresent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnePresent.swift; sourceTree = "<group>"; };
+		7CF8D538281E549300B83EDC /* OneNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneNavigation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +160,8 @@
 				7CD7996E28183FD0007A04DA /* Assets.xcassets */,
 				7CD7997028183FD0007A04DA /* LaunchScreen.storyboard */,
 				7CD7997328183FD0007A04DA /* Info.plist */,
+				7CF8D535281E543300B83EDC /* present */,
+				7CF8D534281E542D00B83EDC /* navagation */,
 				7CF8D52E281D83D000B83EDC /* interface */,
 				7CF8D52A281D795800B83EDC /* bean */,
 				7CF8D527281D78CA00B83EDC /* model */,
@@ -246,6 +252,22 @@
 				7CF8D52F281D840C00B83EDC /* interfaces.swift */,
 			);
 			path = interface;
+			sourceTree = "<group>";
+		};
+		7CF8D534281E542D00B83EDC /* navagation */ = {
+			isa = PBXGroup;
+			children = (
+				7CF8D538281E549300B83EDC /* OneNavigation.swift */,
+			);
+			path = navagation;
+			sourceTree = "<group>";
+		};
+		7CF8D535281E543300B83EDC /* present */ = {
+			isa = PBXGroup;
+			children = (
+				7CF8D536281E544D00B83EDC /* OnePresent.swift */,
+			);
+			path = present;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -344,6 +366,7 @@
 				7CD79C80281844B2007A04DA /* ParameterEncoding.swift in Sources */,
 				7CD79C79281844B2007A04DA /* OperationQueue+Alamofire.swift in Sources */,
 				7CD79C94281844B2007A04DA /* Combine.swift in Sources */,
+				7CF8D539281E549300B83EDC /* OneNavigation.swift in Sources */,
 				7CD79C81281844B2007A04DA /* ServerTrustEvaluation.swift in Sources */,
 				7CD79C8A281844B2007A04DA /* RequestTaskMap.swift in Sources */,
 				7CD7996828183FCE007A04DA /* SceneDelegate.swift in Sources */,
@@ -358,6 +381,7 @@
 				7CD79C78281844B2007A04DA /* Session.swift in Sources */,
 				7CD79C8F281844B2007A04DA /* Alamofire.swift in Sources */,
 				7CD79C7C281844B2007A04DA /* StringEncoding+Alamofire.swift in Sources */,
+				7CF8D537281E544D00B83EDC /* OnePresent.swift in Sources */,
 				7CD79C7A281844B2007A04DA /* Concurrency.swift in Sources */,
 				7CD79C86281844B2007A04DA /* HTTPMethod.swift in Sources */,
 				7CD79C95281844B2007A04DA /* ResponseSerialization.swift in Sources */,

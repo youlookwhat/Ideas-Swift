@@ -13,5 +13,5 @@ class interfaces: NSObject {
 }
 
 protocol OneGetDataListener {
-    func onData(bean : OneBean)
+    func onData(bean : OneBean?)
 }
