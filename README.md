@@ -27,3 +27,42 @@ To install MagazineLayout using CocoaPods, add pod 'MagazineLayout' to your Podf
  - 4、使用 `pod install` 安装
  - 5、最后 打开 `xcworkspace`文件
 
+### xcode11新项目删除main.storyboard
+> https://www.jianshu.com/p/e255303d11b8
+
+ - 1、首先 选中工程文件选项，之后删除 Genaral -> Deployment Info -> Main Interface选项里的Main
+ - 2、接着 删除在`info.plist`里的Application Scene Manifest条目
+ - 3、注释：`application()-> UISceneConfiguration`、`application(,Set<UISceneSession>)`两个方法
+ - 4、添加
+ 	
+ 	```
+ 	    window = UIWindow(frame: UIScreen.main.bounds)
+        let navigationController = UINavigationController(rootViewController: ViewController())
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
+ 	```
+ - 5、删除`main.storyboard `和`SceneDelegate.swift`，应该也可不删除
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+

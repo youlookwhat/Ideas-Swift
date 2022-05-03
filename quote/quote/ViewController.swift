@@ -17,6 +17,10 @@ class ViewController: UIViewController, OneNavigation {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        
+        navigationItem.title = "每日句子"
+        view.backgroundColor = UIColor.white
+        
         present = OnePresent(navigation: self)
         present?.getOneData()
     }
