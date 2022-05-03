@@ -19,11 +19,11 @@ https://www.macwk.com/soft/switchhosts
 
 To install MagazineLayout using CocoaPods, add pod 'MagazineLayout' to your Podfile, then follow the integration tutorial [here](https://guides.cocoapods.org/using/using-cocoapods.html).
 
-1、使用 cd 进入项目根目录
-2、然后使用 pod init ，会创建一个 Podfile 文件
-3、然后安装三方的库，2种方式。使用 vim Podfile 打开文件：
-	- pod 'MagazineLayout'
-	- pod 'SnapKit','~>3.0.2'
-4、使用 pod install 安装
-5、最后 打开 `xcworkspace`文件
+ - 1、使用 `cd` 进入项目根目录
+ - 2、然后使用 `pod init` ，会创建一个 Podfile 文件
+ - 3、然后安装三方的库，2种方式。使用 vim Podfile 打开文件：
+	- `pod 'MagazineLayout'`
+	- `pod 'SnapKit','~>3.0.2'`
+ - 4、使用 `pod install` 安装
+ - 5、最后 打开 `xcworkspace`文件
 
