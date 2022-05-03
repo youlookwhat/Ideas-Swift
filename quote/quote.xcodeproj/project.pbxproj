@@ -56,6 +56,7 @@
 		7CF8D530281D840C00B83EDC /* interfaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D52F281D840C00B83EDC /* interfaces.swift */; };
 		7CF8D537281E544D00B83EDC /* OnePresent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D536281E544D00B83EDC /* OnePresent.swift */; };
 		7CF8D539281E549300B83EDC /* OneNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF8D538281E549300B83EDC /* OneNavigation.swift */; };
+		7CFBBAE92820FA4000F052F0 /* app_lauch.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7CFBBAE82820FA4000F052F0 /* app_lauch.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -111,6 +112,7 @@
 		7CF8D52F281D840C00B83EDC /* interfaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = interfaces.swift; sourceTree = "<group>"; };
 		7CF8D536281E544D00B83EDC /* OnePresent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnePresent.swift; sourceTree = "<group>"; };
 		7CF8D538281E549300B83EDC /* OneNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneNavigation.swift; sourceTree = "<group>"; };
+		7CFBBAE82820FA4000F052F0 /* app_lauch.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = app_lauch.jpg; path = ../../../../../../Downloads/app_lauch.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +162,7 @@
 				7CD7996E28183FD0007A04DA /* Assets.xcassets */,
 				7CD7997028183FD0007A04DA /* LaunchScreen.storyboard */,
 				7CD7997328183FD0007A04DA /* Info.plist */,
+				7CFBBAE82820FA4000F052F0 /* app_lauch.jpg */,
 				7CF8D535281E543300B83EDC /* present */,
 				7CF8D534281E542D00B83EDC /* navagation */,
 				7CF8D52E281D83D000B83EDC /* interface */,
@@ -286,6 +289,8 @@
 			dependencies = (
 			);
 			name = quote;
+			packageProductDependencies = (
+			);
 			productName = quote;
 			productReference = 7CD7996228183FCE007A04DA /* quote.app */;
 			productType = "com.apple.product-type.application";
@@ -314,6 +319,8 @@
 				Base,
 			);
 			mainGroup = 7CD7995928183FCE007A04DA;
+			packageReferences = (
+			);
 			productRefGroup = 7CD7996328183FCE007A04DA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -329,6 +336,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CD79C99281844B2007A04DA /* .travis.yml in Resources */,
+				7CFBBAE92820FA4000F052F0 /* app_lauch.jpg in Resources */,
 				7CD7997228183FD0007A04DA /* LaunchScreen.storyboard in Resources */,
 				7CD7996F28183FD0007A04DA /* Assets.xcassets in Resources */,
 				7CD7996D28183FCE007A04DA /* Main.storyboard in Resources */,
@@ -416,6 +424,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -476,6 +485,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
