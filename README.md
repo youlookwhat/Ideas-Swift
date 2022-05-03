@@ -2,8 +2,9 @@
 每日一句App，用于使用Swift开发iOS App
 
 
-Alamofire-5.5.0
-SwiftyJSON-5.0.1
+ - Alamofire-5.5.0
+ - SwiftyJSON-5.0.1(可不用)
+ - Json序列化: [HandyJSON](https://github.com/alibaba/HandyJSON)
 
 
 解决不能执行`curl -L get.rvm.io | bash -s stable`问题：
@@ -36,15 +37,13 @@ To install MagazineLayout using CocoaPods, add pod 'MagazineLayout' to your Podf
  - 2、接着 删除在`info.plist`里的Application Scene Manifest条目
  - 3、注释：`application()-> UISceneConfiguration`、`application(,Set<UISceneSession>)`两个方法
  - 4、添加
- 	
- 	```
- 	    window = UIWindow(frame: UIScreen.main.bounds)
-        let navigationController = UINavigationController(rootViewController: ViewController())
-        window?.rootViewController = navigationController
-        window?.makeKeyAndVisible()
- 	```
+```
+window = UIWindow(frame: UIScreen.main.bounds)
+let navigationController = UINavigationController(rootViewController: ViewController())
+window?.rootViewController = navigationController
+window?.makeKeyAndVisible()
+```
  - 5、删除`main.storyboard `和`SceneDelegate.swift`，应该也可不删除
-
 
 
 
