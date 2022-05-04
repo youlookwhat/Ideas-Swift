@@ -49,7 +49,8 @@ window?.makeKeyAndVisible()
 
 
 
-
+// swift下拉刷新
+https://github.com/AnRanScheme/MagiRefresh
 
 
 

@@ -1,0 +1,6 @@
+framework module MagazineLayout {
+  umbrella header "MagazineLayout-umbrella.h"
+
+  export *
+  module * { export * }
+}

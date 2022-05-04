@@ -1,0 +1,20 @@
+PODS:
+  - HandyJSON (5.0.2)
+  - MagazineLayout (1.6.5)
+
+DEPENDENCIES:
+  - HandyJSON (~> 5.0.2)
+  - MagazineLayout
+
+SPEC REPOS:
+  trunk:
+    - HandyJSON
+    - MagazineLayout
+
+SPEC CHECKSUMS:
+  HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
+  MagazineLayout: aa7a1a70aac10791a08a29790320de0670e3f4ba
+
+PODFILE CHECKSUM: 6935aad818ec57b699cb0d3b7d66e2a5a08c814c
+
+COCOAPODS: 1.11.3
