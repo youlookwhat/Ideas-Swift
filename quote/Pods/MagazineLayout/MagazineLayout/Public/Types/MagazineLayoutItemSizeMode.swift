@@ -18,7 +18,7 @@ import CoreGraphics
 // MARK: - MagazineLayoutItemSizeMode
 
 /// Represents the horizontal and vertical sizing mode for an item.
-public struct MagazineLayoutItemSizeMode: Hashable {
+public struct MagazineLayoutItemSizeMode: Hashable{
 
   // MARK: Lifecycle
 
@@ -43,7 +43,7 @@ public struct MagazineLayoutItemSizeMode: Hashable {
 ///
 /// Consecutive items with the same width mode will display on the same row until there is no more
 /// room.
-public enum MagazineLayoutItemWidthMode: Hashable {
+public enum MagazineLayoutItemWidthMode: Hashable{
 
   /// Full width items will fill the available width in a section.
   ///
@@ -98,7 +98,7 @@ public enum MagazineLayoutItemWidthMode: Hashable {
 /// `MagazineLayout` supports vertically self-sizing and statically sized items. Since height modes
 /// are specified for each item, you can mix vertically self-sizing and statically sized items in
 /// the same sections, and even in the same rows.
-public enum MagazineLayoutItemHeightMode: Hashable {
+public enum MagazineLayoutItemHeightMode: Hashable{
 
   /// This height mode mode will cause the item to be displayed with a height equal to `height`.
   ///
