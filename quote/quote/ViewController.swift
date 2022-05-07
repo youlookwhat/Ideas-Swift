@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import MagazineLayout
 
 class ViewController: UIViewController, OneNavigation {
     
@@ -21,6 +21,14 @@ class ViewController: UIViewController, OneNavigation {
         navigationItem.title = "每日句子"
         view.backgroundColor = UIColor.white
         
+//        collectionView.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//          collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//          collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//          collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+//          collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+//        ])
+        
         present = OnePresent(navigation: self)
         present?.getOneData()
     }
@@ -29,16 +37,175 @@ class ViewController: UIViewController, OneNavigation {
     func onDataSuccess(bean: OneBean?) {
         if bean != nil {
             print(bean!.res==0)
-            print(bean!.data!.content_list?[1].category)
+//            print(bean!.data!.content_list?[1].category)
         } else {
             // 无内容
         }
     }
     
+    
+    private func removeAllData() {
+      collectionView.performBatchUpdates({
+        for sectionIndex in (0..<dataSource.numberOfSections).reversed() {
+          dataSource.removeSection(atSectionIndex: sectionIndex)
+          collectionView.deleteSections(IndexSet(arrayLiteral: sectionIndex))
+        }
+      }, completion: nil)
+    }
+    
+    func loadData() {
+        
+        removeAllData()
 
-struct Login: Encodable {
-    let email: String
-    let password: String
+//        let section0 = SectionInfo(
+//          headerInfo: HeaderInfo(
+//            visibilityMode: .visible(heightMode: .dynamic, pinToVisibleBounds: true),
+//            title: "Welcome!"),
+//          itemInfos: [
+//            ItemInfo(
+//              sizeMode: MagazineLayoutItemSizeMode(
+//                widthMode: .fullWidth(respectsHorizontalInsets: true),
+//                heightMode: .dynamic),
+//              text: "MagazineLayout lets you layout items in vertically scrolling grids and lists.",
+//              color: Colors.red),
+//            ItemInfo(
+//              sizeMode: MagazineLayoutItemSizeMode(
+//                widthMode: .fullWidth(respectsHorizontalInsets: true),
+//                heightMode: .dynamic),
+//              text: "As you can see...",
+//              color: Colors.red),
+//            ItemInfo(
+//              sizeMode: MagazineLayoutItemSizeMode(
+//                widthMode: .halfWidth,
+//                heightMode: .dynamic),
+//              text: "items can be vertically self-sized",
+//              color: Colors.orange),
+//            ItemInfo(
+//              sizeMode: MagazineLayoutItemSizeMode(
+//                widthMode: .halfWidth,
+//                heightMode: .dynamic),
+//              text: "based on their contents.",
+//              color: Colors.orange),
+//            ItemInfo(
+//              sizeMode: MagazineLayoutItemSizeMode(
+//                widthMode: .halfWidth,
+//                heightMode: .dynamic),
+//              text: "Widths are determined",
+//              color: Colors.green),
+//            ItemInfo(
+//              sizeMode: MagazineLayoutItemSizeMode(
+//                widthMode: .halfWidth,
+//                heightMode: .dynamic),
+//              text: "by item width modes",
+//              color: Colors.green),
+//            ItemInfo(
+//              sizeMode: MagazineLayoutItemSizeMode(
+//                widthMode: .thirdWidth,
+//                heightMode: .dynamic),
+//              text: "3 across",
+//              color: Colors.green),
+//            ItemInfo(
+//              sizeMode: MagazineLayoutItemSizeMode(
+//                widthMode: .thirdWidth,
+//                heightMode: .dynamic),
+//              text: "3 across",
+//              color: Colors.green),
+//            ItemInfo(
+//              sizeMode: MagazineLayoutItemSizeMode(
+//                widthMode: .thirdWidth,
+//                heightMode: .dynamic),
+//              text: "3 across",
+//              color: Colors.green),
+//            ItemInfo(
+//              sizeMode: MagazineLayoutItemSizeMode(
+//                widthMode: .fractionalWidth(divisor: 10),
+//                heightMode: .dynamic),
+//              text: "1",
+//              color: Colors.blue),
+//            ItemInfo(
+//              sizeMode: MagazineLayoutItemSizeMode(
+//                widthMode: .fractionalWidth(divisor: 10),
+//                heightMode: .dynamic),
+//              text: "0",
+//              color: Colors.blue),
+//            ItemInfo(
+//              sizeMode: MagazineLayoutItemSizeMode(
+//                widthMode: .fractionalWidth(divisor: 10),
+//                heightMode: .dynamic),
+//              text: " ",
+//              color: Colors.blue),
+//            ItemInfo(
+//              sizeMode: MagazineLayoutItemSizeMode(
+//                widthMode: .fractionalWidth(divisor: 10),
+//                heightMode: .dynamic),
+//              text: "a",
+//              color: Colors.blue)
+//          ],
+//          footerInfo: FooterInfo(
+//            visibilityMode: .hidden,
+//            title: ""),
+//          backgroundInfo: BackgroundInfo(visibilityMode: .hidden)
+//        )
+        
+//        let section0 = SectionInfo(
+//            headerInfo: nil, itemInfos: nil, footerInfo: nil, backgroundInfo: nil
+//        )
+        
+        collectionView.performBatchUpdates({
+//          dataSource.insert(section0, atSectionIndex: 0)
+//          dataSource.insert(section1, atSectionIndex: 1)
+//          dataSource.insert(section2, atSectionIndex: 2)
+
+          collectionView.insertSections(IndexSet(arrayLiteral: 0, 1, 2))
+        }, completion: nil)
+    }
+    
+    private lazy var collectionView: UICollectionView = {
+      let layout = MagazineLayout()
+      let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+      collectionView.register(OneCellImage.self, forCellWithReuseIdentifier: OneCellImage.description())
+//      collectionView.register(
+//        Header.self,
+//        forSupplementaryViewOfKind: MagazineLayout.SupplementaryViewKind.sectionHeader,
+//        withReuseIdentifier: Header.description())
+//      collectionView.register(
+//        Footer.self,
+//        forSupplementaryViewOfKind: MagazineLayout.SupplementaryViewKind.sectionFooter,
+//        withReuseIdentifier: Footer.description())
+//      collectionView.register(
+//        Background.self,
+//        forSupplementaryViewOfKind: MagazineLayout.SupplementaryViewKind.sectionBackground,
+//        withReuseIdentifier: Background.description())
+      collectionView.isPrefetchingEnabled = false
+      collectionView.dataSource = dataSource
+      collectionView.delegate = self
+      collectionView.backgroundColor = .white
+      collectionView.contentInsetAdjustmentBehavior = .always
+      return collectionView
+    }()
+
+    private lazy var dataSource = DataSource()
+
+//struct Login: Encodable {
+//    let email: String
+//    let password: String
+//}
+
 }
+
+// MARK: UICollectionViewDelegate
+extension ViewController: UICollectionViewDelegate {
+
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    collectionView.performBatchUpdates({
+      if dataSource.numberOfItemsInSection(withIndex: indexPath.section) > 1 {
+        dataSource.removeItem(atItemIndex: indexPath.item, inSectionAtIndex: indexPath.section)
+        collectionView.deleteItems(at: [indexPath])
+      } else {
+        dataSource.removeSection(atSectionIndex: indexPath.section)
+        collectionView.deleteSections(IndexSet(integer: indexPath.section))
+      }
+    }, completion: nil)
+  }
 
 }

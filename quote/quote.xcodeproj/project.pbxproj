@@ -14,6 +14,7 @@
 		7CBC7A1228241E2F005ECB4C /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC7A1128241E2F005ECB4C /* HttpRequest.swift */; };
 		7CBC7A1428241E91005ECB4C /* MoyaConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC7A1328241E91005ECB4C /* MoyaConfig.swift */; };
 		7CBC7A1628256FC3005ECB4C /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC7A1528256FC3005ECB4C /* DataSource.swift */; };
+		7CBC7A182826BAA3005ECB4C /* DataSourceCountsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC7A172826BAA3005ECB4C /* DataSourceCountsProvider.swift */; };
 		7CD7996628183FCE007A04DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7996528183FCE007A04DA /* AppDelegate.swift */; };
 		7CD7996A28183FCE007A04DA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7996928183FCE007A04DA /* ViewController.swift */; };
 		7CD7996F28183FD0007A04DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CD7996E28183FD0007A04DA /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 		7CBC7A1128241E2F005ECB4C /* HttpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
 		7CBC7A1328241E91005ECB4C /* MoyaConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaConfig.swift; sourceTree = "<group>"; };
 		7CBC7A1528256FC3005ECB4C /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
+		7CBC7A172826BAA3005ECB4C /* DataSourceCountsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceCountsProvider.swift; sourceTree = "<group>"; };
 		7CD7996228183FCE007A04DA /* quote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = quote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CD7996528183FCE007A04DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7CD7996928183FCE007A04DA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 			children = (
 				7CBC7A0D2822C18E005ECB4C /* Data.swift */,
 				7CBC7A1528256FC3005ECB4C /* DataSource.swift */,
+				7CBC7A172826BAA3005ECB4C /* DataSourceCountsProvider.swift */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 				7CBC7A0E2822C18E005ECB4C /* Data.swift in Sources */,
 				7CF8D52C281D797C00B83EDC /* OneBean.swift in Sources */,
 				7CF8D530281D840C00B83EDC /* interfaces.swift in Sources */,
+				7CBC7A182826BAA3005ECB4C /* DataSourceCountsProvider.swift in Sources */,
 				7CF8D539281E549300B83EDC /* OneNavigation.swift in Sources */,
 				7CF8D529281D78FF00B83EDC /* OneModel.swift in Sources */,
 				7CBC7A1228241E2F005ECB4C /* HttpRequest.swift in Sources */,
