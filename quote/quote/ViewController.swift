@@ -21,22 +21,41 @@ class ViewController: UIViewController, OneNavigation {
         navigationItem.title = "每日句子"
         view.backgroundColor = UIColor.white
         
-//        collectionView.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//          collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//          collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//          collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-//          collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-//        ])
+        view.addSubview(collectionView)
+        
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+          collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+          collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+          collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+          collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
         
         present = OnePresent(navigation: self)
         present?.getOneData()
     }
 
-    
+    var itemList = [ItemOneBean]()
     func onDataSuccess(bean: OneBean?) {
         if bean != nil {
             print(bean!.res==0)
+            
+            // 这里可以优化一下，直接赋值结构体content_list
+            for item in bean!.data!.content_list!{
+                let one = ItemOneBean()
+                one.sizeMode = MagazineLayoutItemSizeMode(
+                                widthMode: .fullWidth(respectsHorizontalInsets: true),
+                                heightMode: .dynamic)
+                one.author = item.author
+                one.category = item.category
+                one.forward = item.forward
+                one.img_url = item.img_url
+                one.title = item.title
+                one.share_url = item.share_url
+                one.words_info = item.words_info
+                itemList.append(one)
+            }
+            loadData()
 //            print(bean!.data!.content_list?[1].category)
         } else {
             // 无内容
@@ -147,16 +166,17 @@ class ViewController: UIViewController, OneNavigation {
 //          backgroundInfo: BackgroundInfo(visibilityMode: .hidden)
 //        )
         
-//        let section0 = SectionInfo(
-//            headerInfo: nil, itemInfos: nil, footerInfo: nil, backgroundInfo: nil
-//        )
+        let section0 = SectionInfoOne(
+            itemInfos: itemList
+        )
         
         collectionView.performBatchUpdates({
-//          dataSource.insert(section0, atSectionIndex: 0)
+          dataSource.insert(section0, atSectionIndex: 0)
 //          dataSource.insert(section1, atSectionIndex: 1)
 //          dataSource.insert(section2, atSectionIndex: 2)
 
-          collectionView.insertSections(IndexSet(arrayLiteral: 0, 1, 2))
+//          collectionView.insertSections(IndexSet(arrayLiteral: 0, 1, 2))
+            collectionView.insertSections(IndexSet(arrayLiteral: 0))
         }, completion: nil)
     }
     
@@ -184,7 +204,7 @@ class ViewController: UIViewController, OneNavigation {
       return collectionView
     }()
 
-    private lazy var dataSource = DataSource()
+    private lazy var dataSource = DataSourceOne()
 
 //struct Login: Encodable {
 //    let email: String
@@ -198,13 +218,14 @@ extension ViewController: UICollectionViewDelegate {
 
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     collectionView.performBatchUpdates({
-      if dataSource.numberOfItemsInSection(withIndex: indexPath.section) > 1 {
-        dataSource.removeItem(atItemIndex: indexPath.item, inSectionAtIndex: indexPath.section)
-        collectionView.deleteItems(at: [indexPath])
-      } else {
-        dataSource.removeSection(atSectionIndex: indexPath.section)
-        collectionView.deleteSections(IndexSet(integer: indexPath.section))
-      }
+        print(itemList[indexPath.item].title)
+//      if dataSource.numberOfItemsInSection(withIndex: indexPath.section) > 1 {
+//        dataSource.removeItem(atItemIndex: indexPath.item, inSectionAtIndex: indexPath.section)
+//        collectionView.deleteItems(at: [indexPath])
+//      } else {
+//        dataSource.removeSection(atSectionIndex: indexPath.section)
+//        collectionView.deleteSections(IndexSet(integer: indexPath.section))
+//      }
     }, completion: nil)
   }
 

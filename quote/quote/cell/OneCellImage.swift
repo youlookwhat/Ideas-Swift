@@ -45,9 +45,9 @@ class OneCellImage: MagazineLayoutCollectionViewCell {
     contentView.backgroundColor = nil
   }
 
-  func set(_ itemInfo: ItemInfo) {
-    label.text = itemInfo.text
-    contentView.backgroundColor = itemInfo.color
+  func set(_ itemInfo: ItemOneBean) {
+    label.text = itemInfo.title
+    contentView.backgroundColor = UIColor.black
   }
 
   // MARK: Private

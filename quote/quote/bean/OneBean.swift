@@ -46,6 +46,12 @@ class AuthorBean:Decodable {
 }
 
 class ItemOneBean {
-    let sizeMode: MagazineLayoutItemSizeMode? = nil
-    var content_list:[OneContentListBean]? = nil
+    var sizeMode: MagazineLayoutItemSizeMode? = nil
+    var category:String? = nil
+    var img_url:String? = nil
+    var forward:String? = nil
+    var title:String? = nil
+    var words_info:String? = nil
+    var share_url:String? = nil
+    var author:AuthorBean? = nil
 }

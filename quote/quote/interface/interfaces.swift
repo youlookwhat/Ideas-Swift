@@ -8,9 +8,6 @@
 
 import UIKit
 
-class interfaces: NSObject {
-
-}
 
 protocol OneGetDataListener {
     func onData(bean : OneBean?)

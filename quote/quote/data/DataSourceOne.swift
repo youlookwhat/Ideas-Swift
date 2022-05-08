@@ -1,24 +1,23 @@
 //
-//  DataSource.swift
+//  DataSourceImage.swift
 //  quote
 //
-//  Created by 景彬 on 2022/5/6.
+//  Created by 景彬 on 2022/5/8.
 //  Copyright © 2022 景彬. All rights reserved.
 //
 
-import MagazineLayout
 import UIKit
 
-class DataSource: NSObject {
+class DataSourceOne:  NSObject {
 
-    private(set) var sectionInfos = [SectionInfo]()
+    private(set) var sectionInfos = [SectionInfoOne]()
 
-      func insert(_ sectionInfo: SectionInfo, atSectionIndex sectionIndex: Int) {
+      func insert(_ sectionInfo: SectionInfoOne, atSectionIndex sectionIndex: Int) {
         sectionInfos.insert(sectionInfo, at: sectionIndex)
       }
 
       func insert(
-        _ itemInfo: ItemInfo,
+        _ itemInfo: ItemOneBean,
         atItemIndex itemIndex: Int,
         inSectionAtIndex sectionIndex: Int)
       {
@@ -33,19 +32,13 @@ class DataSource: NSObject {
         sectionInfos[sectionIndex].itemInfos.remove(at: itemIndex)
       }
 
-      func setHeaderInfo(_ headerInfo: HeaderInfo, forSectionAtIndex sectionIndex: Int) {
-        sectionInfos[sectionIndex].headerInfo = headerInfo
-      }
-
-      func setFooterInfo(_ footerInfo: FooterInfo, forSectionAtIndex sectionIndex: Int) {
-        sectionInfos[sectionIndex].footerInfo = footerInfo
-      }
+      
 
     }
 
     // MARK: UICollectionViewDataSource
 
-    extension DataSource: UICollectionViewDataSource {
+    extension DataSourceOne: UICollectionViewDataSource {
 
       func numberOfSections(in collectionView: UICollectionView) -> Int {
         return sectionInfos.count
@@ -68,7 +61,7 @@ class DataSource: NSObject {
           withReuseIdentifier: OneCellImage.description(),
           for: indexPath) as! OneCellImage
         let itemInfo = sectionInfos[indexPath.section].itemInfos[indexPath.item]
-//        cell.set(itemInfo)
+        cell.set(itemInfo)
         return cell
       }
 
@@ -106,7 +99,7 @@ class DataSource: NSObject {
 
 // MARK: DataSourceCountsProvider
 
-extension DataSource: DataSourceCountsProvider {
+extension DataSourceOne: DataSourceCountsProvider {
 
   var numberOfSections: Int {
     return sectionInfos.count
