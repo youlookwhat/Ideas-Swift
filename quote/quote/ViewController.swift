@@ -172,11 +172,11 @@ class ViewController: UIViewController, OneNavigation {
         
         collectionView.performBatchUpdates({
           dataSource.insert(section0, atSectionIndex: 0)
-//          dataSource.insert(section1, atSectionIndex: 1)
+          dataSource.insert(section0, atSectionIndex: 1)
 //          dataSource.insert(section2, atSectionIndex: 2)
 
 //          collectionView.insertSections(IndexSet(arrayLiteral: 0, 1, 2))
-            collectionView.insertSections(IndexSet(arrayLiteral: 0))
+            collectionView.insertSections(IndexSet(arrayLiteral: 0,1))
         }, completion: nil)
     }
     
@@ -227,6 +227,93 @@ extension ViewController: UICollectionViewDelegate {
 //        collectionView.deleteSections(IndexSet(integer: indexPath.section))
 //      }
     }, completion: nil)
+  }
+
+}
+
+extension ViewController: UICollectionViewDelegateMagazineLayout {
+
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    sizeModeForItemAt indexPath: IndexPath)
+    -> MagazineLayoutItemSizeMode
+  {
+    return dataSource.sectionInfos[indexPath.section].itemInfos[indexPath.item].sizeMode!
+  }
+
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    visibilityModeForHeaderInSectionAtIndex index: Int)
+    -> MagazineLayoutHeaderVisibilityMode
+  {
+    return .hidden
+  }
+
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    visibilityModeForFooterInSectionAtIndex index: Int)
+    -> MagazineLayoutFooterVisibilityMode
+  {
+    return .hidden
+  }
+
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    visibilityModeForBackgroundInSectionAtIndex index: Int)
+    -> MagazineLayoutBackgroundVisibilityMode
+  {
+    return .hidden
+  }
+
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    horizontalSpacingForItemsInSectionAtIndex index: Int)
+    -> CGFloat
+  {
+    return 12
+  }
+
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    verticalSpacingForElementsInSectionAtIndex index: Int)
+    -> CGFloat
+  {
+    return 12
+  }
+
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    insetsForSectionAtIndex index: Int)
+    -> UIEdgeInsets
+  {
+    return UIEdgeInsets(top: 24, left: 4, bottom: 24, right: 4)
+  }
+
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    insetsForItemsInSectionAtIndex index: Int)
+    -> UIEdgeInsets
+  {
+    return UIEdgeInsets(top: 24, left: 4, bottom: 24, right: 4)
+  }
+
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    finalLayoutAttributesForRemovedItemAt indexPath: IndexPath,
+    byModifying finalLayoutAttributes: UICollectionViewLayoutAttributes)
+  {
+    // Fade and drop out
+    finalLayoutAttributes.alpha = 0
+    finalLayoutAttributes.transform = .init(scaleX: 0.2, y: 0.2)
   }
 
 }

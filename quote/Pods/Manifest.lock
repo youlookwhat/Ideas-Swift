@@ -2,23 +2,27 @@ PODS:
   - Alamofire (5.5.0)
   - HandyJSON (5.0.2)
   - MagazineLayout (1.6.5)
+  - SnapKit (5.6.0)
 
 DEPENDENCIES:
   - Alamofire (~> 5.5.0)
   - HandyJSON (~> 5.0.2)
   - MagazineLayout
+  - SnapKit (~> 5.6.0)
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - HandyJSON
     - MagazineLayout
+    - SnapKit
 
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
   HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
   MagazineLayout: aa7a1a70aac10791a08a29790320de0670e3f4ba
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: c579096914b328725091fba9e494835e0c476a01
+PODFILE CHECKSUM: 678f3a1be5b4ecbd4115f279537acba62e8017f5
 
 COCOAPODS: 1.11.3

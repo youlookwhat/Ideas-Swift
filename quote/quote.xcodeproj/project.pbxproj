@@ -16,6 +16,7 @@
 		7CBC7A1628256FC3005ECB4C /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC7A1528256FC3005ECB4C /* DataSource.swift */; };
 		7CBC7A182826BAA3005ECB4C /* DataSourceCountsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC7A172826BAA3005ECB4C /* DataSourceCountsProvider.swift */; };
 		7CBC7A1A28280DB4005ECB4C /* DataSourceOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC7A1928280DB4005ECB4C /* DataSourceOne.swift */; };
+		7CBC7A1E28295082005ECB4C /* ViewUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC7A1D28295082005ECB4C /* ViewUtil.swift */; };
 		7CD7996628183FCE007A04DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7996528183FCE007A04DA /* AppDelegate.swift */; };
 		7CD7996A28183FCE007A04DA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7996928183FCE007A04DA /* ViewController.swift */; };
 		7CD7996F28183FD0007A04DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CD7996E28183FD0007A04DA /* Assets.xcassets */; };
@@ -39,6 +40,7 @@
 		7CBC7A1528256FC3005ECB4C /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		7CBC7A172826BAA3005ECB4C /* DataSourceCountsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceCountsProvider.swift; sourceTree = "<group>"; };
 		7CBC7A1928280DB4005ECB4C /* DataSourceOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceOne.swift; sourceTree = "<group>"; };
+		7CBC7A1D28295082005ECB4C /* ViewUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtil.swift; sourceTree = "<group>"; };
 		7CD7996228183FCE007A04DA /* quote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = quote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CD7996528183FCE007A04DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7CD7996928183FCE007A04DA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +106,22 @@
 			path = Moya;
 			sourceTree = "<group>";
 		};
+		7CBC7A1B28295047005ECB4C /* BySwiftLib */ = {
+			isa = PBXGroup;
+			children = (
+				7CBC7A1C28295065005ECB4C /* util */,
+			);
+			path = BySwiftLib;
+			sourceTree = "<group>";
+		};
+		7CBC7A1C28295065005ECB4C /* util */ = {
+			isa = PBXGroup;
+			children = (
+				7CBC7A1D28295082005ECB4C /* ViewUtil.swift */,
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
 		7CD7995928183FCE007A04DA = {
 			isa = PBXGroup;
 			children = (
@@ -147,6 +165,7 @@
 		7CD79C49281844B2007A04DA /* library */ = {
 			isa = PBXGroup;
 			children = (
+				7CBC7A1B28295047005ECB4C /* BySwiftLib */,
 				7C9FE97C281ADEF3005D64C0 /* SwiftyJSON */,
 			);
 			path = library;
@@ -326,6 +345,7 @@
 			files = (
 				7CD7996A28183FCE007A04DA /* ViewController.swift in Sources */,
 				7C9FE97F281ADEF3005D64C0 /* SwiftyJSON.swift in Sources */,
+				7CBC7A1E28295082005ECB4C /* ViewUtil.swift in Sources */,
 				7CBC7A1A28280DB4005ECB4C /* DataSourceOne.swift in Sources */,
 				7CD7996628183FCE007A04DA /* AppDelegate.swift in Sources */,
 				7CBC7A1628256FC3005ECB4C /* DataSource.swift in Sources */,
