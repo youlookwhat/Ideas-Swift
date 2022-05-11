@@ -13,10 +13,13 @@ import SnapKit
 class OneCellImage: MagazineLayoutCollectionViewCell {
 
   // MARK: Lifecycle
+    private let label: UILabel
+    private let subLabel: UILabel
 
   override init(frame: CGRect) {
     
     label = UILabel(frame: .zero)
+    subLabel = UILabel(frame: .zero)
 
     super.init(frame: frame)
 
@@ -25,7 +28,13 @@ class OneCellImage: MagazineLayoutCollectionViewCell {
     label.font = UIFont.systemFont(ofSize: 24)
     label.textColor = .white
     label.numberOfLines = 0
+    
+    subLabel.font = UIFont.systemFont(ofSize: 20)
+    subLabel.textColor = .white
+    subLabel.numberOfLines = 3
+    
     contentView.addSubview(label)
+    contentView.addSubview(subLabel)
     
     label.snp.makeConstraints { (make) in
 //        make.width.equalTo(ViewUtil.getScreenWidth())         // 宽为100
@@ -34,7 +43,21 @@ class OneCellImage: MagazineLayoutCollectionViewCell {
 //        make.center.equalTo(view)       // 位于当前视图的中心
     }
     
-    
+    subLabel.snp.makeConstraints { (make) in
+
+        // 让顶部距离view1的底部为10的距离
+        make.top.equalTo(label.snp.bottom).offset(10)
+        make.left.right.equalTo(15)
+        
+//        make.rightMargin.equalTo(55)
+        
+        
+//        make.bottom.equalTo(label)
+    //        make.width.equalTo(ViewUtil.getScreenWidth())         // 宽为100
+//            make.left.right.top.equalTo(15)
+    //        make.height.equalTo(30)        // 高为100
+    //        make.center.equalTo(view)       // 位于当前视图的中心
+        }
 //    let image = UIImageView()
     
 
@@ -62,12 +85,13 @@ class OneCellImage: MagazineLayoutCollectionViewCell {
 
   func set(_ itemInfo: ItemOneBean) {
     label.text = itemInfo.title
+    subLabel.text = itemInfo.forward
     contentView.backgroundColor = UIColor.black
   }
 
   // MARK: Private
 
-  private let label: UILabel
+  
 
 }
 
