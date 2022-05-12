@@ -46,6 +46,12 @@ window?.makeKeyAndVisible()
  - 5、删除`main.storyboard `和`SceneDelegate.swift`，应该也可不删除
 
 
+问题：
+iOS-Xcode解决【workspace integrity couldn't load project'】
+> https://www.cnblogs.com/wangkejia/p/9835230.html
+
+> 鼠标右击.xcodeproj文件 —>显示包内容 —>打开project.pbxproj文件，比较以前的版本号进行修改（比如：把objecVersion=50修改objecVersion=48即可打开工程）。
+
 
 
 

@@ -31,14 +31,16 @@ class OneCellImage: MagazineLayoutCollectionViewCell {
     
     subLabel.font = UIFont.systemFont(ofSize: 20)
     subLabel.textColor = .white
-    subLabel.numberOfLines = 3
+    subLabel.numberOfLines = 0
     
     contentView.addSubview(label)
     contentView.addSubview(subLabel)
     
     label.snp.makeConstraints { (make) in
 //        make.width.equalTo(ViewUtil.getScreenWidth())         // 宽为100
-        make.left.right.top.equalTo(15)
+        make.left.top.equalTo(15)
+        make.right.equalTo(-15)
+        
 //        make.height.equalTo(30)        // 高为100
 //        make.center.equalTo(view)       // 位于当前视图的中心
     }
@@ -47,7 +49,8 @@ class OneCellImage: MagazineLayoutCollectionViewCell {
 
         // 让顶部距离view1的底部为10的距离
         make.top.equalTo(label.snp.bottom).offset(10)
-        make.left.right.equalTo(15)
+        make.left.equalTo(15)
+        make.right.equalTo(-15)
         
 //        make.rightMargin.equalTo(55)
         
