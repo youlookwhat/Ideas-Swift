@@ -60,8 +60,9 @@ https://github.com/AnRanScheme/MagiRefresh
 // 数据请求
 Moya
 
+图片加载：
 
-
+ - https://github.com/SDWebImage/SDWebImage
 
 
 
