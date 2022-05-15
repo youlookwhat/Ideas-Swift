@@ -172,11 +172,11 @@ class ViewController: UIViewController, OneNavigation {
         
         collectionView.performBatchUpdates({
           dataSource.insert(section0, atSectionIndex: 0)
-          dataSource.insert(section0, atSectionIndex: 1)
+//          dataSource.insert(section0, atSectionIndex: 1)
 //          dataSource.insert(section2, atSectionIndex: 2)
 
 //          collectionView.insertSections(IndexSet(arrayLiteral: 0, 1, 2))
-            collectionView.insertSections(IndexSet(arrayLiteral: 0,1))
+            collectionView.insertSections(IndexSet(arrayLiteral: 0))
         }, completion: nil)
     }
     
