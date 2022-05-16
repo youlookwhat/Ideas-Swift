@@ -61,10 +61,10 @@ https://github.com/AnRanScheme/MagiRefresh
 // 数据请求
 Moya
 
-图片加载：
-
- - https://github.com/SDWebImage/SDWebImage
-
+ - [SDWebImage](https://github.com/SDWebImage/SDWebImage)：图片加载
+ - [SDWebImageWebPCoder]()
+ - [MJRefresh](https://github.com/CoderMJLee/MJRefresh)：下拉刷新，加载更多
+ - [SnapKit]()：自动布局
 
 
 
