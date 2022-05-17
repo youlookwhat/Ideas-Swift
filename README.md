@@ -2,12 +2,8 @@
 每日一句App，用于使用Swift开发iOS App
 
 
- - Alamofire-5.5.0
- - SwiftyJSON-5.0.1(可不用)
- - Json序列化: [HandyJSON](https://github.com/alibaba/HandyJSON)
+### 问题：解决不能执行`curl -L get.rvm.io | bash -s stable`问题：
 
-
-解决不能执行`curl -L get.rvm.io | bash -s stable`问题：
 https://github.com/hawtim/hawtim.github.io/issues/10
 
 新增host，选择3.5.8版本
@@ -46,25 +42,22 @@ window?.makeKeyAndVisible()
  - 5、删除`main.storyboard `和`SceneDelegate.swift`，应该也可不删除
 
 
-问题：
+### 问题：iOS-Xcode解决【workspace integrity couldn't load project'】
 
-iOS-Xcode解决【workspace integrity couldn't load project'】
+
 > https://www.cnblogs.com/wangkejia/p/9835230.html
 
 > 鼠标右击.xcodeproj文件 —>显示包内容 —>打开project.pbxproj文件，比较以前的版本号进行修改（比如：把objecVersion=50修改objecVersion=48即可打开工程）。
 
 
-
-
-// swift下拉刷新
-https://github.com/AnRanScheme/MagiRefresh
-// 数据请求
-Moya
-
  - [SDWebImage](https://github.com/SDWebImage/SDWebImage)：图片加载
  - [SDWebImageWebPCoder]()
  - [MJRefresh](https://github.com/CoderMJLee/MJRefresh)：下拉刷新，加载更多
+ - [MagiRefresh](swift下拉刷新)：https://github.com/AnRanScheme/MagiRefresh
  - [SnapKit]()：自动布局
+ - [Moya]()：数据请求
+ - Alamofire-5.5.0
+ - SwiftyJSON-5.0.1(可不用)
 
 
 
