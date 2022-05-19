@@ -2,13 +2,6 @@
 每日一句App，用于使用Swift开发iOS App
 
 
-### 问题：解决不能执行`curl -L get.rvm.io | bash -s stable`问题：
-
-https://github.com/hawtim/hawtim.github.io/issues/10
-
-新增host，选择3.5.8版本
-https://www.macwk.com/soft/switchhosts
-
 ### 安装MagazineLayout方法
 > https://github.com/airbnb/MagazineLayout
 
@@ -42,12 +35,20 @@ window?.makeKeyAndVisible()
  - 5、删除`main.storyboard `和`SceneDelegate.swift`，应该也可不删除
 
 
-### 问题：iOS-Xcode解决【workspace integrity couldn't load project'】
+### 问题
 
+#### 1、解决不能执行`curl -L get.rvm.io | bash -s stable`问题：
 
-> https://www.cnblogs.com/wangkejia/p/9835230.html
+https://github.com/hawtim/hawtim.github.io/issues/10
 
-> 鼠标右击.xcodeproj文件 —>显示包内容 —>打开project.pbxproj文件，比较以前的版本号进行修改（比如：把objecVersion=50修改objecVersion=48即可打开工程）。
+新增host，选择3.5.8版本
+https://www.macwk.com/soft/switchhosts
+
+#### 2、iOS-Xcode解决【workspace integrity couldn't load project'】
+
+https://www.cnblogs.com/wangkejia/p/9835230.html
+
+鼠标右击.xcodeproj文件 —>显示包内容 —>打开project.pbxproj文件，比较以前的版本号进行修改（比如：把objecVersion=50修改objecVersion=48即可打开工程）。
 
 
  - [SDWebImage](https://github.com/SDWebImage/SDWebImage)：图片加载
