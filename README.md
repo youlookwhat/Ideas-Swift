@@ -2,6 +2,16 @@
 每日一句App，用于使用Swift开发iOS App
 
 
+ - [SDWebImage](https://github.com/SDWebImage/SDWebImage)：图片加载
+ - [SDWebImageWebPCoder]()
+ - [MJRefresh](https://github.com/CoderMJLee/MJRefresh)：下拉刷新，加载更多
+ - [MagiRefresh](swift下拉刷新)：https://github.com/AnRanScheme/MagiRefresh
+ - [SnapKit]()：自动布局
+ - [Moya]()：数据请求
+ - Alamofire-5.5.0
+ - SwiftyJSON-5.0.1(可不用)
+
+
 ### 安装MagazineLayout方法
 > https://github.com/airbnb/MagazineLayout
 
@@ -50,15 +60,6 @@ https://www.cnblogs.com/wangkejia/p/9835230.html
 
 鼠标右击.xcodeproj文件 —>显示包内容 —>打开project.pbxproj文件，比较以前的版本号进行修改（比如：把objecVersion=50修改objecVersion=48即可打开工程）。
 
-
- - [SDWebImage](https://github.com/SDWebImage/SDWebImage)：图片加载
- - [SDWebImageWebPCoder]()
- - [MJRefresh](https://github.com/CoderMJLee/MJRefresh)：下拉刷新，加载更多
- - [MagiRefresh](swift下拉刷新)：https://github.com/AnRanScheme/MagiRefresh
- - [SnapKit]()：自动布局
- - [Moya]()：数据请求
- - Alamofire-5.5.0
- - SwiftyJSON-5.0.1(可不用)
 
 
 
