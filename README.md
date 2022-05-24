@@ -61,6 +61,9 @@ https://www.cnblogs.com/wangkejia/p/9835230.html
 鼠标右击.xcodeproj文件 —>显示包内容 —>打开project.pbxproj文件，比较以前的版本号进行修改（比如：把objecVersion=50修改objecVersion=48即可打开工程）。
 
 
+#### 3、安装ruby
+安装镜像 brew：https://zhuanlan.zhihu.com/p/90508170
+然后安装ruby
 
 
 
