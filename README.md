@@ -45,6 +45,17 @@ window?.makeKeyAndVisible()
  - 5、删除`main.storyboard `和`SceneDelegate.swift`，应该也可不删除
 
 
+### 命令行配置
+```
+git config --global https.proxy http://127.0.0.1:1087
+git config --global http.proxy http://127.0.0.1:1087
+git config --global http.proxy socks5://127.0.0.1:1086
+git config --global https.proxy socks5://127.0.0.1:1086
+
+git config --global --unset http.proxy 
+git config --global --unset https.proxy
+```
+
 ### 问题
 
 #### 1、解决不能执行`curl -L get.rvm.io | bash -s stable`问题：
@@ -62,9 +73,10 @@ https://www.cnblogs.com/wangkejia/p/9835230.html
 
 
 #### 3、安装ruby
-安装镜像 brew：https://zhuanlan.zhihu.com/p/90508170
-然后安装ruby
-
+ - 安装镜像 brew：https://zhuanlan.zhihu.com/p/90508170
+ - 然后安装ruby
+ - [安装cocoapods](https://wayou.github.io/2020/10/22/gem-install-%E6%97%B6%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98%E7%9A%84%E4%BF%AE%E6%AD%A3/)：gem cocoapods --user-install
+ - pod install --verbose
 
 
 
