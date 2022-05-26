@@ -77,6 +77,9 @@ https://www.cnblogs.com/wangkejia/p/9835230.html
  - 然后安装ruby
  - [安装cocoapods](https://wayou.github.io/2020/10/22/gem-install-%E6%97%B6%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98%E7%9A%84%E4%BF%AE%E6%AD%A3/)：gem cocoapods --user-install
  - pod install --verbose
+	 - 出现问题：`curl: (7) Received invalid version in initial SOCKS5 response.`
+		 - 	解决：https://blog.csdn.net/toopoo/article/details/123910453
+		 -  或：https://blog.csdn.net/qxqxqzzz/article/details/105565213
 
 
 
