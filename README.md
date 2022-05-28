@@ -91,7 +91,7 @@ https://www.cnblogs.com/wangkejia/p/9835230.html
 
 #### 5、卡住在 Cloning spec repo ‘cocoapods‘ from ‘https://github.com/CocoaPods/Specs.git‘
 
-卡出在
+`pod install --verbose`卡出在
 
 ```
 Cloning spec repo `cocoapods-1` from `https://github.com/CocoaPods/Specs.git`
@@ -101,7 +101,7 @@ Cloning spec repo `cocoapods-1` from `https://github.com/CocoaPods/Specs.git`
 
 部分参考：https://blog.csdn.net/csdn2314/article/details/116599288
 
-### 解决方法：手动替换仓库
+解决方法：手动替换仓库
 
 1、去国内镜像地址手动下载
 `https://github.com/CocoaPods/Specs`
@@ -130,6 +130,20 @@ Initialized empty Git repository in /Users/jingbin/.cocoapods/repos/cocoapods/.g
 查看 `.git/config`里的配置
 ![](https://img-blog.csdnimg.cn/c9b6c50b8b574418a13b1755a03847b2.png)
 
+
+#### 6、Сocoapods trunk URL couldn't be downloaded
+如果替换了`Podfile`文件里的
+
+```
+source 'https://github.com/CocoaPods/Specs.git'
+# source 'https://cdn.cocoapods.org/'
+```
+还是使用cdn出现：Сocoapods trunk URL couldn't be downloaded
+
+则
+`pod repo remove trunk`
+再
+`pod install --verbose`
 
 
  
