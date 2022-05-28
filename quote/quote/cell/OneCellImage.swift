@@ -9,17 +9,21 @@
 import MagazineLayout
 import UIKit
 import SnapKit
+import SDWebImage
+
 
 class OneCellImage: MagazineLayoutCollectionViewCell {
 
   // MARK: Lifecycle
     private let label: UILabel
     private let subLabel: UILabel
+//    private let imageView: SDWebImage
 
   override init(frame: CGRect) {
     
     label = UILabel(frame: .zero)
     subLabel = UILabel(frame: .zero)
+//    imageView = SDWebImage(frame: .zero)
 
     super.init(frame: frame)
 
@@ -90,6 +94,9 @@ class OneCellImage: MagazineLayoutCollectionViewCell {
     label.text = itemInfo.title
     subLabel.text = itemInfo.forward
     contentView.backgroundColor = UIColor.black
+    
+//    imageView.sd_setImage(with: URL(string: itemInfo.img_url!), placeholderImage: UIImage(named: "app_lauch.jpg"))
+    
   }
 
   // MARK: Private

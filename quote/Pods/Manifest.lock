@@ -2,27 +2,29 @@ PODS:
   - Alamofire (5.5.0)
   - HandyJSON (5.0.2)
   - MagazineLayout (1.6.5)
+  - SDWebImage (5.12.5):
+    - SDWebImage/Core (= 5.12.5)
+  - SDWebImage/Core (5.12.5)
   - SnapKit (5.6.0)
 
 DEPENDENCIES:
   - Alamofire (~> 5.5.0)
   - HandyJSON (~> 5.0.2)
   - MagazineLayout
+  - SDWebImage (~> 5.0)
   - SnapKit (~> 5.6.0)
 
 SPEC REPOS:
-  trunk:
-    - Alamofire
-    - HandyJSON
-    - MagazineLayout
-    - SnapKit
+  https://github.com/CocoaPods/Specs:
+    - SDWebImage
 
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
   HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
   MagazineLayout: aa7a1a70aac10791a08a29790320de0670e3f4ba
+  SDWebImage: 0905f1b7760fc8ac4198cae0036600d67478751e
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: 678f3a1be5b4ecbd4115f279537acba62e8017f5
+PODFILE CHECKSUM: e90037853143e568c1838196f6fd581ce87d79b6
 
 COCOAPODS: 1.11.3

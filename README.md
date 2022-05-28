@@ -82,10 +82,53 @@ https://www.cnblogs.com/wangkejia/p/9835230.html
 		 -  或：https://blog.csdn.net/qxqxqzzz/article/details/105565213
 
 
+#### 4、出现问题：`curl: (7) Received invalid version in initial SOCKS5 response.`
+
+查看代理：`git config --global -l`
+会发现SOCKS5的地址可能是不对的，然后再通过`git config --global https.proxy socks5://127.0.0.1:1086`配置正确的SOCKS5地址
 
 
 
+#### 5、卡住在 Cloning spec repo ‘cocoapods‘ from ‘https://github.com/CocoaPods/Specs.git‘
 
+卡出在
+
+```
+Cloning spec repo `cocoapods-1` from `https://github.com/CocoaPods/Specs.git`
+  $ /usr/bin/git clone https://github.com/CocoaPods/Specs.git -- cocoapods-1
+  Cloning into 'cocoapods-1'...
+```
+
+部分参考：https://blog.csdn.net/csdn2314/article/details/116599288
+
+### 解决方法：手动替换仓库
+
+1、去国内镜像地址手动下载
+`https://github.com/CocoaPods/Specs`
+但是由于科学上网的原因，下载的异常慢，可以去国内镜像地址下载：
+`https://gitee.com/mirrors/CocoaPods-Specs`
+
+2、然后解压 放到
+![cocoapods地址](https://img-blog.csdnimg.cn/47c884bbb43e47c89fddd2d2fca70855.png)
+
+3、终端进入
+`cd /Users/jingbin/.cocoapods/repos/cocoapods `
+
+4、git 初始化
+`git init`
+
+会出现：
+```
+jingbin@jingbindeMBP cocoapods % git init
+Initialized empty Git repository in /Users/jingbin/.cocoapods/repos/cocoapods/.git/
+```
+
+5、关联仓库
+`git remote add origin https://github.com/CocoaPods/Specs`
+
+6、查看是否正常
+查看 `.git/config`里的配置
+![](https://img-blog.csdnimg.cn/c9b6c50b8b574418a13b1755a03847b2.png)
 
 
 
