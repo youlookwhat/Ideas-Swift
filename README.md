@@ -12,6 +12,8 @@
  - SwiftyJSON-5.0.1(可不用)
 
 
+----
+
 ### 安装MagazineLayout方法
 > https://github.com/airbnb/MagazineLayout
 
