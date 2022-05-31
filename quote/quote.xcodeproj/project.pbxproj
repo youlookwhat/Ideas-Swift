@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		32500A9C64045C5369ABC81C /* Pods_quote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFC478867C899CDA75E7081 /* Pods_quote.framework */; };
+		7C5EF5E6284667D800AB80F7 /* OneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5EF5E5284667D800AB80F7 /* OneViewController.swift */; };
 		7C9FE97F281ADEF3005D64C0 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9FE97D281ADEF3005D64C0 /* SwiftyJSON.swift */; };
 		7CBC7A092822BCA7005ECB4C /* OneCellImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC7A082822BCA7005ECB4C /* OneCellImage.swift */; };
 		7CBC7A0E2822C18E005ECB4C /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC7A0D2822C18E005ECB4C /* Data.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		4CFC478867C899CDA75E7081 /* Pods_quote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_quote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C5EF5E5284667D800AB80F7 /* OneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneViewController.swift; sourceTree = "<group>"; };
 		7C9FE97D281ADEF3005D64C0 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		7C9FE97E281ADEF3005D64C0 /* SwiftyJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyJSON.h; sourceTree = "<group>"; };
 		7CBC7A082822BCA7005ECB4C /* OneCellImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneCellImage.swift; sourceTree = "<group>"; };
@@ -69,6 +71,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7C5EF5E4284667B000AB80F7 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7C5EF5E5284667D800AB80F7 /* OneViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		7C9FE97C281ADEF3005D64C0 /* SwiftyJSON */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,6 +160,7 @@
 				7CD7997028183FD0007A04DA /* LaunchScreen.storyboard */,
 				7CD7997328183FD0007A04DA /* Info.plist */,
 				7CFBBAE82820FA4000F052F0 /* app_lauch.jpg */,
+				7C5EF5E4284667B000AB80F7 /* ViewController */,
 				7CBC7A0B2822C164005ECB4C /* data */,
 				7CF8D535281E543300B83EDC /* present */,
 				7CBC7A1028241E0D005ECB4C /* Moya */,
@@ -351,6 +362,7 @@
 				7CBC7A1628256FC3005ECB4C /* DataSource.swift in Sources */,
 				7CBC7A0E2822C18E005ECB4C /* Data.swift in Sources */,
 				7CF8D52C281D797C00B83EDC /* OneBean.swift in Sources */,
+				7C5EF5E6284667D800AB80F7 /* OneViewController.swift in Sources */,
 				7CF8D530281D840C00B83EDC /* interfaces.swift in Sources */,
 				7CBC7A182826BAA3005ECB4C /* DataSourceCountsProvider.swift in Sources */,
 				7CF8D539281E549300B83EDC /* OneNavigation.swift in Sources */,
