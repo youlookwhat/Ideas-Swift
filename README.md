@@ -147,6 +147,19 @@ source 'https://github.com/CocoaPods/Specs.git'
 再
 `pod install --verbose`
 
+### 7、Command PhaseScriptExecution failed with a nonzero exit code
+
+After trying all the solutions, I was missing is to enable this option in:
+
+**Targets -> Build Phases -> Embedded pods frameworks**
+
+In newer versions it may be listed as:
+
+**Targets -> Build Phases -> Bundle React Native code and images**
+
+- 选中 Show enironment variables build log 
+- 选中 Run script only when installing
+
 
  
 
