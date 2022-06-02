@@ -28,6 +28,9 @@ class OnePresent {
 
                     // 注意 bean 名称不能轻易用Data名字
                     let bean = try JSONDecoder().decode(OneBean.self, from: response.value!) as OneBean?
+                    
+                    
+                    
     //                print(bean.data!.content_list?[1].category)
 //                    listener.onData(bean: bean)
                     self.navigation?.onDataSuccess(bean: bean)
