@@ -163,3 +163,12 @@ In newer versions it may be listed as:
 
  
 
+### 9、升级系统后 git 不同
+```
+jingbin@jingbindeMBP ~ % git
+xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
+jingbin@jingbindeMBP ~ % xcode-select --install 
+xcode-select: note: install requested for command line developer tools
+jingbin@jingbindeMBP ~ % 
+```
+使用`xcode-select --install`
