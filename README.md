@@ -9,7 +9,6 @@
  - [SnapKit]()：自动布局
  - [Moya]()：数据请求
  - Alamofire-5.5.0
- - SwiftyJSON-5.0.1(可不用)
 
 
 ----
