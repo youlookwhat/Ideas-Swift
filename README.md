@@ -5,7 +5,6 @@
  - [SDWebImage](https://github.com/SDWebImage/SDWebImage)：图片加载
  - [SDWebImageWebPCoder]()
  - [MJRefresh](https://github.com/CoderMJLee/MJRefresh)：下拉刷新，加载更多
- - [MagiRefresh](https://github.com/AnRanScheme/MagiRefresh)：swift下拉刷新
  - [SnapKit]()：自动布局
  - [Moya]()：数据请求
  - Alamofire-5.5.0
