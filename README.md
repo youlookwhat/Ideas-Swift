@@ -3,11 +3,12 @@
 
 
  - [SDWebImage](https://github.com/SDWebImage/SDWebImage)：图片加载
- - [SDWebImageWebPCoder]()
- - [MJRefresh](https://github.com/CoderMJLee/MJRefresh)：下拉刷新，加载更多
- - [SnapKit]()：自动布局
- - [Moya]()：数据请求
- - Alamofire-5.5.0
+ - [SDWebImageWebPCoder](https://github.com/SDWebImage/SDWebImageWebPCoder)：图片加载webp
+ - [MJRefresh 3.2.2](https://github.com/CoderMJLee/MJRefresh)：下拉刷新，加载更多
+ - [SnapKit](https://github.com/SnapKit/SnapKit)：自动布局
+ - [AFNetworking 4.0](https://github.com/AFNetworking/AFNetworking)：数据请求
+ - [MBProgressHUD](https://github.com/jdg/MBProgressHUD)：底部有页面，加载中的Progress
+ - [YYModel](https://github.com/ibireme/YYModel)：json转bean
 
 
 ----
