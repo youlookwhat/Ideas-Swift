@@ -14,10 +14,15 @@ target 'quote' do
   pod 'MagazineLayout'
   pod 'HandyJSON', '~> 5.0.2'
   pod 'SnapKit', '~> 5.6.0'
+  pod 'MJRefresh' #, '3.2.2'
 # platform :ios, '10.0'
 #  pod 'SDWebImage'
   pod 'SDWebImage', '~> 5.0'
 #pod 'SDWebImageWebPCoder'
+
+  pod 'AFNetworking', '~> 4.0'
+
+#  pod 'YYModel', :path => './Local/YYModel'
   # Pods for quote
 
 end
