@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		32500A9C64045C5369ABC81C /* Pods_quote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFC478867C899CDA75E7081 /* Pods_quote.framework */; };
+		7C141083284F96FC0013AD7B /* Defines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C141082284F96FC0013AD7B /* Defines.swift */; };
+		7C141087284F989D0013AD7B /* goods_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C141086284F989D0013AD7B /* goods_default.png */; };
 		7C5EF5E6284667D800AB80F7 /* OneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5EF5E5284667D800AB80F7 /* OneViewController.swift */; };
 		7C9FE97F281ADEF3005D64C0 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9FE97D281ADEF3005D64C0 /* SwiftyJSON.swift */; };
 		7CBC7A092822BCA7005ECB4C /* OneCellImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC7A082822BCA7005ECB4C /* OneCellImage.swift */; };
@@ -32,6 +34,8 @@
 
 /* Begin PBXFileReference section */
 		4CFC478867C899CDA75E7081 /* Pods_quote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_quote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C141082284F96FC0013AD7B /* Defines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Defines.swift; path = "../../../../ios-20220512/BeautifulPractice/BeautifulPractice/Defines.swift"; sourceTree = "<group>"; };
+		7C141086284F989D0013AD7B /* goods_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = goods_default.png; path = image/goods_default.png; sourceTree = "<group>"; };
 		7C5EF5E5284667D800AB80F7 /* OneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneViewController.swift; sourceTree = "<group>"; };
 		7C9FE97D281ADEF3005D64C0 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		7C9FE97E281ADEF3005D64C0 /* SwiftyJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyJSON.h; sourceTree = "<group>"; };
@@ -154,6 +158,8 @@
 		7CD7996428183FCE007A04DA /* quote */ = {
 			isa = PBXGroup;
 			children = (
+				7C141086284F989D0013AD7B /* goods_default.png */,
+				7C141082284F96FC0013AD7B /* Defines.swift */,
 				7CD7996528183FCE007A04DA /* AppDelegate.swift */,
 				7CD7996928183FCE007A04DA /* ViewController.swift */,
 				7CD7996E28183FD0007A04DA /* Assets.xcassets */,
@@ -302,6 +308,7 @@
 				7CFBBAE92820FA4000F052F0 /* app_lauch.jpg in Resources */,
 				7CD7997228183FD0007A04DA /* LaunchScreen.storyboard in Resources */,
 				7CD7996F28183FD0007A04DA /* Assets.xcassets in Resources */,
+				7C141087284F989D0013AD7B /* goods_default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,6 +375,7 @@
 				7CF8D539281E549300B83EDC /* OneNavigation.swift in Sources */,
 				7CF8D529281D78FF00B83EDC /* OneModel.swift in Sources */,
 				7CBC7A1228241E2F005ECB4C /* HttpRequest.swift in Sources */,
+				7C141083284F96FC0013AD7B /* Defines.swift in Sources */,
 				7CBC7A1428241E91005ECB4C /* MoyaConfig.swift in Sources */,
 				7CF8D537281E544D00B83EDC /* OnePresent.swift in Sources */,
 				7CBC7A092822BCA7005ECB4C /* OneCellImage.swift in Sources */,

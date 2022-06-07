@@ -41,7 +41,7 @@ class OneViewController: UIViewController, OneNavigation {
         tableView.separatorColor = UIColor.black
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 83, bottom: 0, right: 15)
         tableView.tableFooterView = UIView()
-        tableView.register(BPTopicListCell.self)
+        tableView.register(BPTopicListCell.self, forCellReuseIdentifier: "dd")
 //        tableView.mj_footer = MJDIYFooter(refreshingBlock: {
 //            self.requestData()
 //        })
@@ -58,7 +58,7 @@ extension OneViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(with: BPTopicListCell.self) as! BPTopicListCell
-        cell.selectionStyle = .none
+//        cell.selectionStyle = .none
         let topic = list?[indexPath.row]
         cell.model = topic
         return cell
@@ -77,6 +77,8 @@ extension OneViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
+public var didSelectTopic: (([AnyHashable: Any]?, Int) -> Void)?
+//fileprivate var list = [BPMomentsTopicModel]()
 
 class BPTopicListCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -111,51 +113,51 @@ class BPTopicListCell: UITableViewCell {
         }
     }
     
-    public var model: BPMomentsTopicModel? {
+    public var model: OneContentListBean? {
         didSet {
             guard let model = model else { return }
             titleLabel.text = "#" + (model.title ?? "")
             
-            iconImageView.sd_setImage(with: URL(string: model.coverImage ?? ""), placeholderImage: GoodsImagePlaceholder)
-            let participantsNum = model.participantsNum
-            let hitNum = model.hitNum
+            iconImageView.sd_setImage(with: URL(string: model.img_url ?? ""), placeholderImage: GoodsImagePlaceholder)
+//            let participantsNum = model.participantsNum
+//            let hitNum = model.hitNum
             var desc = ""
-            if participantsNum > 0 {
-                desc += (Utils.returnHitNum(participantsNum)) + "人参与"
-            }
-            if participantsNum > 0, hitNum > 0 {
-                desc += " | "
-            }
-            if hitNum > 0 {
-                desc += (Utils.returnHitNum(hitNum)) + "浏览量"
-            }
+//            if participantsNum > 0 {
+//                desc += (Utils.returnHitNum(participantsNum)) + "人参与"
+//            }
+//            if participantsNum > 0, hitNum > 0 {
+//                desc += " | "
+//            }
+//            if hitNum > 0 {
+//                desc += (Utils.returnHitNum(hitNum)) + "浏览量"
+//            }
             desLabel.text = desc
             
-            if model.topicTag == 0 {
-                tagLabel.snp.updateConstraints { make in
-                    make.width.height.equalTo(0)
-                }
-                desLabel.snp.updateConstraints { make in
-                    make.left.equalTo(tagLabel.snp.right).offset(0)
-                }
-            } else {
-                tagLabel.snp.updateConstraints { make in
-                    make.width.height.equalTo(16)
-                }
-                desLabel.snp.updateConstraints { make in
-                    make.left.equalTo(tagLabel.snp.right).offset(4)
-                }
-                if model.topicTag == 1 {
-                    tagLabel.text = "热"
-                    tagLabel.backgroundColor = UIColor(rgb: 0xFF666F)
-                } else if model.topicTag == 2 {
-                    tagLabel.text = "新"
-                    tagLabel.backgroundColor = UIColor(rgb: 0xF7A64A)
-                } else if model.topicTag == 3 {
-                    tagLabel.text = "爆"
-                    tagLabel.backgroundColor = UIColor(rgb: 0xB76EFF)
-                }
-            }
+//            if model.topicTag == 0 {
+//                tagLabel.snp.updateConstraints { make in
+//                    make.width.height.equalTo(0)
+//                }
+//                desLabel.snp.updateConstraints { make in
+//                    make.left.equalTo(tagLabel.snp.right).offset(0)
+//                }
+//            } else {
+//                tagLabel.snp.updateConstraints { make in
+//                    make.width.height.equalTo(16)
+//                }
+//                desLabel.snp.updateConstraints { make in
+//                    make.left.equalTo(tagLabel.snp.right).offset(4)
+//                }
+//                if model.topicTag == 1 {
+//                    tagLabel.text = "热"
+//                    tagLabel.backgroundColor = UIColor(rgb: 0xFF666F)
+//                } else if model.topicTag == 2 {
+//                    tagLabel.text = "新"
+//                    tagLabel.backgroundColor = UIColor(rgb: 0xF7A64A)
+//                } else if model.topicTag == 3 {
+//                    tagLabel.text = "爆"
+//                    tagLabel.backgroundColor = UIColor(rgb: 0xB76EFF)
+//                }
+//            }
         }
     }
     
