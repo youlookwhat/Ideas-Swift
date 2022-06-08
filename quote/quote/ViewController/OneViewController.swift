@@ -28,6 +28,7 @@ class OneViewController: UIViewController, OneNavigation {
         
         if (bean != nil && bean!.data != nil && bean!.data!.content_list != nil) {
             list  = bean!.data!.content_list
+            self.tableView.reloadData()
         }
     }
 
@@ -53,27 +54,33 @@ class OneViewController: UIViewController, OneNavigation {
 
 extension OneViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        list!.count
+        list?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(with: BPTopicListCell.self) as! BPTopicListCell
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! BPTopicListCell
         let cell = tableView.dequeueReusableCell(with: BPTopicListCell.self) as! BPTopicListCell
+
+//        let cell : BPTopicListCell = tableView.dequeueReusableCell(withIdentifier: "TableViewCellId", for: indexPath) as! BPTopicListCell
 //        cell.selectionStyle = .none
+        
         let topic = list?[indexPath.row]
         cell.model = topic
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let topic = list?[indexPath.row]
-        if let didSelectTopic = didSelectTopic {
-            let dic = topic?.yy_modelToJSONObject() as? [AnyHashable: Any]
-            didSelectTopic(dic, indexPath.row)
-        } else if let id = topic?.id {
-            let vc = BPTopicViewController()
-            vc.id = id
-            navigationController?.pushViewController(vc, animated: true)
-        }
+//        let topic = list?[indexPath.row]
+//        if let didSelectTopic = didSelectTopic {
+//            let dic = topic?.yy_modelToJSONObject() as? [AnyHashable: Any]
+//            didSelectTopic(dic, indexPath.row)
+//        }
+//        else if let id = topic?.id {
+//            let vc = BPTopicViewController()
+//            vc.id = id
+//            navigationController?.pushViewController(vc, animated: true)
+//        }
     }
 }
 
@@ -174,24 +181,24 @@ class BPTopicListCell: UITableViewCell {
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .color50
-        label.font = .mediumSystemFont(ofSize: 15)
+//        label.textColor = .color50
+//        label.font = .mediumSystemFont(ofSize: 15)
         return label
     }()
     
     lazy var desLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .color99
-        label.font = .mediumSystemFont(ofSize: 12)
+//        label.textColor = .color99
+//        label.font = .mediumSystemFont(ofSize: 12)
         return label
     }()
     
     lazy var tagLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = .mediumSystemFont(ofSize: 12)
+//        label.font = .mediumSystemFont(ofSize: 12)
         label.text = "热"
-        label.backgroundColor = UIColor(rgb: 0xFF666F)
+//        label.backgroundColor = UIColor(rgb: 0xFF666F)
         label.clipsToBounds = true
         label.layer.cornerRadius = 4
         label.textAlignment = .center
