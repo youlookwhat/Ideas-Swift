@@ -43,9 +43,9 @@ class OneViewController: UIViewController, OneNavigation {
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 83, bottom: 0, right: 15)
         tableView.tableFooterView = UIView()
         tableView.register(BPTopicListCell.self, forCellReuseIdentifier: "CellIdentifier")
-        tableView.mj_footer = MJDIYFooter(refreshingBlock: {
-            self.requestData()
-        })
+//        tableView.mj_footer = MJDIYFooter(refreshingBlock: {
+//            self.requestData()
+//        })
         return tableView
     }()
 
