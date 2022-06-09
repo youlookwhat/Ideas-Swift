@@ -42,10 +42,10 @@ class OneViewController: UIViewController, OneNavigation {
         tableView.separatorColor = UIColor.black
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 83, bottom: 0, right: 15)
         tableView.tableFooterView = UIView()
-        tableView.register(BPTopicListCell.self, forCellReuseIdentifier: "dd")
-//        tableView.mj_footer = MJDIYFooter(refreshingBlock: {
-//            self.requestData()
-//        })
+        tableView.register(BPTopicListCell.self, forCellReuseIdentifier: "CellIdentifier")
+        tableView.mj_footer = MJDIYFooter(refreshingBlock: {
+            self.requestData()
+        })
         return tableView
     }()
 
@@ -60,7 +60,10 @@ extension OneViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 //        let cell = tableView.dequeueReusableCell(with: BPTopicListCell.self) as! BPTopicListCell
 //        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! BPTopicListCell
-        let cell = tableView.dequeueReusableCell(with: BPTopicListCell.self) as! BPTopicListCell
+//        let cell = tableView.dequeueReusableCell(with: BPTopicListCell.self) as! BPTopicListCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CellIdentifier", for: indexPath) as! BPTopicListCell
+        //2、获取重用的cell
+//               let cell = tableView.dequeueReusableCell(withIdentifier: identifer,for: indexPath);
 
 //        let cell : BPTopicListCell = tableView.dequeueReusableCell(withIdentifier: "TableViewCellId", for: indexPath) as! BPTopicListCell
 //        cell.selectionStyle = .none
