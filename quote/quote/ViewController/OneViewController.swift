@@ -19,6 +19,10 @@ class OneViewController: UIViewController, OneNavigation {
 
         view.addSubview(tableView)
         
+        navigationItem.title = "一个"
+        view.backgroundColor = UIColor.white
+        
+        
         // Do any additional setup after loading the view.
         present = OnePresent(navigation: self)
         present?.getOneData()
@@ -33,14 +37,18 @@ class OneViewController: UIViewController, OneNavigation {
     }
 
     lazy var tableView: UITableView = {
-//        let tableView = UITableView(frame: viewBounds(), style: .plain)
-        let tableView = UITableView(frame: self.view.frame, style: .plain)
-//        tableView.backgroundColor = .line
-        tableView.rowHeight = 94
+        // viewBounds() 限制了tableView的宽高
+        let tableView = UITableView(frame: viewBounds(), style: .plain)
+//        let tableView = UITableView(frame: self.view.frame, style: .plain)
+        tableView.backgroundColor = .white
+        // 这里的100是像素，不是文字对应的高度，要将高度转为像素
+        tableView.rowHeight = Screen.width * (1175/2262.0) + 100.0
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.separatorColor = UIColor.black
-        tableView.separatorInset = UIEdgeInsets(top: 0, left: 83, bottom: 0, right: 15)
+        // 分割线，加了以后最上面也有分割线
+        tableView.separatorColor = UIColor.gray
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
+        
         tableView.tableFooterView = UIView()
         tableView.register(BPTopicListCell.self, forCellReuseIdentifier: "CellIdentifier")
 //        tableView.mj_footer = MJDIYFooter(refreshingBlock: {
@@ -58,15 +66,11 @@ extension OneViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(with: BPTopicListCell.self) as! BPTopicListCell
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! BPTopicListCell
-//        let cell = tableView.dequeueReusableCell(with: BPTopicListCell.self) as! BPTopicListCell
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CellIdentifier", for: indexPath) as! BPTopicListCell
-        //2、获取重用的cell
-//               let cell = tableView.dequeueReusableCell(withIdentifier: identifer,for: indexPath);
 
-//        let cell : BPTopicListCell = tableView.dequeueReusableCell(withIdentifier: "TableViewCellId", for: indexPath) as! BPTopicListCell
-//        cell.selectionStyle = .none
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CellIdentifier", for: indexPath) as! BPTopicListCell
+
+        // 没有选中的样式，一般都没有
+        cell.selectionStyle = .none
         
         let topic = list?[indexPath.row]
         cell.model = topic
@@ -99,25 +103,34 @@ class BPTopicListCell: UITableViewCell {
         contentView.addSubview(desLabel)
         contentView.addSubview(tagLabel)
         
+        
         iconImageView.snp.makeConstraints { make in
             make.left.equalTo(15)
-            make.centerY.equalToSuperview()
-            make.width.height.equalTo(54)
+            make.right.equalTo(-15)
+            // 这个属性是上下居中
+//            make.centerY.equalToSuperview()
+            make.height.equalTo(Int(Screen.width * (1175/2262.0)))
+            make.width.equalTo(Screen.width)
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.left.equalTo(iconImageView.snp.right).offset(14)
-            make.top.equalTo(iconImageView.snp.top).offset(5)
+//            make.left.equalTo(iconImageView.snp.right).offset(14)
+            // 在iconImageView下方，且距离10
+            make.top.equalTo(iconImageView.snp.bottom).offset(10)
+            make.left.equalTo(15)
+            make.right.equalTo(-15)
             make.height.equalTo(15)
         }
         
         desLabel.snp.makeConstraints { make in
+            // 在tagLabel左边，且距离4
             make.left.equalTo(tagLabel.snp.right).offset(4)
+            // 在titleLabel的下方，且距离16
             make.top.equalTo(titleLabel.snp.bottom).offset(16)
         }
         
         tagLabel.snp.makeConstraints { make in
-            make.width.height.equalTo(14)
+            make.width.height.equalTo(15)
             make.left.equalTo(titleLabel.snp.left)
             make.centerY.equalTo(desLabel)
         }
@@ -126,22 +139,15 @@ class BPTopicListCell: UITableViewCell {
     public var model: OneContentListBean? {
         didSet {
             guard let model = model else { return }
-            titleLabel.text = "#" + (model.title ?? "")
             
+            // 内容描述
+            titleLabel.text =  (model.forward ?? "")
+            
+            // 图片
             iconImageView.sd_setImage(with: URL(string: model.img_url ?? ""), placeholderImage: GoodsImagePlaceholder)
-//            let participantsNum = model.participantsNum
-//            let hitNum = model.hitNum
-            var desc = ""
-//            if participantsNum > 0 {
-//                desc += (Utils.returnHitNum(participantsNum)) + "人参与"
-//            }
-//            if participantsNum > 0, hitNum > 0 {
-//                desc += " | "
-//            }
-//            if hitNum > 0 {
-//                desc += (Utils.returnHitNum(hitNum)) + "浏览量"
-//            }
-            desLabel.text = desc
+
+            // 标题
+            desLabel.text = (model.title ?? "")
             
 //            if model.topicTag == 0 {
 //                tagLabel.snp.updateConstraints { make in
@@ -184,6 +190,7 @@ class BPTopicListCell: UITableViewCell {
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 15)
 //        label.textColor = .color50
 //        label.font = .mediumSystemFont(ofSize: 15)
         return label
@@ -198,7 +205,7 @@ class BPTopicListCell: UITableViewCell {
     
     lazy var tagLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .white
+        label.textColor = .gray
 //        label.font = .mediumSystemFont(ofSize: 12)
         label.text = "热"
 //        label.backgroundColor = UIColor(rgb: 0xFF666F)

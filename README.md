@@ -10,6 +10,9 @@
  - [MBProgressHUD](https://github.com/jdg/MBProgressHUD)：底部有页面，加载中的Progress
  - [YYModel](https://github.com/ibireme/YYModel)：json转bean
 
+## Api
+ - [quotes](https://github.com/vv314/quotes)：收集了一些每日一句的接口与网站。
+ - ONE：一个的首页数据：[http://v3.wufazhuce.com:8000/api/channel/one/0/0](http://v3.wufazhuce.com:8000/api/channel/one/0/0)
 
 ----
 
