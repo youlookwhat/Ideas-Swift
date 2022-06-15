@@ -42,12 +42,12 @@ class OneViewController: UIViewController, OneNavigation {
 //        let tableView = UITableView(frame: self.view.frame, style: .plain)
         tableView.backgroundColor = .white
         // 这里的100是像素，不是文字对应的高度，要将高度转为像素
-        tableView.rowHeight = Screen.width * (1175/2262.0) + 100.0
+        tableView.rowHeight = Screen.width * (1175/2262.0) + 99.0
         tableView.dataSource = self
         tableView.delegate = self
         // 分割线，加了以后最上面也有分割线
-        tableView.separatorColor = UIColor.gray
-        tableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
+//        tableView.separatorColor = UIColor.gray
+//        tableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         
         tableView.tableFooterView = UIView()
         tableView.register(BPTopicListCell.self, forCellReuseIdentifier: "CellIdentifier")
@@ -104,6 +104,7 @@ class BPTopicListCell: UITableViewCell {
         contentView.addSubview(tagLabel)
         
         
+        // 图片
         iconImageView.snp.makeConstraints { make in
             make.left.equalTo(15)
             make.right.equalTo(-15)
@@ -113,15 +114,17 @@ class BPTopicListCell: UITableViewCell {
             make.width.equalTo(Screen.width)
         }
         
+        // 图片下方的第二标题
         titleLabel.snp.makeConstraints { make in
 //            make.left.equalTo(iconImageView.snp.right).offset(14)
             // 在iconImageView下方，且距离10
             make.top.equalTo(iconImageView.snp.bottom).offset(10)
             make.left.equalTo(15)
             make.right.equalTo(-15)
-            make.height.equalTo(15)
+            make.height.equalTo(45)
         }
         
+        // 第三行标题
         desLabel.snp.makeConstraints { make in
             // 在tagLabel左边，且距离4
             make.left.equalTo(tagLabel.snp.right).offset(4)
@@ -129,8 +132,9 @@ class BPTopicListCell: UITableViewCell {
             make.top.equalTo(titleLabel.snp.bottom).offset(16)
         }
         
+        // 热的标签
         tagLabel.snp.makeConstraints { make in
-            make.width.height.equalTo(15)
+            make.height.equalTo(15)
             make.left.equalTo(titleLabel.snp.left)
             make.centerY.equalTo(desLabel)
         }
@@ -148,6 +152,8 @@ class BPTopicListCell: UITableViewCell {
 
             // 标题
             desLabel.text = (model.title ?? "")
+            // 标签
+            tagLabel.text = (model.words_info ?? "")
             
 //            if model.topicTag == 0 {
 //                tagLabel.snp.updateConstraints { make in
@@ -190,6 +196,7 @@ class BPTopicListCell: UITableViewCell {
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 2
         label.font = UIFont.systemFont(ofSize: 15)
 //        label.textColor = .color50
 //        label.font = .mediumSystemFont(ofSize: 15)
@@ -210,7 +217,7 @@ class BPTopicListCell: UITableViewCell {
         label.text = "热"
 //        label.backgroundColor = UIColor(rgb: 0xFF666F)
         label.clipsToBounds = true
-        label.layer.cornerRadius = 4
+//        label.layer.cornerRadius = 4
         label.textAlignment = .center
         return label
     }()
