@@ -42,10 +42,11 @@ class OneViewController: UIViewController, OneNavigation {
 //        let tableView = UITableView(frame: self.view.frame, style: .plain)
         tableView.backgroundColor = .white
         // 这里的100是像素，不是文字对应的高度，要将高度转为像素
-        tableView.rowHeight = Screen.width * (1175/2262.0) + 99.0
+        tableView.rowHeight = Screen.width * (1175/2262.0) + 150.0
         tableView.dataSource = self
         tableView.delegate = self
         // 分割线，加了以后最上面也有分割线
+        tableView.separatorStyle = .none
 //        tableView.separatorColor = UIColor.gray
 //        tableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         
@@ -71,6 +72,7 @@ extension OneViewController: UITableViewDataSource, UITableViewDelegate {
 
         // 没有选中的样式，一般都没有
         cell.selectionStyle = .none
+        
         
         let topic = list?[indexPath.row]
         cell.model = topic
@@ -102,10 +104,16 @@ class BPTopicListCell: UITableViewCell {
         contentView.addSubview(titleLabel)
         contentView.addSubview(desLabel)
         contentView.addSubview(tagLabel)
+        // 设置全部的子view阴影
+//        contentView.layer.shadowColor = UIColor.gray.cgColor  // 设置背景颜色
+//        contentView.layer.shadowOpacity = 1 // 设置透明度
+//        contentView.layer.shadowOffset = .zero  // 设置偏移
+//        contentView.layer.shadowRadius = 5  // 设置半径
         
         
         // 图片
         iconImageView.snp.makeConstraints { make in
+            make.top.equalTo(10)
             make.left.equalTo(15)
             make.right.equalTo(-15)
             // 这个属性是上下居中
@@ -114,30 +122,54 @@ class BPTopicListCell: UITableViewCell {
             make.width.equalTo(Screen.width)
         }
         
+        // 标签 摄影|jeff...
+        tagLabel.snp.makeConstraints { make in
+            
+            // 在iconImageView下方，且距离10
+            make.top.equalTo(iconImageView.snp.bottom).offset(10)
+            // 水平居中
+            make.centerX.equalToSuperview()
+            // 高度
+            make.height.equalTo(15)
+            
+            
+            // 高度
+//            make.height.equalTo(15)
+            // 和标题一样的左边距
+//            make.left.equalTo(titleLabel.snp.left)
+            // 以desLabel垂直居中对齐
+//            make.centerY.equalTo(desLabel)
+        }
+        
         // 图片下方的第二标题
         titleLabel.snp.makeConstraints { make in
 //            make.left.equalTo(iconImageView.snp.right).offset(14)
             // 在iconImageView下方，且距离10
-            make.top.equalTo(iconImageView.snp.bottom).offset(10)
-            make.left.equalTo(15)
-            make.right.equalTo(-15)
+            make.top.equalTo(tagLabel.snp.bottom).offset(20)
+            make.left.equalTo(40)
+            make.right.equalTo(-40)
             make.height.equalTo(45)
+            // 水平居中
+            make.centerX.equalToSuperview()
         }
         
         // 第三行标题
         desLabel.snp.makeConstraints { make in
+            
+            make.top.equalTo(titleLabel.snp.bottom).offset(20)
+            // 水平居中
+            make.centerX.equalToSuperview()
+            // 高度
+            make.height.equalTo(15)
+            
             // 在tagLabel左边，且距离4
-            make.left.equalTo(tagLabel.snp.right).offset(4)
+//            make.left.equalTo(tagLabel.snp.right).offset(4)
             // 在titleLabel的下方，且距离16
-            make.top.equalTo(titleLabel.snp.bottom).offset(16)
+//            make.top.equalTo(titleLabel.snp.bottom).offset(16)
+//            make.bottom.equalTo(-10)
         }
         
-        // 热的标签
-        tagLabel.snp.makeConstraints { make in
-            make.height.equalTo(15)
-            make.left.equalTo(titleLabel.snp.left)
-            make.centerY.equalTo(desLabel)
-        }
+        
     }
     
     public var model: OneContentListBean? {
@@ -151,9 +183,10 @@ class BPTopicListCell: UITableViewCell {
             iconImageView.sd_setImage(with: URL(string: model.img_url ?? ""), placeholderImage: GoodsImagePlaceholder)
 
             // 标题
-            desLabel.text = (model.title ?? "")
+            desLabel.text = (model.words_info ?? "")
             // 标签
-            tagLabel.text = (model.words_info ?? "")
+            let subtitle = "\((model.title) ?? "") | \(model.pic_info ?? "")"
+            tagLabel.text = subtitle
             
 //            if model.topicTag == 0 {
 //                tagLabel.snp.updateConstraints { make in
@@ -197,6 +230,7 @@ class BPTopicListCell: UITableViewCell {
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 2
+//        label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 15)
 //        label.textColor = .color50
 //        label.font = .mediumSystemFont(ofSize: 15)
@@ -205,6 +239,8 @@ class BPTopicListCell: UITableViewCell {
     
     lazy var desLabel: UILabel = {
         let label = UILabel()
+        label.textColor = .gray
+        label.font = UIFont.systemFont(ofSize: 13)
 //        label.textColor = .color99
 //        label.font = .mediumSystemFont(ofSize: 12)
         return label
@@ -213,6 +249,7 @@ class BPTopicListCell: UITableViewCell {
     lazy var tagLabel: UILabel = {
         let label = UILabel()
         label.textColor = .gray
+        label.font = UIFont.systemFont(ofSize: 13)
 //        label.font = .mediumSystemFont(ofSize: 12)
         label.text = "热"
 //        label.backgroundColor = UIColor(rgb: 0xFF666F)

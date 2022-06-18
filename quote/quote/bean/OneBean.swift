@@ -33,6 +33,7 @@ class OneContentListBean : Decodable {
     var title:String? = nil
     var words_info:String? = nil
     var share_url:String? = nil
+    var pic_info:String? = nil
     var author:AuthorBean? = nil
     required init() {}
 }
