@@ -43,7 +43,7 @@ class OneViewController: UIViewController, OneNavigation {
 //        let tableView = UITableView(frame: self.view.frame, style: .plain)
         tableView.backgroundColor = .white
         // 这里的100是像素，不是文字对应的高度，要将高度转为像素
-        tableView.rowHeight = Screen.width * (1175/2262.0) + 150.0
+        tableView.rowHeight = Screen.width * (1175/2262.0) + 170.0
         tableView.dataSource = self
         tableView.delegate = self
         // 分割线，加了以后最上面也有分割线
@@ -101,7 +101,7 @@ class BPTopicListCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-//        contentView.layer.addSublayer(shadowLayer)
+        contentView.layer.addSublayer(shadowLayer)
         
         contentView.addSubview(iconImageView)
         contentView.addSubview(titleLabel)
@@ -188,6 +188,7 @@ class BPTopicListCell: UITableViewCell {
             
             
             if (model.words_info != nil && model.words_info != "") {
+                shadowLayer.isHidden=false
                 // 是第一个
                 // 图片
                 iconImageView.snp.makeConstraints { make in
@@ -234,6 +235,7 @@ class BPTopicListCell: UITableViewCell {
                 
             } else {
                 
+                shadowLayer.isHidden=true
                 // 没有words_info，不是第一个
                 // 标题
                 desLabel.textColor = .black
@@ -245,7 +247,7 @@ class BPTopicListCell: UITableViewCell {
                 
                 // 第三行标题
                 desLabel.snp.remakeConstraints { make in
-                    make.top.equalTo(10)
+                    make.top.equalTo(30)
                     make.left.equalTo(15)
                     make.right.equalTo(-15)
 //                    make.top.equalTo(titleLabel.snp.bottom).offset(20)
