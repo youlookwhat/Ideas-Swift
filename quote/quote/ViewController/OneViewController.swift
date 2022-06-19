@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class OneViewController: UIViewController, OneNavigation {
     
     
@@ -100,74 +101,71 @@ class BPTopicListCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+//        contentView.layer.addSublayer(shadowLayer)
+        
         contentView.addSubview(iconImageView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(desLabel)
         contentView.addSubview(tagLabel)
-        // 设置全部的子view阴影
-//        contentView.layer.shadowColor = UIColor.gray.cgColor  // 设置背景颜色
-//        contentView.layer.shadowOpacity = 1 // 设置透明度
-//        contentView.layer.shadowOffset = .zero  // 设置偏移
-//        contentView.layer.shadowRadius = 5  // 设置半径
         
         
         // 图片
-        iconImageView.snp.makeConstraints { make in
-            make.top.equalTo(10)
-            make.left.equalTo(15)
-            make.right.equalTo(-15)
-            // 这个属性是上下居中
-//            make.centerY.equalToSuperview()
-            make.height.equalTo(Int(Screen.width * (1175/2262.0)))
-            make.width.equalTo(Screen.width)
-        }
-        
-        // 标签 摄影|jeff...
-        tagLabel.snp.makeConstraints { make in
-            
-            // 在iconImageView下方，且距离10
-            make.top.equalTo(iconImageView.snp.bottom).offset(10)
-            // 水平居中
-            make.centerX.equalToSuperview()
-            // 高度
-            make.height.equalTo(15)
-            
-            
-            // 高度
+//        iconImageView.snp.makeConstraints { make in
+//            make.top.equalTo(10)
+//            make.left.equalTo(15)
+//            make.right.equalTo(-15)
+//            // 这个属性是上下居中
+////            make.centerY.equalToSuperview()
+//            make.height.equalTo(Int(Screen.width * (1175/2262.0)))
+//            make.width.equalTo(Screen.width)
+//        }
+//
+//        // 标签 摄影|jeff...
+//        tagLabel.snp.makeConstraints { make in
+//
+//            // 在iconImageView下方，且距离10
+//            make.top.equalTo(iconImageView.snp.bottom).offset(10)
+//            // 水平居中
+//            make.centerX.equalToSuperview()
+//            // 高度
 //            make.height.equalTo(15)
-            // 和标题一样的左边距
-//            make.left.equalTo(titleLabel.snp.left)
-            // 以desLabel垂直居中对齐
-//            make.centerY.equalTo(desLabel)
-        }
-        
-        // 图片下方的第二标题
-        titleLabel.snp.makeConstraints { make in
-//            make.left.equalTo(iconImageView.snp.right).offset(14)
-            // 在iconImageView下方，且距离10
-            make.top.equalTo(tagLabel.snp.bottom).offset(20)
-            make.left.equalTo(40)
-            make.right.equalTo(-40)
-            make.height.equalTo(45)
-            // 水平居中
-            make.centerX.equalToSuperview()
-        }
-        
-        // 第三行标题
-        desLabel.snp.makeConstraints { make in
-            
-            make.top.equalTo(titleLabel.snp.bottom).offset(20)
-            // 水平居中
-            make.centerX.equalToSuperview()
-            // 高度
-            make.height.equalTo(15)
-            
-            // 在tagLabel左边，且距离4
-//            make.left.equalTo(tagLabel.snp.right).offset(4)
-            // 在titleLabel的下方，且距离16
-//            make.top.equalTo(titleLabel.snp.bottom).offset(16)
-//            make.bottom.equalTo(-10)
-        }
+//
+//
+//            // 高度
+////            make.height.equalTo(15)
+//            // 和标题一样的左边距
+////            make.left.equalTo(titleLabel.snp.left)
+//            // 以desLabel垂直居中对齐
+////            make.centerY.equalTo(desLabel)
+//        }
+//
+//        // 图片下方的第二标题
+//        titleLabel.snp.makeConstraints { make in
+////            make.left.equalTo(iconImageView.snp.right).offset(14)
+//            // 在iconImageView下方，且距离10
+//            make.top.equalTo(tagLabel.snp.bottom).offset(20)
+//            make.left.equalTo(40)
+//            make.right.equalTo(-40)
+//            make.height.equalTo(45)
+//            // 水平居中
+//            make.centerX.equalToSuperview()
+//        }
+//
+//        // 第三行标题
+//        desLabel.snp.makeConstraints { make in
+//
+//            make.top.equalTo(titleLabel.snp.bottom).offset(20)
+//            // 水平居中
+//            make.centerX.equalToSuperview()
+//            // 高度
+//            make.height.equalTo(15)
+//
+//            // 在tagLabel左边，且距离4
+////            make.left.equalTo(tagLabel.snp.right).offset(4)
+//            // 在titleLabel的下方，且距离16
+////            make.top.equalTo(titleLabel.snp.bottom).offset(16)
+////            make.bottom.equalTo(-10)
+//        }
         
         
     }
@@ -176,17 +174,123 @@ class BPTopicListCell: UITableViewCell {
         didSet {
             guard let model = model else { return }
             
-            // 内容描述
-            titleLabel.text =  (model.forward ?? "")
+            // 标题   第一个是2行话的那个
+            titleLabel.text =  (model.forward ?? "未知")
             
             // 图片
             iconImageView.sd_setImage(with: URL(string: model.img_url ?? ""), placeholderImage: GoodsImagePlaceholder)
 
-            // 标题
-            desLabel.text = (model.words_info ?? "")
-            // 标签
-            let subtitle = "\((model.title) ?? "") | \(model.pic_info ?? "")"
+            // 标题  第一个是最后一行的作者：严明
+            desLabel.text = (model.words_info ?? "未知")
+            // 标签  第一个是：摄影|jeff...
+            let subtitle = "\((model.title) ?? "未知") | \(model.pic_info ?? "未知")"
             tagLabel.text = subtitle
+            
+            
+            if (model.words_info != nil && model.words_info != "") {
+                // 是第一个
+                // 图片
+                iconImageView.snp.makeConstraints { make in
+                    make.top.equalTo(10)
+                    make.left.equalTo(15)
+                    make.right.equalTo(-15)
+                    // 这个属性是上下居中
+        //            make.centerY.equalToSuperview()
+                    make.height.equalTo(Int(Screen.width * (1175/2262.0)))
+                    make.width.equalTo(Screen.width)
+                }
+                
+                // 标签 摄影|jeff...
+                tagLabel.snp.makeConstraints { make in
+                    
+                    // 在iconImageView下方，且距离10
+                    make.top.equalTo(iconImageView.snp.bottom).offset(10)
+                    // 水平居中
+                    make.centerX.equalToSuperview()
+                    // 高度
+                    make.height.equalTo(15)
+                }
+                
+                // 图片下方的第二标题
+                titleLabel.snp.makeConstraints { make in
+                    // 在iconImageView下方，且距离10
+                    make.top.equalTo(tagLabel.snp.bottom).offset(20)
+                    make.left.equalTo(40)
+                    make.right.equalTo(-40)
+                    make.height.equalTo(45)
+                    // 水平居中
+                    make.centerX.equalToSuperview()
+                }
+                
+                // 第三行标题
+                desLabel.snp.makeConstraints { make in
+                    make.top.equalTo(titleLabel.snp.bottom).offset(20)
+                    // 水平居中
+                    make.centerX.equalToSuperview()
+                    // 高度
+                    make.height.equalTo(15)
+                }
+                
+                
+            } else {
+                
+                // 没有words_info，不是第一个
+                // 标题
+                desLabel.textColor = .black
+                // 全粗
+//                desLabel.font = .boldSystemFont(ofSize: 18)
+                // 中等粗
+                desLabel.font = .systemFont(ofSize: 18, weight: .medium)
+                desLabel.text = model.title ?? "未知"
+                
+                // 第三行标题
+                desLabel.snp.remakeConstraints { make in
+                    make.top.equalTo(10)
+                    make.left.equalTo(15)
+                    make.right.equalTo(-15)
+//                    make.top.equalTo(titleLabel.snp.bottom).offset(20)
+                    // 水平居中
+//                    make.centerX.equalToSuperview()
+                    // 高度
+                    make.height.equalTo(18)
+                }
+                
+                // 作者
+                tagLabel.text = "文 / \(model.author?.user_name ?? "未知")"
+                // 居左对齐
+                tagLabel.textAlignment = .left
+                tagLabel.snp.remakeConstraints { make in
+                    // 在desLabel下方，且距离8
+                    make.top.equalTo(desLabel.snp.bottom).offset(8)
+                    make.left.equalTo(15)
+                    make.right.equalTo(-15)
+                    // 高度
+                    make.height.equalTo(15)
+                }
+                
+                // 图片下方的第二标题
+                titleLabel.snp.remakeConstraints { make in
+                    make.top.equalTo(tagLabel.snp.bottom).offset(14)
+                    make.left.equalTo(15)
+                    make.right.equalTo(-15)
+                    make.height.equalTo(45)
+                    // 水平居中
+//                    make.centerX.equalToSuperview()
+                }
+                
+                
+                // 图片
+                iconImageView.snp.remakeConstraints { make in
+                    make.top.equalTo(titleLabel.snp.bottom).offset(10)
+                    make.left.equalTo(15)
+                    make.right.equalTo(-15)
+                    // 这个属性是上下居中
+        //            make.centerY.equalToSuperview()
+                    make.height.equalTo(Int(Screen.width * (1175/2262.0)))
+                    make.width.equalTo(Screen.width)
+                }
+                
+            }
             
 //            if model.topicTag == 0 {
 //                tagLabel.snp.updateConstraints { make in
@@ -258,4 +362,31 @@ class BPTopicListCell: UITableViewCell {
         label.textAlignment = .center
         return label
     }()
+    
+    /// 阴影
+    lazy var shadowLayer: CALayer = {
+        let bgLayer1 = CALayer()
+        bgLayer1.frame = CGRect(x: 15, y: 10, width: kScreenWidth - 30, height: Screen.width * (1175/2262.0) + 150.0)
+        bgLayer1.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).cgColor
+        bgLayer1.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.08).cgColor
+        bgLayer1.shadowOffset = CGSize(width: 0, height: 0)
+        bgLayer1.shadowOpacity = 1
+        bgLayer1.shadowRadius = 3
+        bgLayer1.cornerRadius = 8
+        bgLayer1.shadowPath = CGPath(roundedRect: bgLayer1.bounds, cornerWidth: 4, cornerHeight: 4, transform: nil)
+        return bgLayer1
+    }()
 }
+
+func setShadow(view:UIView,offset:CGSize,
+               opacity:Float,radius:CGFloat) {
+    //设置阴影颜色
+    view.layer.shadowColor = UIColor.lightGray.cgColor
+    //设置透明度
+    view.layer.shadowOpacity = opacity
+    //设置阴影半径
+    view.layer.shadowRadius = radius
+    //设置阴影偏移量
+    view.layer.shadowOffset = offset
+}
+
