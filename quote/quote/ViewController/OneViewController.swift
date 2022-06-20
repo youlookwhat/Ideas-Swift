@@ -101,12 +101,14 @@ class BPTopicListCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        // 阴影
         contentView.layer.addSublayer(shadowLayer)
         
         contentView.addSubview(iconImageView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(desLabel)
         contentView.addSubview(tagLabel)
+        contentView.addSubview(lineView)
         
         
         // 图片
@@ -178,7 +180,7 @@ class BPTopicListCell: UITableViewCell {
             titleLabel.text =  (model.forward ?? "未知")
             
             // 图片
-            iconImageView.sd_setImage(with: URL(string: model.img_url ?? ""), placeholderImage: GoodsImagePlaceholder)
+            iconImageView.sd_setImage(with: URL(string: model.img_url ?? ""), placeholderImage: BannerImagePlaceholder)
 
             // 标题  第一个是最后一行的作者：严明
             desLabel.text = (model.words_info ?? "未知")
@@ -188,7 +190,8 @@ class BPTopicListCell: UITableViewCell {
             
             
             if (model.words_info != nil && model.words_info != "") {
-                shadowLayer.isHidden=false
+                shadowLayer.isHidden = false
+                lineView.isHidden = true
                 // 是第一个
                 // 图片
                 iconImageView.snp.makeConstraints { make in
@@ -234,8 +237,16 @@ class BPTopicListCell: UITableViewCell {
                 
                 
             } else {
+                lineView.isHidden = false
+                lineView.snp.remakeConstraints{ make in
+                    make.top.equalTo(10)
+//                    make.left.equalTo(10)
+//                    make.right.equalTo(10)
+                    make.width.equalTo(Screen.width)
+                    make.height.equalTo(1)
+                }
                 
-                shadowLayer.isHidden=true
+                shadowLayer.isHidden = true
                 // 没有words_info，不是第一个
                 // 标题
                 desLabel.textColor = .black
@@ -247,7 +258,8 @@ class BPTopicListCell: UITableViewCell {
                 
                 // 第三行标题
                 desLabel.snp.remakeConstraints { make in
-                    make.top.equalTo(30)
+                    make.top.equalTo(lineView.snp.bottom).offset(30)
+//                    make.top.equalTo(30)
                     make.left.equalTo(15)
                     make.right.equalTo(-15)
 //                    make.top.equalTo(titleLabel.snp.bottom).offset(20)
@@ -325,6 +337,13 @@ class BPTopicListCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+   
+    lazy var lineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.lightGray
+        view.alpha = 0.1
+        return view
+    }()
     
     lazy var iconImageView: UIImageView = {
         let view = UIImageView()

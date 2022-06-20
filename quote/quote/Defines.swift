@@ -58,11 +58,8 @@ extension UIFont {
 /// 用户默认头像
 //let UserAvaterPlaceholder = UserAvaterDefault()
 
-/// 商品默认图
-let GoodsImagePlaceholder = UIImage(named: "goods_default")
-
 /// Banner默认图
-//let BannerImagePlaceholder = UIImage(named: "banner_default")
+let BannerImagePlaceholder = UIImage(named: "banner_default")
 
 /// 屏幕高度
 let kScreenHeight = UIScreen.main.bounds.size.height
