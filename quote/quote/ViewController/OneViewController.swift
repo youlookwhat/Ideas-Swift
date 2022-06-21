@@ -21,7 +21,7 @@ class OneViewController: UIViewController, OneNavigation {
         view.addSubview(tableView)
         
         navigationItem.title = "一个"
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor(lightThemeColor: .white, darkThemeColor: .black)
         
         
         // Do any additional setup after loading the view.
@@ -41,7 +41,7 @@ class OneViewController: UIViewController, OneNavigation {
         // viewBounds() 限制了tableView的宽高
         let tableView = UITableView(frame: viewBounds(), style: .plain)
 //        let tableView = UITableView(frame: self.view.frame, style: .plain)
-        tableView.backgroundColor = .white
+//        tableView.backgroundColor = .white
         // 这里的100是像素，不是文字对应的高度，要将高度转为像素
         tableView.rowHeight = Screen.width * (1175/2262.0) + 170.0
         tableView.dataSource = self
@@ -101,9 +101,10 @@ class BPTopicListCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        //这里生成后就不会变了
+        
         // 阴影
         contentView.layer.addSublayer(shadowLayer)
-        
         contentView.addSubview(iconImageView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(desLabel)
@@ -188,13 +189,16 @@ class BPTopicListCell: UITableViewCell {
             let subtitle = "\((model.title) ?? "未知") | \(model.pic_info ?? "未知")"
             tagLabel.text = subtitle
             
+            // 这里每次绘制cell都会执行。但是切换深色模式不会走这里？
+            shadowLayer.backgroundColor = UIColor(lightThemeColor: .white, darkThemeColor: .black).cgColor
+            
             
             if (model.words_info != nil && model.words_info != "") {
                 shadowLayer.isHidden = false
                 lineView.isHidden = true
                 // 是第一个
-                // 图片
-                iconImageView.snp.makeConstraints { make in
+                // 图片 使用 remakeConstraints ，如果使用makeConstraints可能会布局异常
+                iconImageView.snp.remakeConstraints { make in
                     make.top.equalTo(10)
                     make.left.equalTo(15)
                     make.right.equalTo(-15)
@@ -205,7 +209,7 @@ class BPTopicListCell: UITableViewCell {
                 }
                 
                 // 标签 摄影|jeff...
-                tagLabel.snp.makeConstraints { make in
+                tagLabel.snp.remakeConstraints { make in
                     
                     // 在iconImageView下方，且距离10
                     make.top.equalTo(iconImageView.snp.bottom).offset(10)
@@ -216,7 +220,7 @@ class BPTopicListCell: UITableViewCell {
                 }
                 
                 // 图片下方的第二标题
-                titleLabel.snp.makeConstraints { make in
+                titleLabel.snp.remakeConstraints { make in
                     // 在iconImageView下方，且距离10
                     make.top.equalTo(tagLabel.snp.bottom).offset(20)
                     make.left.equalTo(40)
@@ -226,8 +230,10 @@ class BPTopicListCell: UITableViewCell {
                     make.centerX.equalToSuperview()
                 }
                 
+                desLabel.font = UIFont.systemFont(ofSize: 13)
+                desLabel.textColor = UIColor(lightThemeColor: .gray, darkThemeColor: .gray)
                 // 第三行标题
-                desLabel.snp.makeConstraints { make in
+                desLabel.snp.remakeConstraints { make in
                     make.top.equalTo(titleLabel.snp.bottom).offset(20)
                     // 水平居中
                     make.centerX.equalToSuperview()
@@ -249,7 +255,7 @@ class BPTopicListCell: UITableViewCell {
                 shadowLayer.isHidden = true
                 // 没有words_info，不是第一个
                 // 标题
-                desLabel.textColor = .black
+                desLabel.textColor = UIColor(lightThemeColor: .black, darkThemeColor: .white)
                 // 全粗
 //                desLabel.font = .boldSystemFont(ofSize: 18)
                 // 中等粗
@@ -364,7 +370,8 @@ class BPTopicListCell: UITableViewCell {
     
     lazy var desLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .gray
+//        label.textColor = .gray
+//        label.textColor = UIColor(lightThemeColor: .black, darkThemeColor: .white)
         label.font = UIFont.systemFont(ofSize: 13)
 //        label.textColor = .color99
 //        label.font = .mediumSystemFont(ofSize: 12)
@@ -388,7 +395,9 @@ class BPTopicListCell: UITableViewCell {
     lazy var shadowLayer: CALayer = {
         let bgLayer1 = CALayer()
         bgLayer1.frame = CGRect(x: 15, y: 10, width: kScreenWidth - 30, height: Screen.width * (1175/2262.0) + 150.0)
-        bgLayer1.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).cgColor
+        // 背景，去掉后看起来没有阴影了
+        bgLayer1.backgroundColor = UIColor(lightThemeColor: .white, darkThemeColor: .black).cgColor
+//        bgLayer1.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).cgColor
         bgLayer1.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.08).cgColor
         bgLayer1.shadowOffset = CGSize(width: 0, height: 0)
         bgLayer1.shadowOpacity = 1
@@ -409,5 +418,33 @@ func setShadow(view:UIView,offset:CGSize,
     view.layer.shadowRadius = radius
     //设置阴影偏移量
     view.layer.shadowOffset = offset
+}
+
+//MARK: - LightMode与DarkMode的颜色思路
+extension UIColor {
+
+    /// 便利构造函数(配合cssHex函数使用 更好)
+    /// - Parameters:
+    ///   - lightThemeColor: 明亮主题的颜色
+    ///   - darkThemeColor: 黑暗主题的颜色
+
+    public convenience init(lightThemeColor: UIColor, darkThemeColor: UIColor? = nil) {
+        if #available(iOS 13.0, *) {
+            self.init { (traitCollection) -> UIColor in
+                switch traitCollection.userInterfaceStyle {
+                    case .light:
+                        return lightThemeColor
+                    case .unspecified:
+                        return lightThemeColor
+                    case .dark:
+                        return darkThemeColor ?? lightThemeColor
+                    @unknown default:
+                        fatalError()
+                }
+            }
+        } else {
+            self.init(cgColor: lightThemeColor.cgColor)
+        }
+    }
 }
 
