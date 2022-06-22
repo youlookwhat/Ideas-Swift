@@ -20,6 +20,7 @@
 		7CBC7A1A28280DB4005ECB4C /* DataSourceOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC7A1928280DB4005ECB4C /* DataSourceOne.swift */; };
 		7CBC7A1E28295082005ECB4C /* ViewUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC7A1D28295082005ECB4C /* ViewUtil.swift */; };
 		7CC51D0C2860BDDA00D5CC00 /* banner_default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7CC51D0B2860BDDA00D5CC00 /* banner_default.jpg */; };
+		7CC51D0E2863541400D5CC00 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC51D0D2863541400D5CC00 /* WebViewViewController.swift */; };
 		7CD7996628183FCE007A04DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7996528183FCE007A04DA /* AppDelegate.swift */; };
 		7CD7996A28183FCE007A04DA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7996928183FCE007A04DA /* ViewController.swift */; };
 		7CD7996F28183FD0007A04DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CD7996E28183FD0007A04DA /* Assets.xcassets */; };
@@ -47,6 +48,7 @@
 		7CBC7A1928280DB4005ECB4C /* DataSourceOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceOne.swift; sourceTree = "<group>"; };
 		7CBC7A1D28295082005ECB4C /* ViewUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtil.swift; sourceTree = "<group>"; };
 		7CC51D0B2860BDDA00D5CC00 /* banner_default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = banner_default.jpg; path = image/banner_default.jpg; sourceTree = "<group>"; };
+		7CC51D0D2863541400D5CC00 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		7CD7996228183FCE007A04DA /* quote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = quote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CD7996528183FCE007A04DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7CD7996928183FCE007A04DA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				7C5EF5E5284667D800AB80F7 /* OneViewController.swift */,
+				7CC51D0D2863541400D5CC00 /* WebViewViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 			files = (
 				7CD7996A28183FCE007A04DA /* ViewController.swift in Sources */,
 				7C9FE97F281ADEF3005D64C0 /* SwiftyJSON.swift in Sources */,
+				7CC51D0E2863541400D5CC00 /* WebViewViewController.swift in Sources */,
 				7CBC7A1E28295082005ECB4C /* ViewUtil.swift in Sources */,
 				7CBC7A1A28280DB4005ECB4C /* DataSourceOne.swift in Sources */,
 				7CD7996628183FCE007A04DA /* AppDelegate.swift in Sources */,
@@ -518,6 +522,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5J8DQFNWK3;
 				INFOPLIST_FILE = quote/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -536,6 +541,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5J8DQFNWK3;
 				INFOPLIST_FILE = quote/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

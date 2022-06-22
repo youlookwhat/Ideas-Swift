@@ -81,7 +81,17 @@ extension OneViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let topic = list?[indexPath.row]
+        let bean = list?[indexPath.row]
+        guard let bean = bean else { return }
+        
+        if (bean.words_info != nil && bean.words_info != "") {
+            
+        } else {
+            let vc = WebViewViewController()
+            vc.url = bean.share_url
+            navigationController?.pushViewController(vc, animated: true)
+        }
+        
 //        if let didSelectTopic = didSelectTopic {
 //            let dic = topic?.yy_modelToJSONObject() as? [AnyHashable: Any]
 //            didSelectTopic(dic, indexPath.row)

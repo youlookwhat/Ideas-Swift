@@ -84,9 +84,12 @@ var isIPhoneXAll: Bool {
 var kTopMargin: CGFloat {
     max(Screen.statusBarHeight() - 20, 0)
 }
+
+// 底部的高度
 var kBottomMargin: CGFloat {
     isIPhoneXAll ? 24 : 0
 }
+// 顶部的高度
 var kNavigationBarHeight: CGFloat {
     statusBarHeight + 44
 }
