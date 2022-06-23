@@ -29,11 +29,11 @@ class WebViewViewController: UIViewController, WKScriptMessageHandler {
 //        self.tabBarItem.badgeValue = "新消息"
 //        self.tabBarItem.badgeColor = UIColor.orange
         
-        studyWKWebView()
+        initWKWebView()
         addToolView()
     }
     
-    func studyWKWebView(){
+    func initWKWebView(){
         // 创建网页配置
         let config = WKWebViewConfiguration()
 
@@ -108,8 +108,11 @@ class WebViewViewController: UIViewController, WKScriptMessageHandler {
         toolView.isHidden = true
         
         // 加载进度条
-        progress = UIProgressView(frame: CGRect(x: 0, y: kNavigationBarHeight, width: self.view.frame.size.width, height: 2))
-        progress!.progressTintColor = UIColor.red
+        progress = UIProgressView(frame: CGRect(x: 0, y: kNavigationBarHeight, width: self.view.frame.size.width, height: 1))
+        // 进度颜色
+        progress!.progressTintColor = UIColor.systemBlue
+        // 进度条底色
+        progress.trackTintColor = UIColor.clear
         progress!.progress = 0
         self.view.addSubview(progress!)
         webview?.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
@@ -179,4 +182,14 @@ class WebViewViewController: UIViewController, WKScriptMessageHandler {
 
        }
    }
+    
+    // 已经从屏幕中移除 如果使用viewWillDisappear，左滑的时候会执行
+    override func viewDidDisappear(_ animated: Bool) {
+        progress.isHidden = true
+        // 移除，消除音频声音
+        webview.removeFromSuperview()
+        webview.stopLoading()
+        webview = nil
+    }
+    
 }
