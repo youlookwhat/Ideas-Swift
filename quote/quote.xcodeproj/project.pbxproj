@@ -21,6 +21,7 @@
 		7CBC7A1E28295082005ECB4C /* ViewUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC7A1D28295082005ECB4C /* ViewUtil.swift */; };
 		7CC51D0C2860BDDA00D5CC00 /* banner_default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7CC51D0B2860BDDA00D5CC00 /* banner_default.jpg */; };
 		7CC51D0E2863541400D5CC00 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC51D0D2863541400D5CC00 /* WebViewViewController.swift */; };
+		7CC51D8C286600FC00D5CC00 /* iv_left_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CC51D8B286600FC00D5CC00 /* iv_left_back.png */; };
 		7CD7996628183FCE007A04DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7996528183FCE007A04DA /* AppDelegate.swift */; };
 		7CD7996A28183FCE007A04DA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7996928183FCE007A04DA /* ViewController.swift */; };
 		7CD7996F28183FD0007A04DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CD7996E28183FD0007A04DA /* Assets.xcassets */; };
@@ -49,6 +50,7 @@
 		7CBC7A1D28295082005ECB4C /* ViewUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtil.swift; sourceTree = "<group>"; };
 		7CC51D0B2860BDDA00D5CC00 /* banner_default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = banner_default.jpg; path = image/banner_default.jpg; sourceTree = "<group>"; };
 		7CC51D0D2863541400D5CC00 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
+		7CC51D8B286600FC00D5CC00 /* iv_left_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iv_left_back.png; path = image/iv_left_back.png; sourceTree = "<group>"; };
 		7CD7996228183FCE007A04DA /* quote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = quote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CD7996528183FCE007A04DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7CD7996928183FCE007A04DA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 		7CD7996428183FCE007A04DA /* quote */ = {
 			isa = PBXGroup;
 			children = (
+				7CC51D8B286600FC00D5CC00 /* iv_left_back.png */,
 				7CC51D0B2860BDDA00D5CC00 /* banner_default.jpg */,
 				7C1410BD28523B1A0013AD7B /* Defines.swift */,
 				7CD7996528183FCE007A04DA /* AppDelegate.swift */,
@@ -311,6 +314,7 @@
 				7CFBBAE92820FA4000F052F0 /* app_lauch.jpg in Resources */,
 				7CD7997228183FD0007A04DA /* LaunchScreen.storyboard in Resources */,
 				7CD7996F28183FD0007A04DA /* Assets.xcassets in Resources */,
+				7CC51D8C286600FC00D5CC00 /* iv_left_back.png in Resources */,
 				7CC51D0C2860BDDA00D5CC00 /* banner_default.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
