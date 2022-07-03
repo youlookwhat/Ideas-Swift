@@ -23,9 +23,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        showLauchImage()
         
         
-        window = UIWindow(frame: UIScreen.main.bounds)
-        let navigationController = UINavigationController(rootViewController: OneViewController())
-        window?.rootViewController = navigationController
+//        window = UIWindow(frame: UIScreen.main.bounds)
+//        let navigationController = UINavigationController(rootViewController: OneViewController())
+//        window?.rootViewController = navigationController
+//        window?.makeKeyAndVisible()
+        
+        window = UIWindow.init(frame: UIScreen.main.bounds)
+//        window?.backgroundColor = UIColor.white
+        let nc = BaseNc(rootViewController: OneViewController())
+        window?.rootViewController = nc
         window?.makeKeyAndVisible()
         
         return true

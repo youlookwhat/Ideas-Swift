@@ -30,9 +30,7 @@ class OnePresent {
                     let bean = try JSONDecoder().decode(OneBean.self, from: response.value!) as OneBean?
                     
                     
-                    
-    //                print(bean.data!.content_list?[1].category)
-//                    listener.onData(bean: bean)
+//                    print(bean!.data!.weather?.climate)
                     self.navigation?.onDataSuccess(bean: bean)
                 } catch {
                     // print error here.

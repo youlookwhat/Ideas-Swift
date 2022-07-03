@@ -21,6 +21,7 @@ class OneBean : Decodable {
 class OneData : Decodable{
     var id:String? = nil
     var content_list:[OneContentListBean]? = nil
+    var weather:AuthorBean? = nil
     required init() {}
 }
 
@@ -39,6 +40,8 @@ class OneContentListBean : Decodable {
 }
 
 class AuthorBean:Decodable {
+    // 日期
+    var date:String? = nil
     var user_name:String? = nil
     var desc:String? = nil
     var summary:String? = nil

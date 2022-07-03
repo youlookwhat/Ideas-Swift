@@ -20,17 +20,97 @@ class OneViewController: UIViewController, OneNavigation {
 
         view.addSubview(tableView)
         
-        navigationItem.title = "一个"
+        navigationController?.navigationBar.isHidden = true
+//        navigationItem.title = "一个"
         view.backgroundColor = UIColor(lightThemeColor: .white, darkThemeColor: .black)
         
-        
+        initTitleView()
         // Do any additional setup after loading the view.
         present = OnePresent(navigation: self)
         present?.getOneData()
     }
     
-    func onDataSuccess(bean: OneBean?) {
+    // 标题栏
+    func initTitleView(){
+        let toolView = UIView(frame: CGRect(x: 0, y: statusBarHeight, width: self.view.frame.width, height: 44))
+//        toolView.backgroundColor = UIColor.white
+        self.view.addSubview(toolView)
         
+        toolView.addSubview(labelTimeDay)
+        toolView.addSubview(labelTimeYearMon)
+        toolView.addSubview(labelAbout)
+        
+        // 使用时需要一个Superview
+        labelTimeDay.snp.makeConstraints { make in
+            make.left.equalTo(15)
+            make.height.equalTo(44)
+            // 垂直居中
+            make.centerY.equalToSuperview()
+        }
+        labelTimeYearMon.snp.makeConstraints { make in
+            make.left.equalTo(labelTimeDay.snp.right).offset(10)
+            make.bottom.equalTo(labelTimeDay.snp.bottom).offset(-8)
+        }
+        labelAbout.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.right.equalToSuperview()
+            make.width.equalTo(54)
+            make.height.equalTo(44)
+        }
+    }
+    
+    lazy var labelTimeDay: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor(lightThemeColor: .black, darkThemeColor: .white)
+        label.font = UIFont(name: "PingFangSC-Medium", size: 28)
+//        label.font = .systemFont(ofSize: 25, weight: .medium)
+//        label.text = "03"
+        label.textAlignment = .center
+        return label
+    }()
+    
+    lazy var labelTimeYearMon: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor(lightThemeColor: .black, darkThemeColor: .white)
+//        label.text = "07 . 2022"
+        label.font = UIFont(name: "PingFangSC-Medium", size: 15)
+//        label.font = UIFont.systemFont(ofSize: 13)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    lazy var labelAbout: UIButton = {
+        // 添加前进按钮
+        let bt2 = UIButton()
+        bt2.setTitle("关于", for: .normal)
+        // 设置文字大小
+        bt2.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+        bt2.setTitleColor(UIColor(lightThemeColor: .gray, darkThemeColor: .white), for: .normal)
+        bt2.addTarget(self, action: #selector(openAbout), for: .touchUpInside)
+        return bt2;
+    }()
+    
+    // 点击关于
+    @objc func openAbout(){
+        let vc = WebViewViewController()
+        vc.url = "https://github.com/youlookwhat"
+        vc.titleOut = "youlookwhat"
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func onDataSuccess(bean: OneBean?) {
+        if (bean != nil && bean!.data != nil && bean!.data!.weather != nil){
+            let weather = bean!.data!.weather
+            let date = weather?.date
+            if (date!.contains("-")){
+                // 以 - 切割
+                let times = date?.components(separatedBy: "-")
+                if (times!.count == 3){
+                    labelTimeDay.text = times?[2]
+                    labelTimeYearMon.text = "\(times![1]) . \(times![0])"
+                }
+            }
+        }
         if (bean != nil && bean!.data != nil && bean!.data!.content_list != nil) {
             list  = bean!.data!.content_list
             self.tableView.reloadData()
@@ -38,12 +118,15 @@ class OneViewController: UIViewController, OneNavigation {
     }
 
     lazy var tableView: UITableView = {
-        // viewBounds() 限制了tableView的宽高
+        // viewBounds() 限制了tableView的宽高，距上状态栏+44
         let tableView = UITableView(frame: viewBounds(), style: .plain)
 //        let tableView = UITableView(frame: self.view.frame, style: .plain)
 //        tableView.backgroundColor = .white
         // 这里的100是像素，不是文字对应的高度，要将高度转为像素
-        tableView.rowHeight = Screen.width * (1175/2262.0) + 170.0
+//        tableView.rowHeight = Screen.width * (1175/2262.0) + 170.0
+//        tableView.estimatedRowHeight = Screen.width * (1175/2262.0) + 170.0
+//        tableView.rowHeight = UITableView.automaticDimension
+        
         tableView.dataSource = self
         tableView.delegate = self
         // 分割线，加了以后最上面也有分割线
@@ -74,10 +157,18 @@ extension OneViewController: UITableViewDataSource, UITableViewDelegate {
         // 没有选中的样式，一般都没有
         cell.selectionStyle = .none
         
-        
         let topic = list?[indexPath.row]
         cell.model = topic
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        // 动态设置高度
+        if indexPath.row == 0 {
+            return (Screen.width * (1175/2262.0) + 170.0);
+        } else {
+            return (Screen.width * (1175/2262.0) + 170.0);
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -89,18 +180,9 @@ extension OneViewController: UITableViewDataSource, UITableViewDelegate {
         } else {
             let vc = WebViewViewController()
             vc.url = bean.share_url
+            vc.titleOut = bean.title ?? ""
             navigationController?.pushViewController(vc, animated: true)
         }
-        
-//        if let didSelectTopic = didSelectTopic {
-//            let dic = topic?.yy_modelToJSONObject() as? [AnyHashable: Any]
-//            didSelectTopic(dic, indexPath.row)
-//        }
-//        else if let id = topic?.id {
-//            let vc = BPTopicViewController()
-//            vc.id = id
-//            navigationController?.pushViewController(vc, animated: true)
-//        }
     }
 }
 
@@ -112,7 +194,6 @@ class BPTopicListCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         //这里生成后就不会变了
-        
         // 阴影
         contentView.layer.addSublayer(shadowLayer)
         contentView.addSubview(iconImageView)
@@ -120,67 +201,6 @@ class BPTopicListCell: UITableViewCell {
         contentView.addSubview(desLabel)
         contentView.addSubview(tagLabel)
         contentView.addSubview(lineView)
-        
-        
-        // 图片
-//        iconImageView.snp.makeConstraints { make in
-//            make.top.equalTo(10)
-//            make.left.equalTo(15)
-//            make.right.equalTo(-15)
-//            // 这个属性是上下居中
-////            make.centerY.equalToSuperview()
-//            make.height.equalTo(Int(Screen.width * (1175/2262.0)))
-//            make.width.equalTo(Screen.width)
-//        }
-//
-//        // 标签 摄影|jeff...
-//        tagLabel.snp.makeConstraints { make in
-//
-//            // 在iconImageView下方，且距离10
-//            make.top.equalTo(iconImageView.snp.bottom).offset(10)
-//            // 水平居中
-//            make.centerX.equalToSuperview()
-//            // 高度
-//            make.height.equalTo(15)
-//
-//
-//            // 高度
-////            make.height.equalTo(15)
-//            // 和标题一样的左边距
-////            make.left.equalTo(titleLabel.snp.left)
-//            // 以desLabel垂直居中对齐
-////            make.centerY.equalTo(desLabel)
-//        }
-//
-//        // 图片下方的第二标题
-//        titleLabel.snp.makeConstraints { make in
-////            make.left.equalTo(iconImageView.snp.right).offset(14)
-//            // 在iconImageView下方，且距离10
-//            make.top.equalTo(tagLabel.snp.bottom).offset(20)
-//            make.left.equalTo(40)
-//            make.right.equalTo(-40)
-//            make.height.equalTo(45)
-//            // 水平居中
-//            make.centerX.equalToSuperview()
-//        }
-//
-//        // 第三行标题
-//        desLabel.snp.makeConstraints { make in
-//
-//            make.top.equalTo(titleLabel.snp.bottom).offset(20)
-//            // 水平居中
-//            make.centerX.equalToSuperview()
-//            // 高度
-//            make.height.equalTo(15)
-//
-//            // 在tagLabel左边，且距离4
-////            make.left.equalTo(tagLabel.snp.right).offset(4)
-//            // 在titleLabel的下方，且距离16
-////            make.top.equalTo(titleLabel.snp.bottom).offset(16)
-////            make.bottom.equalTo(-10)
-//        }
-        
-        
     }
     
     public var model: OneContentListBean? {
@@ -230,6 +250,16 @@ class BPTopicListCell: UITableViewCell {
                 }
                 
                 // 图片下方的第二标题
+                titleLabel.numberOfLines = 2
+                //通过富文本来设置行间距
+//                let paraph = NSMutableParagraphStyle()
+                //将行间距设置为28
+//                paraph.lineSpacing = 5
+                //样式属性集合
+//                let attributes = [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 15),
+//                                  NSAttributedString.Key.paragraphStyle: paraph]
+//                titleLabel.attributedText = NSAttributedString(string: (model.forward ?? "未知"), attributes: attributes)
+                
                 titleLabel.snp.remakeConstraints { make in
                     // 在iconImageView下方，且距离10
                     make.top.equalTo(tagLabel.snp.bottom).offset(20)
@@ -299,6 +329,7 @@ class BPTopicListCell: UITableViewCell {
                 }
                 
                 // 图片下方的第二标题
+                titleLabel.numberOfLines = 2
                 titleLabel.snp.remakeConstraints { make in
                     make.top.equalTo(tagLabel.snp.bottom).offset(14)
                     make.left.equalTo(15)
@@ -321,32 +352,6 @@ class BPTopicListCell: UITableViewCell {
                 }
                 
             }
-            
-//            if model.topicTag == 0 {
-//                tagLabel.snp.updateConstraints { make in
-//                    make.width.height.equalTo(0)
-//                }
-//                desLabel.snp.updateConstraints { make in
-//                    make.left.equalTo(tagLabel.snp.right).offset(0)
-//                }
-//            } else {
-//                tagLabel.snp.updateConstraints { make in
-//                    make.width.height.equalTo(16)
-//                }
-//                desLabel.snp.updateConstraints { make in
-//                    make.left.equalTo(tagLabel.snp.right).offset(4)
-//                }
-//                if model.topicTag == 1 {
-//                    tagLabel.text = "热"
-//                    tagLabel.backgroundColor = UIColor(rgb: 0xFF666F)
-//                } else if model.topicTag == 2 {
-//                    tagLabel.text = "新"
-//                    tagLabel.backgroundColor = UIColor(rgb: 0xF7A64A)
-//                } else if model.topicTag == 3 {
-//                    tagLabel.text = "爆"
-//                    tagLabel.backgroundColor = UIColor(rgb: 0xB76EFF)
-//                }
-//            }
         }
     }
     
@@ -371,9 +376,9 @@ class BPTopicListCell: UITableViewCell {
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 2
+//        label.lineBreakMode = .byWordWrapping
 //        label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 15)
-//        label.textColor = .color50
 //        label.font = .mediumSystemFont(ofSize: 15)
         return label
     }()
@@ -393,8 +398,7 @@ class BPTopicListCell: UITableViewCell {
         label.textColor = .gray
         label.font = UIFont.systemFont(ofSize: 13)
 //        label.font = .mediumSystemFont(ofSize: 12)
-        label.text = "热"
-//        label.backgroundColor = UIColor(rgb: 0xFF666F)
+        label.text = ""
         label.clipsToBounds = true
 //        label.layer.cornerRadius = 4
         label.textAlignment = .center
