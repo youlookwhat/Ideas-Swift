@@ -238,3 +238,31 @@ extension UINavigationController: UINavigationBarDelegate, UIGestureRecognizerDe
 
     
 }
+
+//MARK: - LightMode与DarkMode的颜色思路
+extension UIColor {
+
+    /// 便利构造函数(配合cssHex函数使用 更好)
+    /// - Parameters:
+    ///   - lightThemeColor: 明亮主题的颜色
+    ///   - darkThemeColor: 黑暗主题的颜色
+
+    public convenience init(lightThemeColor: UIColor, darkThemeColor: UIColor? = nil) {
+        if #available(iOS 13.0, *) {
+            self.init { (traitCollection) -> UIColor in
+                switch traitCollection.userInterfaceStyle {
+                    case .light:
+                        return lightThemeColor
+                    case .unspecified:
+                        return lightThemeColor
+                    case .dark:
+                        return darkThemeColor ?? lightThemeColor
+                    @unknown default:
+                        fatalError()
+                }
+            }
+        } else {
+            self.init(cgColor: lightThemeColor.cgColor)
+        }
+    }
+}

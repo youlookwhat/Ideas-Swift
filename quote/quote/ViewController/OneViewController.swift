@@ -124,8 +124,9 @@ class OneViewController: UIViewController, OneNavigation {
 //        tableView.backgroundColor = .white
         // 这里的100是像素，不是文字对应的高度，要将高度转为像素
 //        tableView.rowHeight = Screen.width * (1175/2262.0) + 170.0
-//        tableView.estimatedRowHeight = Screen.width * (1175/2262.0) + 170.0
-//        tableView.rowHeight = UITableView.automaticDimension
+        // 自适应高度添加 1.这两行属性 初始高度和配置 2.最底部的一个cell配上bottom属性
+        tableView.estimatedRowHeight = Screen.width * (1175/2262.0) + 170.0
+        tableView.rowHeight = UITableView.automaticDimension
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -162,15 +163,6 @@ extension OneViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        // 动态设置高度
-        if indexPath.row == 0 {
-            return (Screen.width * (1175/2262.0) + 170.0);
-        } else {
-            return (Screen.width * (1175/2262.0) + 170.0);
-        }
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let bean = list?[indexPath.row]
         guard let bean = bean else { return }
@@ -195,7 +187,7 @@ class BPTopicListCell: UITableViewCell {
         
         //这里生成后就不会变了
         // 阴影
-        contentView.layer.addSublayer(shadowLayer)
+//        contentView.layer.addSublayer(shadowLayer)
         contentView.addSubview(iconImageView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(desLabel)
@@ -208,7 +200,19 @@ class BPTopicListCell: UITableViewCell {
             guard let model = model else { return }
             
             // 标题   第一个是2行话的那个
-            titleLabel.text =  (model.forward ?? "未知")
+//            titleLabel.text =  (model.forward ?? "未知")
+            
+            // 图片下方的第二标题
+//                titleLabel.numberOfLines = 2
+            //通过富文本来设置行间距
+            let paraph = NSMutableParagraphStyle()
+            //将行间距设置为28
+            paraph.lineSpacing = 5
+            //样式属性集合
+            let attributes = [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 15),
+                              NSAttributedString.Key.paragraphStyle: paraph]
+            titleLabel.attributedText = NSAttributedString(string: (model.forward ?? "未知"), attributes: attributes)
+            
             
             // 图片
             iconImageView.sd_setImage(with: URL(string: model.img_url ?? ""), placeholderImage: BannerImagePlaceholder)
@@ -220,11 +224,11 @@ class BPTopicListCell: UITableViewCell {
             tagLabel.text = subtitle
             
             // 这里每次绘制cell都会执行。但是切换深色模式不会走这里？
-            shadowLayer.backgroundColor = UIColor(lightThemeColor: .white, darkThemeColor: .black).cgColor
+//            shadowLayer.backgroundColor = UIColor(lightThemeColor: .white, darkThemeColor: .black).cgColor
             
             
             if (model.words_info != nil && model.words_info != "") {
-                shadowLayer.isHidden = false
+//                shadowLayer.isHidden = false
                 lineView.isHidden = true
                 // 是第一个
                 // 图片 使用 remakeConstraints ，如果使用makeConstraints可能会布局异常
@@ -240,7 +244,6 @@ class BPTopicListCell: UITableViewCell {
                 
                 // 标签 摄影|jeff...
                 tagLabel.snp.remakeConstraints { make in
-                    
                     // 在iconImageView下方，且距离10
                     make.top.equalTo(iconImageView.snp.bottom).offset(10)
                     // 水平居中
@@ -249,23 +252,12 @@ class BPTopicListCell: UITableViewCell {
                     make.height.equalTo(15)
                 }
                 
-                // 图片下方的第二标题
-                titleLabel.numberOfLines = 2
-                //通过富文本来设置行间距
-//                let paraph = NSMutableParagraphStyle()
-                //将行间距设置为28
-//                paraph.lineSpacing = 5
-                //样式属性集合
-//                let attributes = [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 15),
-//                                  NSAttributedString.Key.paragraphStyle: paraph]
-//                titleLabel.attributedText = NSAttributedString(string: (model.forward ?? "未知"), attributes: attributes)
-                
                 titleLabel.snp.remakeConstraints { make in
                     // 在iconImageView下方，且距离10
                     make.top.equalTo(tagLabel.snp.bottom).offset(20)
                     make.left.equalTo(40)
                     make.right.equalTo(-40)
-                    make.height.equalTo(45)
+                    // 如果是自适应则不要设置固定高度 make.height.equalTo(45)
                     // 水平居中
                     make.centerX.equalToSuperview()
                 }
@@ -275,6 +267,8 @@ class BPTopicListCell: UITableViewCell {
                 // 第三行标题
                 desLabel.snp.remakeConstraints { make in
                     make.top.equalTo(titleLabel.snp.bottom).offset(20)
+                    // 自适应高度的话，最后一个item需要bottom
+                    make.bottom.equalTo(-10)
                     // 水平居中
                     make.centerX.equalToSuperview()
                     // 高度
@@ -292,7 +286,7 @@ class BPTopicListCell: UITableViewCell {
                     make.height.equalTo(1)
                 }
                 
-                shadowLayer.isHidden = true
+//                shadowLayer.isHidden = true
                 // 没有words_info，不是第一个
                 // 标题
                 desLabel.textColor = UIColor(lightThemeColor: .black, darkThemeColor: .white)
@@ -305,14 +299,11 @@ class BPTopicListCell: UITableViewCell {
                 // 第三行标题
                 desLabel.snp.remakeConstraints { make in
                     make.top.equalTo(lineView.snp.bottom).offset(30)
-//                    make.top.equalTo(30)
                     make.left.equalTo(15)
                     make.right.equalTo(-15)
-//                    make.top.equalTo(titleLabel.snp.bottom).offset(20)
-                    // 水平居中
-//                    make.centerX.equalToSuperview()
+                    // 水平居中 make.centerX.equalToSuperview()
                     // 高度
-                    make.height.equalTo(18)
+//                    make.height.equalTo(18)
                 }
                 
                 // 作者
@@ -329,24 +320,20 @@ class BPTopicListCell: UITableViewCell {
                 }
                 
                 // 图片下方的第二标题
-                titleLabel.numberOfLines = 2
                 titleLabel.snp.remakeConstraints { make in
                     make.top.equalTo(tagLabel.snp.bottom).offset(14)
                     make.left.equalTo(15)
                     make.right.equalTo(-15)
-                    make.height.equalTo(45)
                     // 水平居中
 //                    make.centerX.equalToSuperview()
                 }
                 
-                
                 // 图片
                 iconImageView.snp.remakeConstraints { make in
                     make.top.equalTo(titleLabel.snp.bottom).offset(10)
+                    make.bottom.equalTo(-10)
                     make.left.equalTo(15)
                     make.right.equalTo(-15)
-                    // 这个属性是上下居中
-        //            make.centerY.equalToSuperview()
                     make.height.equalTo(Int(Screen.width * (1175/2262.0)))
                     make.width.equalTo(Screen.width)
                 }
@@ -375,8 +362,9 @@ class BPTopicListCell: UITableViewCell {
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 2
-//        label.lineBreakMode = .byWordWrapping
+        // 自适应高度添加
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
 //        label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 15)
 //        label.font = .mediumSystemFont(ofSize: 15)
@@ -388,7 +376,6 @@ class BPTopicListCell: UITableViewCell {
 //        label.textColor = .gray
 //        label.textColor = UIColor(lightThemeColor: .black, darkThemeColor: .white)
         label.font = UIFont.systemFont(ofSize: 13)
-//        label.textColor = .color99
 //        label.font = .mediumSystemFont(ofSize: 12)
         return label
     }()
@@ -434,31 +421,4 @@ func setShadow(view:UIView,offset:CGSize,
     view.layer.shadowOffset = offset
 }
 
-//MARK: - LightMode与DarkMode的颜色思路
-extension UIColor {
-
-    /// 便利构造函数(配合cssHex函数使用 更好)
-    /// - Parameters:
-    ///   - lightThemeColor: 明亮主题的颜色
-    ///   - darkThemeColor: 黑暗主题的颜色
-
-    public convenience init(lightThemeColor: UIColor, darkThemeColor: UIColor? = nil) {
-        if #available(iOS 13.0, *) {
-            self.init { (traitCollection) -> UIColor in
-                switch traitCollection.userInterfaceStyle {
-                    case .light:
-                        return lightThemeColor
-                    case .unspecified:
-                        return lightThemeColor
-                    case .dark:
-                        return darkThemeColor ?? lightThemeColor
-                    @unknown default:
-                        fatalError()
-                }
-            }
-        } else {
-            self.init(cgColor: lightThemeColor.cgColor)
-        }
-    }
-}
 

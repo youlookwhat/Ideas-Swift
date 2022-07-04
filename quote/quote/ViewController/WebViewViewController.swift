@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class WebViewViewController: UIViewController, WKScriptMessageHandler {
+class WebViewViewController: UIViewController, WKScriptMessageHandler, WKNavigationDelegate {
 
     var ivBack:UIImageView! = nil
     var lableTitle:UILabel! = nil
@@ -91,7 +91,6 @@ class WebViewViewController: UIViewController, WKScriptMessageHandler {
         webview?.isOpaque = false
         webview?.backgroundColor = UIColor(lightThemeColor: .white, darkThemeColor: .black)
         self.view.addSubview(webview!)
-//        let url = URL(string: "https://jinbeen.com")
         let url = URL(string: url!)
         let request = URLRequest(url: url!)
         webview!.load(request)
@@ -167,7 +166,8 @@ class WebViewViewController: UIViewController, WKScriptMessageHandler {
         webview?.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
         // 监听标题
         webview?.addObserver(self, forKeyPath: "title", options: .new, context: nil)
-        
+        // 加载结束，加载失败等
+        webview?.navigationDelegate = self
      }
     
     
@@ -198,6 +198,7 @@ class WebViewViewController: UIViewController, WKScriptMessageHandler {
         }
     }
         
+    // 后退
     @objc func navBtnPress(){
         if webview!.canGoBack {
             webview?.goBack()
@@ -217,10 +218,6 @@ class WebViewViewController: UIViewController, WKScriptMessageHandler {
         }
     }
     
-    // 后退
-    @objc func back(){
-        if webview!.canGoBack {webview?.goBack()}
-    }
 
     // 前进
     @objc func goForward(){
@@ -229,6 +226,7 @@ class WebViewViewController: UIViewController, WKScriptMessageHandler {
         webview?.evaluateJavaScript("javaScript:userFunc()", completionHandler: nil)
     }
 
+    // 监听深色模式
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         if #available(iOS 13.0, *) {
@@ -240,6 +238,26 @@ class WebViewViewController: UIViewController, WKScriptMessageHandler {
         }
     }
 
+    // 设置了 webview?.navigationDelegate = self
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        // 页面加载完成
+        print("---页面加载完成")
+    }
+    
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        print("---加载失败 didFail \(error)")
+        if (error as NSError).code == -999 {
+            return
+        }
+    }
+    
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        print("---加载失败 didFailProvisionalNavigation")
+//        if error == NSURLErrorCancelled {
+//            return
+//        }
+    }
+    
     // 设置字体背景 暗黑 白色
     func changeTextBackgroundStyle(style : String = "dark"){
         webview?.backgroundColor = UIColor(lightThemeColor: .white, darkThemeColor: .black)
@@ -278,29 +296,4 @@ class WebViewViewController: UIViewController, WKScriptMessageHandler {
 //        return false
 //    }
     
-    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage? {
-        let size = image.size
-        
-        let widthRatio  = targetSize.width  / size.width
-        let heightRatio = targetSize.height / size.height
-        
-        // Figure out what our orientation is, and use that to form the rectangle
-        var newSize: CGSize
-        if(widthRatio > heightRatio) {
-            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
-        } else {
-            newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
-        }
-        
-        // This is the rect that we've calculated out and this is what is actually used below
-        let rect = CGRect(origin: .zero, size: newSize)
-        
-        // Actually do the resizing to the rect using the ImageContext stuff
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        image.draw(in: rect)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return newImage
-    }
 }
