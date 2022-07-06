@@ -11,15 +11,19 @@ import UIKit
 
 class OneViewController: UIViewController, OneNavigation {
     
-    
-    var  list :[OneContentListBean]?
+    // 数据
+    var list:[OneContentListBean]?
+    // P层
     var present:OnePresent?
+    // 重试按钮
+    var btNoNet:UIButton?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.addSubview(tableView)
         
+        // 隐藏导航栏(标题栏)
         navigationController?.navigationBar.isHidden = true
 //        navigationItem.title = "一个"
         view.backgroundColor = UIColor(lightThemeColor: .white, darkThemeColor: .black)
@@ -114,9 +118,25 @@ class OneViewController: UIViewController, OneNavigation {
         if (bean != nil && bean!.data != nil && bean!.data!.content_list != nil) {
             list  = bean!.data!.content_list
             self.tableView.reloadData()
+        } else {
+            tableView.removeFromSuperview()
+            btNoNet = UIButton(frame: viewBounds())
+            btNoNet!.setTitle("请检查网络，点击重试", for: .normal)
+            // 设置文字大小
+            btNoNet!.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+            btNoNet!.setTitleColor(UIColor(lightThemeColor: .black, darkThemeColor: .white), for: .normal)
+            btNoNet!.addTarget(self, action: #selector(reLoad), for: .touchUpInside)
+            view.addSubview(btNoNet!)
         }
     }
 
+    // 重新加载
+    @objc func reLoad(){
+        btNoNet?.removeFromSuperview()
+        view.addSubview(tableView)
+        present?.getOneData()
+    }
+    
     lazy var tableView: UITableView = {
         // viewBounds() 限制了tableView的宽高，距上状态栏+44
         let tableView = UITableView(frame: viewBounds(), style: .plain)
