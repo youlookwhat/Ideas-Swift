@@ -21,9 +21,9 @@
 		7CBC7A182826BAA3005ECB4C /* DataSourceCountsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC7A172826BAA3005ECB4C /* DataSourceCountsProvider.swift */; };
 		7CBC7A1A28280DB4005ECB4C /* DataSourceOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC7A1928280DB4005ECB4C /* DataSourceOne.swift */; };
 		7CBC7A1E28295082005ECB4C /* ViewUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC7A1D28295082005ECB4C /* ViewUtil.swift */; };
-		7CC51D0C2860BDDA00D5CC00 /* banner_default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7CC51D0B2860BDDA00D5CC00 /* banner_default.jpg */; };
 		7CC51D0E2863541400D5CC00 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC51D0D2863541400D5CC00 /* WebViewViewController.swift */; };
 		7CC51D8C286600FC00D5CC00 /* iv_left_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CC51D8B286600FC00D5CC00 /* iv_left_back.png */; };
+		7CD4303928772DA3007B1713 /* banner_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CD4303828772DA3007B1713 /* banner_default.png */; };
 		7CD7996628183FCE007A04DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7996528183FCE007A04DA /* AppDelegate.swift */; };
 		7CD7996A28183FCE007A04DA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7996928183FCE007A04DA /* ViewController.swift */; };
 		7CD7996F28183FD0007A04DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CD7996E28183FD0007A04DA /* Assets.xcassets */; };
@@ -52,9 +52,9 @@
 		7CBC7A172826BAA3005ECB4C /* DataSourceCountsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceCountsProvider.swift; sourceTree = "<group>"; };
 		7CBC7A1928280DB4005ECB4C /* DataSourceOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceOne.swift; sourceTree = "<group>"; };
 		7CBC7A1D28295082005ECB4C /* ViewUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtil.swift; sourceTree = "<group>"; };
-		7CC51D0B2860BDDA00D5CC00 /* banner_default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = banner_default.jpg; path = image/banner_default.jpg; sourceTree = "<group>"; };
 		7CC51D0D2863541400D5CC00 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		7CC51D8B286600FC00D5CC00 /* iv_left_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iv_left_back.png; path = image/iv_left_back.png; sourceTree = "<group>"; };
+		7CD4303828772DA3007B1713 /* banner_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = banner_default.png; path = image/banner_default.png; sourceTree = "<group>"; };
 		7CD7996228183FCE007A04DA /* quote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = quote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CD7996528183FCE007A04DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7CD7996928183FCE007A04DA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -178,7 +178,7 @@
 				7C7DDC662870A05D00ABD1A6 /* base */,
 				7CC51D8B286600FC00D5CC00 /* iv_left_back.png */,
 				7C7DDC6B2870A88700ABD1A6 /* icon_back_base.png */,
-				7CC51D0B2860BDDA00D5CC00 /* banner_default.jpg */,
+				7CD4303828772DA3007B1713 /* banner_default.png */,
 				7C1410BD28523B1A0013AD7B /* Defines.swift */,
 				7CD7996528183FCE007A04DA /* AppDelegate.swift */,
 				7CD7996928183FCE007A04DA /* ViewController.swift */,
@@ -330,7 +330,7 @@
 				7CD7997228183FD0007A04DA /* LaunchScreen.storyboard in Resources */,
 				7CD7996F28183FD0007A04DA /* Assets.xcassets in Resources */,
 				7CC51D8C286600FC00D5CC00 /* iv_left_back.png in Resources */,
-				7CC51D0C2860BDDA00D5CC00 /* banner_default.jpg in Resources */,
+				7CD4303928772DA3007B1713 /* banner_default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

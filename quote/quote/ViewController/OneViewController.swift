@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MJRefresh
 
 
 class OneViewController: UIViewController, OneNavigation {
@@ -17,6 +18,8 @@ class OneViewController: UIViewController, OneNavigation {
     var present:OnePresent?
     // 重试按钮
     var btNoNet:UIButton?
+    // 下拉刷新
+    var heser:MJRefreshNormalHeader?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +35,17 @@ class OneViewController: UIViewController, OneNavigation {
         // Do any additional setup after loading the view.
         present = OnePresent(navigation: self)
         present?.getOneData()
+        addRefreshHeader()
     }
+    
+    // Example as MJRefreshNormalHeader
+     func addRefreshHeader() {
+          heser = MJRefreshNormalHeader { [weak self] in
+           // load some data
+             self?.present?.getOneData()
+         }.autoChangeTransparency(true)
+         .link(to: tableView)
+     }
     
     // 标题栏
     func initTitleView(){
@@ -103,6 +116,10 @@ class OneViewController: UIViewController, OneNavigation {
     }
     
     func onDataSuccess(bean: OneBean?) {
+        
+        // 下拉刷新完成，收起
+        self.tableView.mj_header?.endRefreshing()
+        
         if (bean != nil && bean!.data != nil && bean!.data!.weather != nil){
             let weather = bean!.data!.weather
             let date = weather?.date
