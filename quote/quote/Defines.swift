@@ -59,7 +59,7 @@ extension UIFont {
 //let UserAvaterPlaceholder = UserAvaterDefault()
 
 /// Banner默认图
-let BannerImagePlaceholder = UIImage(named: "banner_default")
+let BannerImagePlaceholder = UIImage(named: "bg_loading_failed.jpg")
 
 /// 屏幕高度
 let kScreenHeight = UIScreen.main.bounds.size.height

@@ -12,6 +12,8 @@ import Alamofire
 class OnePresent {
 
     var navigation :OneNavigation?
+    var num : Int = 0
+    
     init(navigation :OneNavigation) {
         self.navigation = navigation
     }

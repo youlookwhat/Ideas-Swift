@@ -275,8 +275,8 @@ class BPTopicListCell: UITableViewCell {
                     make.right.equalTo(-15)
                     // 这个属性是上下居中
         //            make.centerY.equalToSuperview()
-                    make.height.equalTo(Int(Screen.width * (1175/2262.0)))
-                    make.width.equalTo(Screen.width)
+                    make.height.equalTo(Int((Screen.width-30) * (1175/2262.0)))
+                    make.width.equalTo(Screen.width-30)
                 }
                 
                 // 标签 摄影|jeff...
@@ -371,8 +371,8 @@ class BPTopicListCell: UITableViewCell {
                     make.bottom.equalTo(-10)
                     make.left.equalTo(15)
                     make.right.equalTo(-15)
-                    make.height.equalTo(Int(Screen.width * (1175/2262.0)))
-                    make.width.equalTo(Screen.width)
+                    make.height.equalTo(Int((Screen.width-30) * (1175/2262.0)))
+                    make.width.equalTo(Screen.width-30)
                 }
                 
             }
