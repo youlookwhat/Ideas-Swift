@@ -29,9 +29,13 @@ class OneData : Decodable{
 class OneContentListBean : Decodable {
     
     var category:String? = nil
+    // 图片链接
     var img_url:String? = nil
+    // 正文，对应的是词霸的note
     var forward:String? = nil
+    // 对应的是一个第一个cell的图片下面一行话
     var title:String? = nil
+    // 对应的是第一个最后一行的作者
     var words_info:String? = nil
     var share_url:String? = nil
     var pic_info:String? = nil
@@ -58,4 +62,32 @@ class ItemOneBean {
     var words_info:String? = nil
     var share_url:String? = nil
     var author:AuthorBean? = nil
+}
+
+
+// 词霸
+class CiBaBean : Decodable {
+    // 英文
+    var content:String? = nil
+    // 中文
+    var note:String? = nil
+    // 词霸每日一句
+    var caption:String? = nil
+    // 图片
+    var picture2:String? = nil
+    required init() {}
+}
+
+// 扇贝
+class ShanBeiBean : Decodable {
+    // 英文
+    var content:String? = nil
+    // 中文
+    var translation:String? = nil
+    // 扇贝每日一句，不能直接写死？
+//    var caption:String = "扇贝每日一句"
+    var author:String? = nil
+    // 图片集合
+    var origin_img_urls:[String]? = nil
+    required init() {}
 }

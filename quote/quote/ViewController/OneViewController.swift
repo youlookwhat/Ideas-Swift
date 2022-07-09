@@ -32,17 +32,17 @@ class OneViewController: UIViewController, OneNavigation {
         view.backgroundColor = UIColor(lightThemeColor: .white, darkThemeColor: .black)
         
         initTitleView()
-        // Do any additional setup after loading the view.
+        addRefreshHeader()
+        
         present = OnePresent(navigation: self)
         present?.getOneData()
-        addRefreshHeader()
     }
     
     // Example as MJRefreshNormalHeader
      func addRefreshHeader() {
           heser = MJRefreshNormalHeader { [weak self] in
            // load some data
-             self?.present?.getOneData()
+           self?.present?.refresh()
          }.autoChangeTransparency(true)
          .link(to: tableView)
      }
@@ -90,7 +90,7 @@ class OneViewController: UIViewController, OneNavigation {
         let label = UILabel()
         label.textColor = UIColor(lightThemeColor: .black, darkThemeColor: .white)
 //        label.text = "07 . 2022"
-        label.font = UIFont(name: "PingFangSC-Medium", size: 15)
+        label.font = UIFont(name: "PingFangSC-Medium", size: 13)
 //        label.font = UIFont.systemFont(ofSize: 13)
         label.textAlignment = .center
         return label
@@ -133,9 +133,21 @@ class OneViewController: UIViewController, OneNavigation {
             }
         }
         if (bean != nil && bean!.data != nil && bean!.data!.content_list != nil) {
-            list  = bean!.data!.content_list
-            self.tableView.reloadData()
-        } else {
+            switch present?.num {
+            case 0:
+                list  = bean!.data!.content_list
+                self.tableView.reloadData()
+            default:
+                list?.insert(contentsOf: bean!.data!.content_list!, at: 0)
+                // 在第row行插入
+                let indexPath1:IndexPath = IndexPath.init(row: 0, section: 0)
+                tableView.beginUpdates()
+                tableView.insertRows(at: [indexPath1], with: .fade)
+                tableView.endUpdates()
+            }
+            
+        } else if present!.num == 0{
+            // 只有第一页才显示错误页面
             tableView.removeFromSuperview()
             btNoNet = UIButton(frame: viewBounds())
             btNoNet!.setTitle("请检查网络，点击重试", for: .normal)
@@ -253,11 +265,17 @@ class BPTopicListCell: UITableViewCell {
             
             // 图片
             iconImageView.sd_setImage(with: URL(string: model.img_url ?? ""), placeholderImage: BannerImagePlaceholder)
+            
 
             // 标题  第一个是最后一行的作者：严明
             desLabel.text = (model.words_info ?? "未知")
             // 标签  第一个是：摄影|jeff...
-            let subtitle = "\((model.title) ?? "未知") | \(model.pic_info ?? "未知")"
+            var subtitle = ""
+            if (model.pic_info == nil || model.pic_info!.isEmpty) {
+                subtitle = "\((model.title) ?? "未知")"
+            } else {
+                subtitle = "\((model.title) ?? "未知") | \(model.pic_info ?? "未知")"
+            }
             tagLabel.text = subtitle
             
             // 这里每次绘制cell都会执行。但是切换深色模式不会走这里？
@@ -393,6 +411,8 @@ class BPTopicListCell: UITableViewCell {
     lazy var iconImageView: UIImageView = {
         let view = UIImageView()
         view.layer.masksToBounds = true
+        // 缩放模式，相当于centerCrop
+        view.contentMode = .scaleAspectFill
         view.layer.cornerRadius = 8
         return view
     }()
