@@ -40,6 +40,8 @@ class OneContentListBean : Decodable {
     var share_url:String? = nil
     var pic_info:String? = nil
     var author:AuthorBean? = nil
+    // 不能为Int，要为Int?。数据类型：0一个 1词霸 2扇贝
+    var typeContent:Int? = 0
     required init() {}
 }
 
@@ -89,5 +91,16 @@ class ShanBeiBean : Decodable {
     var author:String? = nil
     // 图片集合
     var origin_img_urls:[String]? = nil
+    required init() {}
+}
+
+// 一言
+class YiYanBean : Decodable {
+    // 鲁迅日记
+    var from:String? = nil
+    // 鲁迅
+    var from_who:String? = nil
+    // 中文
+    var hitokoto:String? = nil
     required init() {}
 }
