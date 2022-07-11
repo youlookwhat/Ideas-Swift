@@ -18,8 +18,6 @@ class OneViewController: UIViewController, OneNavigation {
     var present:OnePresent?
     // 重试按钮
     var btNoNet:UIButton?
-    // 下拉刷新
-    var heser:MJRefreshNormalHeader?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,21 +29,24 @@ class OneViewController: UIViewController, OneNavigation {
 //        navigationItem.title = "一个"
         view.backgroundColor = UIColor(lightThemeColor: .white, darkThemeColor: .black)
         
+        // 下拉刷新
+        tableView.mj_header = MJRefreshNormalHeader { [weak self] in
+            // load some data
+            self?.present?.refresh()
+          }.autoChangeTransparency(true)
+          .link(to: tableView)
+        
+        // 加载更多
+        tableView.mj_footer = MJRefreshAutoNormalFooter{  [weak self] in
+            self?.tableView.mj_footer?.endRefreshingWithNoMoreData()
+        }.autoChangeTransparency(true)
+       .link(to: tableView)
+        
         initTitleView()
-        addRefreshHeader()
         
         present = OnePresent(navigation: self)
         present?.getOneData()
     }
-    
-    // Example as MJRefreshNormalHeader
-     func addRefreshHeader() {
-          heser = MJRefreshNormalHeader { [weak self] in
-           // load some data
-           self?.present?.refresh()
-         }.autoChangeTransparency(true)
-         .link(to: tableView)
-     }
     
     // 标题栏
     func initTitleView(){
@@ -99,7 +100,7 @@ class OneViewController: UIViewController, OneNavigation {
     lazy var labelAbout: UIButton = {
         // 添加关于按钮
         let bt2 = UIButton()
-        bt2.setTitle("关于", for: .normal)
+        bt2.setTitle("ByQuoteApp", for: .normal)
         // 设置文字大小
         bt2.titleLabel?.font = UIFont.systemFont(ofSize: 13)
         bt2.setTitleColor(UIColor(lightThemeColor: .gray, darkThemeColor: .white), for: .normal)
@@ -116,8 +117,8 @@ class OneViewController: UIViewController, OneNavigation {
     // 点击关于
     @objc func openAbout(){
         let vc = WebViewViewController()
-        vc.url = "https://github.com/youlookwhat"
-        vc.titleOut = "youlookwhat"
+        vc.url = "https://github.com/youlookwhat/ByQuoteApp"
+        vc.titleOut = "ByQuoteApp"
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -125,6 +126,9 @@ class OneViewController: UIViewController, OneNavigation {
         
         // 下拉刷新完成，收起
         self.tableView.mj_header?.endRefreshing()
+        // 加载更多完成
+        self.tableView.mj_footer?.endRefreshing()
+        
         btNoNet?.removeFromSuperview()
         tableView.isHidden = false
         
@@ -165,6 +169,8 @@ class OneViewController: UIViewController, OneNavigation {
             btNoNet!.setTitleColor(UIColor(lightThemeColor: .black, darkThemeColor: .white), for: .normal)
             btNoNet!.addTarget(self, action: #selector(reLoad), for: .touchUpInside)
             view.addSubview(btNoNet!)
+        } else {
+            self.tableView.mj_footer?.endRefreshingWithNoMoreData()
         }
     }
 
