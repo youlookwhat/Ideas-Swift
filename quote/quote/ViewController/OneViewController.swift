@@ -12,6 +12,7 @@ import MJRefresh
 
 class OneViewController: UIViewController, OneNavigation {
     
+    var sidebar:DCSidebar? = nil
     // 数据
     var list:[OneContentListBean]?
     // P层
@@ -43,9 +44,22 @@ class OneViewController: UIViewController, OneNavigation {
        .link(to: tableView)
         
         initTitleView()
+//        sidebar = DCSidebar(sideView: view)
+//        sidebar?.showAnimationsTime = 0.2
+//        sidebar?.hideAnimationsTime = 0.2
         
         present = OnePresent(navigation: self)
         present?.getOneData()
+    }
+    
+    @IBAction func showButtonTouchUpInside(_ sender: Any) {
+        sidebar?.show()
+    }
+        
+    @IBAction func screenEdgePanGesture(_ sender: UIScreenEdgePanGestureRecognizer) {
+        if sender.state == .ended {
+            sidebar?.show()
+        }
     }
     
     // 标题栏
