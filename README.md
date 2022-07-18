@@ -1,6 +1,17 @@
-# ByQuoteApp
-每日一句App，用于使用Swift开发iOS App
+# flomo-offline FlomoOffline
 
+浮墨-离线版:
+
+用于免费使用快捷指令存到App里(同时备份到备忘录)，然后存到足够多的条数时，同步到flomo里。这样可以一直使用快捷指令，而且不用长时间开会员。
+
+### 特性
+ - 1.使用快捷指令存到flomo里，不需要会员。
+ - 2.可离线使用快捷指令
+ - 3.不用担心数据丢失，因为备份了一份到备忘录。
+ - 4.同步依赖flomo的会员API功能，一天可同步100条。
+
+
+### 技术
 
  - [SDWebImage](https://github.com/SDWebImage/SDWebImage)：图片加载
  - [SDWebImageWebPCoder](https://github.com/SDWebImage/SDWebImageWebPCoder)：图片加载webp
@@ -9,6 +20,9 @@
  - [AFNetworking 4.0](https://github.com/AFNetworking/AFNetworking)：数据请求
  - [MBProgressHUD](https://github.com/jdg/MBProgressHUD)：底部有页面，加载中的Progress
  - [YYModel](https://github.com/ibireme/YYModel)：json转bean
+
+
+---
 
 ## Api
  - [quotes](https://github.com/vv314/quotes)：收集了一些每日一句的接口与网站。
