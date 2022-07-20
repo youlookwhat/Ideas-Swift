@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow.init(frame: UIScreen.main.bounds)
 //        window?.backgroundColor = UIColor.white
-        let nc = BaseNc(rootViewController: OneViewController())
+        let nc = BaseNc(rootViewController: FlomoViewController())
         window?.rootViewController = nc
         window?.makeKeyAndVisible()
         

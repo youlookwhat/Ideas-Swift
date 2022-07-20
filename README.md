@@ -1,4 +1,4 @@
-# flomo-offline FlomoOffline
+# flomo-offline
 
 浮墨-离线版:
 

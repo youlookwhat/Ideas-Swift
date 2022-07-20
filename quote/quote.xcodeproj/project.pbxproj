@@ -14,6 +14,15 @@
 		7C9674F7287F13E100B81A67 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9674F6287F13E100B81A67 /* BaseViewController.swift */; };
 		7C9674FA287F14B100B81A67 /* DCSidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9674F9287F14B100B81A67 /* DCSidebar.swift */; };
 		7C9FE97F281ADEF3005D64C0 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9FE97D281ADEF3005D64C0 /* SwiftyJSON.swift */; };
+		7CB0E65C28883E1600EA40F1 /* FlomoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB0E65B28883E1600EA40F1 /* FlomoViewController.swift */; };
+		7CB0E65E2888401400EA40F1 /* FlomoPresent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB0E65D2888401400EA40F1 /* FlomoPresent.swift */; };
+		7CB0E6602888406400EA40F1 /* FlomoNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB0E65F2888406400EA40F1 /* FlomoNavigation.swift */; };
+		7CB0E6622888432B00EA40F1 /* ColorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB0E6612888432B00EA40F1 /* ColorProvider.swift */; };
+		7CB0E6672888478000EA40F1 /* icon_about.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CB0E6642888478000EA40F1 /* icon_about.png */; };
+		7CB0E6682888478000EA40F1 /* iv_left_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CB0E6652888478000EA40F1 /* iv_left_back.png */; };
+		7CB0E6692888478000EA40F1 /* bg_loading_failed.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7CB0E6662888478000EA40F1 /* bg_loading_failed.jpg */; };
+		7CB0E66B2888492800EA40F1 /* icon_menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CB0E66A2888492800EA40F1 /* icon_menu.png */; };
+		7CB0E66D28884AEC00EA40F1 /* icon_send.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CB0E66C28884AEC00EA40F1 /* icon_send.png */; };
 		7CBC7A092822BCA7005ECB4C /* OneCellImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC7A082822BCA7005ECB4C /* OneCellImage.swift */; };
 		7CBC7A0E2822C18E005ECB4C /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC7A0D2822C18E005ECB4C /* Data.swift */; };
 		7CBC7A1228241E2F005ECB4C /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC7A1128241E2F005ECB4C /* HttpRequest.swift */; };
@@ -47,6 +56,15 @@
 		7C9674F9287F14B100B81A67 /* DCSidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DCSidebar.swift; sourceTree = "<group>"; };
 		7C9FE97D281ADEF3005D64C0 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		7C9FE97E281ADEF3005D64C0 /* SwiftyJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyJSON.h; sourceTree = "<group>"; };
+		7CB0E65B28883E1600EA40F1 /* FlomoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlomoViewController.swift; sourceTree = "<group>"; };
+		7CB0E65D2888401400EA40F1 /* FlomoPresent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlomoPresent.swift; sourceTree = "<group>"; };
+		7CB0E65F2888406400EA40F1 /* FlomoNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlomoNavigation.swift; sourceTree = "<group>"; };
+		7CB0E6612888432B00EA40F1 /* ColorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorProvider.swift; sourceTree = "<group>"; };
+		7CB0E6642888478000EA40F1 /* icon_about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_about.png; sourceTree = "<group>"; };
+		7CB0E6652888478000EA40F1 /* iv_left_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iv_left_back.png; sourceTree = "<group>"; };
+		7CB0E6662888478000EA40F1 /* bg_loading_failed.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg_loading_failed.jpg; sourceTree = "<group>"; };
+		7CB0E66A2888492800EA40F1 /* icon_menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_menu.png; sourceTree = "<group>"; };
+		7CB0E66C28884AEC00EA40F1 /* icon_send.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_send.png; sourceTree = "<group>"; };
 		7CBC7A082822BCA7005ECB4C /* OneCellImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneCellImage.swift; sourceTree = "<group>"; };
 		7CBC7A0D2822C18E005ECB4C /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Data.swift; path = "../../../../../../../Downloads/MagazineLayout-master/Example/MagazineLayoutExample/Data/Data.swift"; sourceTree = "<group>"; };
 		7CBC7A1128241E2F005ECB4C /* HttpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
@@ -92,6 +110,7 @@
 			children = (
 				7C5EF5E5284667D800AB80F7 /* OneViewController.swift */,
 				7CC51D0D2863541400D5CC00 /* WebViewViewController.swift */,
+				7CB0E65B28883E1600EA40F1 /* FlomoViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -101,6 +120,7 @@
 			children = (
 				7C7DDC672870A08300ABD1A6 /* BaseNc.swift */,
 				7C9674F6287F13E100B81A67 /* BaseViewController.swift */,
+				7CB0E6612888432B00EA40F1 /* ColorProvider.swift */,
 			);
 			path = base;
 			sourceTree = "<group>";
@@ -120,6 +140,18 @@
 				7C9FE97E281ADEF3005D64C0 /* SwiftyJSON.h */,
 			);
 			path = SwiftyJSON;
+			sourceTree = "<group>";
+		};
+		7CB0E6632888478000EA40F1 /* image */ = {
+			isa = PBXGroup;
+			children = (
+				7CB0E6642888478000EA40F1 /* icon_about.png */,
+				7CB0E6652888478000EA40F1 /* iv_left_back.png */,
+				7CB0E6662888478000EA40F1 /* bg_loading_failed.jpg */,
+				7CB0E66C28884AEC00EA40F1 /* icon_send.png */,
+				7CB0E66A2888492800EA40F1 /* icon_menu.png */,
+			);
+			path = image;
 			sourceTree = "<group>";
 		};
 		7CBC7A072822BC7B005ECB4C /* cell */ = {
@@ -198,6 +230,7 @@
 				7CD7997028183FD0007A04DA /* LaunchScreen.storyboard */,
 				7CD7997328183FD0007A04DA /* Info.plist */,
 				7CFBBAE82820FA4000F052F0 /* app_lauch.jpg */,
+				7CB0E6632888478000EA40F1 /* image */,
 				7C5EF5E4284667B000AB80F7 /* ViewController */,
 				7CBC7A0B2822C164005ECB4C /* data */,
 				7CF8D535281E543300B83EDC /* present */,
@@ -258,6 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				7CF8D538281E549300B83EDC /* OneNavigation.swift */,
+				7CB0E65F2888406400EA40F1 /* FlomoNavigation.swift */,
 			);
 			path = navagation;
 			sourceTree = "<group>";
@@ -266,6 +300,7 @@
 			isa = PBXGroup;
 			children = (
 				7CF8D536281E544D00B83EDC /* OnePresent.swift */,
+				7CB0E65D2888401400EA40F1 /* FlomoPresent.swift */,
 			);
 			path = present;
 			sourceTree = "<group>";
@@ -347,10 +382,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CB0E66B2888492800EA40F1 /* icon_menu.png in Resources */,
+				7CB0E6672888478000EA40F1 /* icon_about.png in Resources */,
 				7CFBBAE92820FA4000F052F0 /* app_lauch.jpg in Resources */,
 				7CD7997228183FD0007A04DA /* LaunchScreen.storyboard in Resources */,
+				7CB0E6682888478000EA40F1 /* iv_left_back.png in Resources */,
 				7CDE723D28788377003D20D8 /* bg_loading_failed.jpg in Resources */,
 				7CD7996F28183FD0007A04DA /* Assets.xcassets in Resources */,
+				7CB0E6692888478000EA40F1 /* bg_loading_failed.jpg in Resources */,
+				7CB0E66D28884AEC00EA40F1 /* icon_send.png in Resources */,
 				7CC51D8C286600FC00D5CC00 /* iv_left_back.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -414,12 +454,16 @@
 				7CBC7A1628256FC3005ECB4C /* DataSource.swift in Sources */,
 				7CBC7A0E2822C18E005ECB4C /* Data.swift in Sources */,
 				7CF8D52C281D797C00B83EDC /* OneBean.swift in Sources */,
+				7CB0E65E2888401400EA40F1 /* FlomoPresent.swift in Sources */,
 				7C5EF5E6284667D800AB80F7 /* OneViewController.swift in Sources */,
 				7C1410BE28523B1A0013AD7B /* Defines.swift in Sources */,
 				7C7DDC682870A08300ABD1A6 /* BaseNc.swift in Sources */,
 				7C9674F7287F13E100B81A67 /* BaseViewController.swift in Sources */,
+				7CB0E6622888432B00EA40F1 /* ColorProvider.swift in Sources */,
 				7CF8D530281D840C00B83EDC /* interfaces.swift in Sources */,
 				7C9674FA287F14B100B81A67 /* DCSidebar.swift in Sources */,
+				7CB0E6602888406400EA40F1 /* FlomoNavigation.swift in Sources */,
+				7CB0E65C28883E1600EA40F1 /* FlomoViewController.swift in Sources */,
 				7CBC7A182826BAA3005ECB4C /* DataSourceCountsProvider.swift in Sources */,
 				7CF8D539281E549300B83EDC /* OneNavigation.swift in Sources */,
 				7CF8D529281D78FF00B83EDC /* OneModel.swift in Sources */,
