@@ -112,7 +112,7 @@ class FlomoViewController: BaseViewController, FlomoNavigation {
 //        ivBack.tintColor = UIColor(lightThemeColor: .black, darkThemeColor: .white)
         ivBack.contentMode = .center
         // 给图片加点击事件
-        let singleTapGesture = UITapGestureRecognizer(target: self, action: #selector(openAbout))
+        let singleTapGesture = UITapGestureRecognizer(target: self, action: #selector(openMenu))
         ivBack.addGestureRecognizer(singleTapGesture)
         ivBack.isUserInteractionEnabled = true
         return ivBack
@@ -171,6 +171,12 @@ class FlomoViewController: BaseViewController, FlomoNavigation {
         bt2.addTarget(self, action: #selector(openAbout), for: .touchUpInside)
         return bt2;
     }()
+    
+    // 打开菜单
+    @objc func openMenu(){
+        let vc = OneViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
     // 点击日期，刷新所有
     @objc func refreshAll(){
@@ -257,6 +263,7 @@ class FlomoViewController: BaseViewController, FlomoNavigation {
         let tableView = UITableView(frame: viewBounds(), style: .plain)
 //        let tableView = UITableView(frame: self.view.frame, style: .plain)
 //        tableView.backgroundColor = .white
+        tableView.backgroundColor = UIColor(lightThemeColor: UIColor.colorF3F3F3, darkThemeColor: .black)
         // 这里的100是像素，不是文字对应的高度，要将高度转为像素
 //        tableView.rowHeight = Screen.width * (1175/2262.0) + 170.0
         // 自适应高度添加 1.这两行属性 初始高度和配置 2.最底部的一个cell配上bottom属性
@@ -271,7 +278,7 @@ class FlomoViewController: BaseViewController, FlomoNavigation {
 //        tableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         
         tableView.tableFooterView = UIView()
-        tableView.register(HomeListCell.self, forCellReuseIdentifier: "CellIdentifier")
+        tableView.register(FlomoCell.self, forCellReuseIdentifier: "CellIdentifier")
 //        tableView.mj_footer = MJDIYFooter(refreshingBlock: {
 //            self.requestData()
 //        })
@@ -287,7 +294,7 @@ extension FlomoViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CellIdentifier", for: indexPath) as! HomeListCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CellIdentifier", for: indexPath) as! FlomoCell
 
         // 没有选中的样式，一般都没有
         cell.selectionStyle = .none

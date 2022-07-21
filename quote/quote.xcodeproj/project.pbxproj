@@ -23,6 +23,8 @@
 		7CB0E6692888478000EA40F1 /* bg_loading_failed.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7CB0E6662888478000EA40F1 /* bg_loading_failed.jpg */; };
 		7CB0E66B2888492800EA40F1 /* icon_menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CB0E66A2888492800EA40F1 /* icon_menu.png */; };
 		7CB0E66D28884AEC00EA40F1 /* icon_send.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CB0E66C28884AEC00EA40F1 /* icon_send.png */; };
+		7CB0E66F28899D9000EA40F1 /* FlomoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB0E66E28899D8F00EA40F1 /* FlomoCell.swift */; };
+		7CB0E67228899FE100EA40F1 /* TimeUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB0E67128899FE100EA40F1 /* TimeUtil.swift */; };
 		7CBC7A092822BCA7005ECB4C /* OneCellImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC7A082822BCA7005ECB4C /* OneCellImage.swift */; };
 		7CBC7A0E2822C18E005ECB4C /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC7A0D2822C18E005ECB4C /* Data.swift */; };
 		7CBC7A1228241E2F005ECB4C /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC7A1128241E2F005ECB4C /* HttpRequest.swift */; };
@@ -65,6 +67,8 @@
 		7CB0E6662888478000EA40F1 /* bg_loading_failed.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg_loading_failed.jpg; sourceTree = "<group>"; };
 		7CB0E66A2888492800EA40F1 /* icon_menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_menu.png; sourceTree = "<group>"; };
 		7CB0E66C28884AEC00EA40F1 /* icon_send.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_send.png; sourceTree = "<group>"; };
+		7CB0E66E28899D8F00EA40F1 /* FlomoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlomoCell.swift; sourceTree = "<group>"; };
+		7CB0E67128899FE100EA40F1 /* TimeUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUtil.swift; sourceTree = "<group>"; };
 		7CBC7A082822BCA7005ECB4C /* OneCellImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneCellImage.swift; sourceTree = "<group>"; };
 		7CBC7A0D2822C18E005ECB4C /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Data.swift; path = "../../../../../../../Downloads/MagazineLayout-master/Example/MagazineLayoutExample/Data/Data.swift"; sourceTree = "<group>"; };
 		7CBC7A1128241E2F005ECB4C /* HttpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
@@ -154,10 +158,20 @@
 			path = image;
 			sourceTree = "<group>";
 		};
+		7CB0E67028899FC500EA40F1 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				7CB0E67128899FE100EA40F1 /* TimeUtil.swift */,
+			);
+			name = utils;
+			path = quote/utils;
+			sourceTree = SOURCE_ROOT;
+		};
 		7CBC7A072822BC7B005ECB4C /* cell */ = {
 			isa = PBXGroup;
 			children = (
 				7CBC7A082822BCA7005ECB4C /* OneCellImage.swift */,
+				7CB0E66E28899D8F00EA40F1 /* FlomoCell.swift */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -236,6 +250,7 @@
 				7CF8D535281E543300B83EDC /* present */,
 				7CDE7241287ACAC1003D20D8 /* adapter */,
 				7CBC7A1028241E0D005ECB4C /* Moya */,
+				7CB0E67028899FC500EA40F1 /* utils */,
 				7CF8D534281E542D00B83EDC /* navagation */,
 				7CF8D52E281D83D000B83EDC /* interface */,
 				7CF8D52A281D795800B83EDC /* bean */,
@@ -451,6 +466,7 @@
 				7CBC7A1E28295082005ECB4C /* ViewUtil.swift in Sources */,
 				7CBC7A1A28280DB4005ECB4C /* DataSourceOne.swift in Sources */,
 				7CD7996628183FCE007A04DA /* AppDelegate.swift in Sources */,
+				7CB0E67228899FE100EA40F1 /* TimeUtil.swift in Sources */,
 				7CBC7A1628256FC3005ECB4C /* DataSource.swift in Sources */,
 				7CBC7A0E2822C18E005ECB4C /* Data.swift in Sources */,
 				7CF8D52C281D797C00B83EDC /* OneBean.swift in Sources */,
@@ -459,6 +475,7 @@
 				7C1410BE28523B1A0013AD7B /* Defines.swift in Sources */,
 				7C7DDC682870A08300ABD1A6 /* BaseNc.swift in Sources */,
 				7C9674F7287F13E100B81A67 /* BaseViewController.swift in Sources */,
+				7CB0E66F28899D9000EA40F1 /* FlomoCell.swift in Sources */,
 				7CB0E6622888432B00EA40F1 /* ColorProvider.swift in Sources */,
 				7CF8D530281D840C00B83EDC /* interfaces.swift in Sources */,
 				7C9674FA287F14B100B81A67 /* DCSidebar.swift in Sources */,

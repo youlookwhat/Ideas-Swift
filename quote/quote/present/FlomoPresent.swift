@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 
 /*
- * 文档：https://github.com/vv314/quotes
+ * Flomo首页
  */
 class FlomoPresent {
 
