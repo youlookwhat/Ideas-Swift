@@ -84,8 +84,9 @@ class FlomoViewController: BaseViewController, FlomoNavigation {
         }
         menuImage.snp.makeConstraints { make in
             make.left.equalToSuperview()
+            make.centerY.equalToSuperview()
             make.width.equalTo(70)
-            make.height.equalTo(44)
+            make.height.equalTo(40)
         }
         aboutImage.snp.makeConstraints { make in
             make.right.equalToSuperview()
@@ -110,7 +111,7 @@ class FlomoViewController: BaseViewController, FlomoNavigation {
         let image = UIImage(named: "icon_menu")?.withRenderingMode(.alwaysOriginal)
         var ivBack:UIImageView  = UIImageView(image: image)
 //        ivBack.tintColor = UIColor(lightThemeColor: .black, darkThemeColor: .white)
-        ivBack.contentMode = .center
+        ivBack.contentMode = .scaleAspectFit
         // 给图片加点击事件
         let singleTapGesture = UITapGestureRecognizer(target: self, action: #selector(openMenu))
         ivBack.addGestureRecognizer(singleTapGesture)
@@ -301,6 +302,11 @@ extension FlomoViewController: UITableViewDataSource, UITableViewDelegate {
         
         let topic = list?[indexPath.row]
         cell.model = topic
+        
+        cell.moreImage.tag = indexPath.row
+        cell.moreImage.isUserInteractionEnabled = true
+        cell.moreImage.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(clickMore(_:))))
+        
         return cell
     }
     
@@ -316,5 +322,12 @@ extension FlomoViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+    // 点击更多
+   @objc func clickMore(_ tap: UITapGestureRecognizer) {
+       let img = tap.view as! UIImageView
+       let row = img.tag
+       print("editCar",row)
+   }
+   
 
 }

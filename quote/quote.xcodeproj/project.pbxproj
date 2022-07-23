@@ -11,6 +11,9 @@
 		7C1410BE28523B1A0013AD7B /* Defines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1410BD28523B1A0013AD7B /* Defines.swift */; };
 		7C5EF5E6284667D800AB80F7 /* OneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5EF5E5284667D800AB80F7 /* OneViewController.swift */; };
 		7C7DDC682870A08300ABD1A6 /* BaseNc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DDC672870A08300ABD1A6 /* BaseNc.swift */; };
+		7C7F150F288C356D00956FDE /* icon_more.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C7F150E288C356D00956FDE /* icon_more.png */; };
+		7C7F1512288C39EF00956FDE /* icon_more_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C7F1510288C39EF00956FDE /* icon_more_white.png */; };
+		7C7F1513288C39EF00956FDE /* icon_more_flomo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C7F1511288C39EF00956FDE /* icon_more_flomo.png */; };
 		7C9674F7287F13E100B81A67 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9674F6287F13E100B81A67 /* BaseViewController.swift */; };
 		7C9674FA287F14B100B81A67 /* DCSidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9674F9287F14B100B81A67 /* DCSidebar.swift */; };
 		7C9FE97F281ADEF3005D64C0 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9FE97D281ADEF3005D64C0 /* SwiftyJSON.swift */; };
@@ -54,6 +57,9 @@
 		7C1410BD28523B1A0013AD7B /* Defines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Defines.swift; sourceTree = "<group>"; };
 		7C5EF5E5284667D800AB80F7 /* OneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneViewController.swift; sourceTree = "<group>"; };
 		7C7DDC672870A08300ABD1A6 /* BaseNc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNc.swift; sourceTree = "<group>"; };
+		7C7F150E288C356D00956FDE /* icon_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_more.png; sourceTree = "<group>"; };
+		7C7F1510288C39EF00956FDE /* icon_more_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_more_white.png; sourceTree = "<group>"; };
+		7C7F1511288C39EF00956FDE /* icon_more_flomo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_more_flomo.png; sourceTree = "<group>"; };
 		7C9674F6287F13E100B81A67 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		7C9674F9287F14B100B81A67 /* DCSidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DCSidebar.swift; sourceTree = "<group>"; };
 		7C9FE97D281ADEF3005D64C0 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
@@ -154,6 +160,9 @@
 				7CB0E6662888478000EA40F1 /* bg_loading_failed.jpg */,
 				7CB0E66C28884AEC00EA40F1 /* icon_send.png */,
 				7CB0E66A2888492800EA40F1 /* icon_menu.png */,
+				7C7F150E288C356D00956FDE /* icon_more.png */,
+				7C7F1511288C39EF00956FDE /* icon_more_flomo.png */,
+				7C7F1510288C39EF00956FDE /* icon_more_white.png */,
 			);
 			path = image;
 			sourceTree = "<group>";
@@ -398,15 +407,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CB0E66B2888492800EA40F1 /* icon_menu.png in Resources */,
+				7C7F1512288C39EF00956FDE /* icon_more_white.png in Resources */,
 				7CB0E6672888478000EA40F1 /* icon_about.png in Resources */,
 				7CFBBAE92820FA4000F052F0 /* app_lauch.jpg in Resources */,
 				7CD7997228183FD0007A04DA /* LaunchScreen.storyboard in Resources */,
 				7CB0E6682888478000EA40F1 /* iv_left_back.png in Resources */,
 				7CDE723D28788377003D20D8 /* bg_loading_failed.jpg in Resources */,
+				7C7F150F288C356D00956FDE /* icon_more.png in Resources */,
 				7CD7996F28183FD0007A04DA /* Assets.xcassets in Resources */,
 				7CB0E6692888478000EA40F1 /* bg_loading_failed.jpg in Resources */,
 				7CB0E66D28884AEC00EA40F1 /* icon_send.png in Resources */,
 				7CC51D8C286600FC00D5CC00 /* iv_left_back.png in Resources */,
+				7C7F1513288C39EF00956FDE /* icon_more_flomo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

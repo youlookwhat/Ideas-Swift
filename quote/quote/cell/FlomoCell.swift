@@ -15,12 +15,17 @@ class FlomoCell : UITableViewCell {
         
         contentView.backgroundColor = UIColor(lightThemeColor: UIColor.colorF3F3F3, darkThemeColor: .black)
         
-        //这里生成后就不会变了
-        // 阴影
-//        contentView.layer.addSublayer(shadowLayer)
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(desLabel)
-//        contentView.addSubview(tagLabel)
+        uiView.addSubview(titleLabel)
+        uiView.addSubview(desLabel)
+        uiView.addSubview(moreImage)
+        contentView.addSubview(uiView)
+        
+        uiView.snp.makeConstraints{ make in
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
+            make.top.equalTo(5)
+            make.bottom.equalTo(-5)
+        }
     }
     
     public var model: OneContentListBean? {
@@ -49,6 +54,10 @@ class FlomoCell : UITableViewCell {
                 make.right.equalTo(-10)
                 make.bottom.equalToSuperview().offset(-10)
             }
+            moreImage.snp.makeConstraints{ make in
+                make.width.height.equalTo(36)
+                make.right.equalTo(-5)
+            }
         }
     }
     
@@ -56,6 +65,13 @@ class FlomoCell : UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    lazy var uiView: UIView = {
+        let label = UIView()
+        label.layer.cornerRadius = 4
+        label.backgroundColor = UIColor(lightThemeColor: .white, darkThemeColor: UIColor.darkGray)
+        return label
+    }()
+    
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -87,20 +103,15 @@ class FlomoCell : UITableViewCell {
         return label
     }()
     
-    /// 阴影
-    lazy var shadowLayer: CALayer = {
-        let bgLayer1 = CALayer()
-        bgLayer1.frame = CGRect(x: 15, y: 10, width: kScreenWidth - 30, height: Screen.width * (1175/2262.0) + 150.0)
-        // 背景，去掉后看起来没有阴影了
-        bgLayer1.backgroundColor = UIColor(lightThemeColor: .white, darkThemeColor: .black).cgColor
-//        bgLayer1.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).cgColor
-        bgLayer1.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.08).cgColor
-        bgLayer1.shadowOffset = CGSize(width: 0, height: 0)
-        bgLayer1.shadowOpacity = 1
-        bgLayer1.shadowRadius = 3
-        bgLayer1.cornerRadius = 8
-        bgLayer1.shadowPath = CGPath(roundedRect: bgLayer1.bounds, cornerWidth: 4, cornerHeight: 4, transform: nil)
-        return bgLayer1
+    lazy var moreImage: UIImageView = {
+        let image = UIImage(named: "icon_more_flomo")?.withRenderingMode(.alwaysOriginal)
+        var imageView:UIImageView = UIImageView(image: image)
+        imageView.contentMode = .scaleAspectFit
+        // 给图片加点击事件
+//        let singleTapGesture = UITapGestureRecognizer(target: self, action: #selector(send))
+//        imageView.addGestureRecognizer(singleTapGesture)
+//        imageView.isUserInteractionEnabled = true
+        return imageView
     }()
 
 }
