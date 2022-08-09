@@ -98,7 +98,7 @@ extension String: ColorProvider {
         return getColor(alpha: 1)
     }
     
-    func getColor(alpha: CGFloat) -> UIColor {
+    public func getColor(alpha: CGFloat) -> UIColor {
         var cstr = trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).uppercased() as NSString
         if cstr.length < 6 { return .clear }
         if cstr.hasPrefix("0X") {
@@ -188,4 +188,10 @@ extension UIColor {
 extension UIColor {
     static let colorTheme = "#48B07B".uiColor
     static let colorF3F3F3 = "#F3F3F3".uiColor
+    static let colorF6 = "#F6F6F6".uiColor
+    static let colorF7 = "#F7F7F7".uiColor
+    static let colorB5 = "#B5B5B5".uiColor
+    
+    static let colorBlack = "#000000".uiColor
+    static let colorBlack0d6 = "#000000".getColor(alpha: 0.6)
 }

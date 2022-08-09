@@ -9,8 +9,9 @@
 import UIKit
 import MJRefresh
 
-class FlomoViewController: BaseViewController, FlomoNavigation {
+class FlomoViewController: BaseViewController, FlomoNavigation,UITextFieldDelegate{
 
+    
     var sidebar:DCSidebar? = nil
     // 数据
     var list:[OneContentListBean]?
@@ -18,6 +19,7 @@ class FlomoViewController: BaseViewController, FlomoNavigation {
     var present:FlomoPresent?
     // 重试按钮
     var btNoNet:UIButton?
+    var viewEdit = XbsCommentEditView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,13 +51,31 @@ class FlomoViewController: BaseViewController, FlomoNavigation {
         
         present = FlomoPresent(navigation: self)
         present?.getOneData()
+        
+//
+//        let viewEdit = XbsCommentEditView()
+        viewEdit.isHidden = true
+        view.addSubview(viewEdit)
+  
+
+        viewEdit.snp.makeConstraints{ make in
+            make.height.equalTo(Screen.height)
+            make.width.equalTo(Screen.width)
+        }
+        
+        // 监听键盘弹起 5.6.0
+        //键盘监听
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+
+//
+        NotificationCenter.default.addObserver(self, selector:Selector(("keyBoardWillShow:")), name:UIResponder.keyboardWillShowNotification, object: nil)
     }
     
-    @IBAction func showButtonTouchUpInside(_ sender: Any) {
+    func showButtonTouchUpInside(_ sender: Any) {
         sidebar?.show()
     }
         
-    @IBAction func screenEdgePanGesture(_ sender: UIScreenEdgePanGestureRecognizer) {
+    func screenEdgePanGesture(_ sender: UIScreenEdgePanGestureRecognizer) {
         if sender.state == .ended {
             sidebar?.show()
         }
@@ -195,10 +215,13 @@ class FlomoViewController: BaseViewController, FlomoNavigation {
     
     // 发布内容
     @objc func send(){
-        let vc = WebViewViewController()
-        vc.url = "https://github.com/youlookwhat/ByQuoteApp"
-        vc.titleOut = "ByQuoteApp"
-        navigationController?.pushViewController(vc, animated: true)
+//        let vc = WebViewViewController()
+//        vc.url = "https://github.com/youlookwhat/ByQuoteApp"
+//        vc.titleOut = "ByQuoteApp"
+//        navigationController?.pushViewController(vc, animated: true)
+        
+        viewEdit.isHidden = false
+        viewEdit.commentTextView.becomeFirstResponder()
     }
     
     func onDataSuccess(bean: OneBean?) {
@@ -328,6 +351,15 @@ extension FlomoViewController: UITableViewDataSource, UITableViewDelegate {
        let row = img.tag
        print("editCar",row)
    }
-   
+
+    
+    
+    @objc func keyBoardWillShow(note:Notification){
+        print("弹起键盘了")
+        viewEdit.keyboardWillChangeFrame(notifi: note)
+    }
+    
+
+
 
 }
