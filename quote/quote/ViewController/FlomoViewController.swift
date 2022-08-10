@@ -9,7 +9,7 @@
 import UIKit
 import MJRefresh
 
-class FlomoViewController: BaseViewController, FlomoNavigation,UITextFieldDelegate{
+class FlomoViewController: BaseViewController, FlomoNavigation,UITextFieldDelegate, XbsCommentEditViewDelegate{
 
     
     var sidebar:DCSidebar? = nil
@@ -55,6 +55,7 @@ class FlomoViewController: BaseViewController, FlomoNavigation,UITextFieldDelega
 //
 //        let viewEdit = XbsCommentEditView()
         viewEdit.isHidden = true
+        viewEdit.delegate = self
         view.addSubview(viewEdit)
   
 
@@ -63,12 +64,12 @@ class FlomoViewController: BaseViewController, FlomoNavigation,UITextFieldDelega
             make.width.equalTo(Screen.width)
         }
         
-        // 监听键盘弹起 5.6.0
-        //键盘监听
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        // 监听键盘弹起
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
 
-//
-        NotificationCenter.default.addObserver(self, selector:Selector(("keyBoardWillShow:")), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(notification:)), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
+
+
     }
     
     func showButtonTouchUpInside(_ sender: Any) {
@@ -354,12 +355,28 @@ extension FlomoViewController: UITableViewDataSource, UITableViewDelegate {
 
     
     
-    @objc func keyBoardWillShow(note:Notification){
+    @objc func keyboardWillAppear(notification: NSNotification) {
         print("弹起键盘了")
-        viewEdit.keyboardWillChangeFrame(notifi: note)
+        viewEdit.keyboardWillChangeFrame(notifi: notification as Notification)
     }
     
 
+    func commentSend(sendBtnClik view: XbsCommentEditView, sender: UIButton) {
+        
+    }
+    
+    func commentAddPhoto(addPhotoClick view: XbsCommentEditView, sender: UIButton) {
+        
+    }
+    
+    func commentDismiss(dismissClick view: XbsCommentEditView, sender: UIButton?) {
+        viewEdit.endEditing(true)
+        viewEdit.isHidden = true
+    }
+    
+    func commentDelete(deleteClick view: XbsCommentEditView, index: Int) {
+        
+    }
 
 
 }

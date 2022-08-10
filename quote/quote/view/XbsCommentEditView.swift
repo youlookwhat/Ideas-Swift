@@ -8,8 +8,6 @@
 
 import UIKit
 
-import UIKit
-
 /// 修宝说评论编辑弹窗
 @objc protocol XbsCommentEditViewDelegate {
     func commentSend(sendBtnClik view: XbsCommentEditView, sender: UIButton)
@@ -28,8 +26,8 @@ class XbsCommentEditView: UIView {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTouched))
         addGestureRecognizer(tapGesture)
         addSubview(backView)
-        backView.addSubview(addPhotoBtn)
-        backView.addSubview(tipsLabel)
+//        backView.addSubview(addPhotoBtn)
+//        backView.addSubview(tipsLabel)
         backView.addSubview(sendBtn)
         backView.addSubview(editBackView)
         editBackView.addSubview(commentTextView)
@@ -39,24 +37,25 @@ class XbsCommentEditView: UIView {
             make.left.right.bottom.equalToSuperview()
         }
         
-        addPhotoBtn.snp.makeConstraints { make in
-            make.left.equalTo(15)
-            make.bottom.equalTo(-17)
-        }
+//        addPhotoBtn.snp.makeConstraints { make in
+//            make.left.equalTo(15)
+//            make.bottom.equalTo(-17)
+//        }
         
         sendBtn.snp.makeConstraints { make in
             make.right.equalTo(-15)
-            make.centerY.equalTo(addPhotoBtn)
+            make.centerY.equalToSuperview()
+//            make.centerY.equalTo(addPhotoBtn)
             make.height.equalTo(28)
             make.width.equalTo(54)
         }
         
-        tipsLabel.snp.makeConstraints { make in
-            make.left.equalTo(addPhotoBtn.snp.right).offset(13)
-            make.centerY.equalTo(addPhotoBtn)
-            make.right.lessThanOrEqualTo(sendBtn.snp.left)
-            make.height.equalTo(14)
-        }
+//        tipsLabel.snp.makeConstraints { make in
+//            make.left.equalTo(addPhotoBtn.snp.right).offset(13)
+//            make.centerY.equalTo(addPhotoBtn)
+//            make.right.lessThanOrEqualTo(sendBtn.snp.left)
+//            make.height.equalTo(14)
+//        }
         
         editBackView.snp.makeConstraints { make in
             make.left.top.equalTo(15)
@@ -154,8 +153,7 @@ class XbsCommentEditView: UIView {
         textView.font = .font14
         textView.textColor = .colorTheme
         textView.textContainerInset = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 10)
-        
-        textView.cm_placeholder = "能在评论区留下足迹的人都不简单哟～"
+        textView.cm_placeholder = "现在的想法是..."
         textView.cm_placeholderColor = .colorB5
         textView.cm_maxNumberOfLines = 6
         textView.delegate = self
@@ -215,7 +213,7 @@ extension XbsCommentEditView: UITextViewDelegate {
         
         let strings = textView.text.trimmingCharacters(in: .whitespaces)
         if strings.count >= 20 {
-            tipsLabel.text = "真棒！发送后获得更多回复哟～"
+//            tipsLabel.text = "真棒！发送后获得更多回复哟～"
         } else {
 //            let string = String.init(format: "再评%lu字可被更多人回复", 20 - strings.count)
 //            tipsLabel.attributedText = NSAttributedString(string: string,
@@ -231,7 +229,7 @@ extension XbsCommentEditView: UITextViewDelegate {
             sendBtn.backgroundColor = .colorF7
             sendBtn.isUserInteractionEnabled = false
         } else {
-//            sendBtn.backgroundColor = .nav_purple
+            sendBtn.backgroundColor = .colorTheme
             sendBtn.isUserInteractionEnabled = true
         }
     }

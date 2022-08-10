@@ -13,9 +13,11 @@
 #import <zlib.h>
 
 #ifdef __OBJC__
-//#import <UIKit/UIKit.h>
+#import <UIKit/UIKit.h>
 //#import <YYModel/YYModel.h>
+#import "UITextView+CMInputView.h"
 #endif
 
 // tool
-#import "UITextView+CMInputView.h"
+//#import "UITextView+CMInputView.h"
+
