@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		32500A9C64045C5369ABC81C /* Pods_quote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFC478867C899CDA75E7081 /* Pods_quote.framework */; };
 		7C1410BE28523B1A0013AD7B /* Defines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1410BD28523B1A0013AD7B /* Defines.swift */; };
-		7C4B7BFC28A14DAE00D7CC4D /* XbsCommentEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4B7BFB28A14DAE00D7CC4D /* XbsCommentEditView.swift */; };
+		7C4B7BFC28A14DAE00D7CC4D /* FlomoSendEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4B7BFB28A14DAE00D7CC4D /* FlomoSendEditView.swift */; };
 		7C4B7C8528A29B9100D7CC4D /* Wrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4B7C8428A29B9100D7CC4D /* Wrapper.swift */; };
 		7C4B7C8928A29E1000D7CC4D /* UITextView+CMInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C4B7C8728A29E1000D7CC4D /* UITextView+CMInputView.m */; };
 		7C5EF5E6284667D800AB80F7 /* OneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5EF5E5284667D800AB80F7 /* OneViewController.swift */; };
@@ -58,7 +58,7 @@
 /* Begin PBXFileReference section */
 		4CFC478867C899CDA75E7081 /* Pods_quote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_quote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C1410BD28523B1A0013AD7B /* Defines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Defines.swift; sourceTree = "<group>"; };
-		7C4B7BFB28A14DAE00D7CC4D /* XbsCommentEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XbsCommentEditView.swift; sourceTree = "<group>"; };
+		7C4B7BFB28A14DAE00D7CC4D /* FlomoSendEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlomoSendEditView.swift; sourceTree = "<group>"; };
 		7C4B7C8428A29B9100D7CC4D /* Wrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wrapper.swift; sourceTree = "<group>"; };
 		7C4B7C8728A29E1000D7CC4D /* UITextView+CMInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+CMInputView.m"; sourceTree = "<group>"; };
 		7C4B7C8828A29E1000D7CC4D /* UITextView+CMInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+CMInputView.h"; sourceTree = "<group>"; };
@@ -134,6 +134,7 @@
 		7C4B7C8328A29B6500D7CC4D /* extension */ = {
 			isa = PBXGroup;
 			children = (
+				7C4B7C8C28A3FAA300D7CC4D /* UIKit */,
 				7C4B7C8628A29E1000D7CC4D /* UITextView */,
 				7C4B7C8428A29B9100D7CC4D /* Wrapper.swift */,
 			);
@@ -147,6 +148,13 @@
 				7C4B7C8828A29E1000D7CC4D /* UITextView+CMInputView.h */,
 			);
 			path = UITextView;
+			sourceTree = "<group>";
+		};
+		7C4B7C8C28A3FAA300D7CC4D /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UIKit;
 			sourceTree = "<group>";
 		};
 		7C5EF5E4284667B000AB80F7 /* ViewController */ = {
@@ -174,7 +182,7 @@
 			children = (
 				7C4B7BF628A14D4A00D7CC4D /* popu */,
 				7C9674F9287F14B100B81A67 /* DCSidebar.swift */,
-				7C4B7BFB28A14DAE00D7CC4D /* XbsCommentEditView.swift */,
+				7C4B7BFB28A14DAE00D7CC4D /* FlomoSendEditView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -539,7 +547,7 @@
 				7CBC7A1228241E2F005ECB4C /* HttpRequest.swift in Sources */,
 				7CBC7A1428241E91005ECB4C /* MoyaConfig.swift in Sources */,
 				7CF8D537281E544D00B83EDC /* OnePresent.swift in Sources */,
-				7C4B7BFC28A14DAE00D7CC4D /* XbsCommentEditView.swift in Sources */,
+				7C4B7BFC28A14DAE00D7CC4D /* FlomoSendEditView.swift in Sources */,
 				7CBC7A092822BCA7005ECB4C /* OneCellImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

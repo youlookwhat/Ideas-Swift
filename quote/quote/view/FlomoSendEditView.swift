@@ -9,13 +9,13 @@
 import UIKit
 
 /// 修宝说评论编辑弹窗
-@objc protocol XbsCommentEditViewDelegate {
-    func commentSend(sendBtnClik view: XbsCommentEditView, sender: UIButton)
-    func commentAddPhoto(addPhotoClick view: XbsCommentEditView, sender: UIButton)
-    func commentDismiss(dismissClick view: XbsCommentEditView, sender: UIButton?)
-    func commentDelete(deleteClick view: XbsCommentEditView, index: Int)
+@objc protocol FlomoSendEditViewDelegate {
+    func commentSend(sendBtnClik view: FlomoSendEditView, sender: UIButton)
+    func commentAddPhoto(addPhotoClick view: FlomoSendEditView, sender: UIButton)
+    func commentDismiss(dismissClick view: FlomoSendEditView, sender: UIButton?)
+    func commentDelete(deleteClick view: FlomoSendEditView, index: Int)
 }
-class XbsCommentEditView: UIView {
+class FlomoSendEditView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 //        self.backgroundColor = UIColor(rgb: 0x000000, alpha: 0.6)
@@ -32,6 +32,7 @@ class XbsCommentEditView: UIView {
         backView.addSubview(editBackView)
         editBackView.addSubview(commentTextView)
 //        editBackView.addSubview(commentPhotoView)
+        editBackView.addSubview(tipsLabel222)
 
         backView.snp.makeConstraints { make in
             make.left.right.bottom.equalToSuperview()
@@ -62,7 +63,12 @@ class XbsCommentEditView: UIView {
             make.right.equalTo(-15)
             make.bottom.equalTo(-48)
         }
-        
+        tipsLabel222.snp.makeConstraints{make in
+            make.width.equalTo(kScreenWidth)
+            make.bottom.equalTo(-10)
+            make.top.equalTo(commentTextView.snp.bottom).offset(10)
+            make.height.equalTo(1)
+        }
 //        commentPhotoView.snp.makeConstraints { make in
 //            make.left.equalTo(13)
 //            make.top.equalTo(commentTextView.snp.bottom).offset(20)
@@ -125,7 +131,7 @@ class XbsCommentEditView: UIView {
         delegate?.commentAddPhoto(addPhotoClick: self, sender: sender)
     }
     
-    @objc public weak var delegate: XbsCommentEditViewDelegate?
+    @objc public weak var delegate: FlomoSendEditViewDelegate?
     
     /// 评论图片
 //    lazy var commentPhotoView: UICollectionView = {
@@ -155,10 +161,17 @@ class XbsCommentEditView: UIView {
         textView.textContainerInset = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 10)
         textView.cm_placeholder = "现在的想法是..."
         textView.cm_placeholderColor = .colorB5
-        textView.cm_maxNumberOfLines = 6
+        textView.cm_maxNumberOfLines = 10
         textView.delegate = self
         textViewDidChange(textView)
         return textView
+    }()
+    
+    /// 提示语
+    lazy var tipsLabel222: UILabel = {
+        let label = UILabel()
+//        label.font = .font14
+        return label
     }()
     
     /// 提示语
@@ -207,7 +220,7 @@ class XbsCommentEditView: UIView {
     }()
 }
 
-extension XbsCommentEditView: UITextViewDelegate {
+extension FlomoSendEditView: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         
@@ -231,7 +244,7 @@ extension XbsCommentEditView: UITextViewDelegate {
         } else {
             sendBtn.backgroundColor = .colorTheme
             sendBtn.isUserInteractionEnabled = true
-        }
+        }        
     }
 }
 

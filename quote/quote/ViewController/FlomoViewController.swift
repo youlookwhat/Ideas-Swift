@@ -9,7 +9,7 @@
 import UIKit
 import MJRefresh
 
-class FlomoViewController: BaseViewController, FlomoNavigation,UITextFieldDelegate, XbsCommentEditViewDelegate{
+class FlomoViewController: BaseViewController, FlomoNavigation,UITextFieldDelegate, FlomoSendEditViewDelegate{
 
     
     var sidebar:DCSidebar? = nil
@@ -19,7 +19,7 @@ class FlomoViewController: BaseViewController, FlomoNavigation,UITextFieldDelega
     var present:FlomoPresent?
     // 重试按钮
     var btNoNet:UIButton?
-    var viewEdit = XbsCommentEditView()
+    var viewEdit = FlomoSendEditView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -361,20 +361,20 @@ extension FlomoViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
 
-    func commentSend(sendBtnClik view: XbsCommentEditView, sender: UIButton) {
+    func commentSend(sendBtnClik view: FlomoSendEditView, sender: UIButton) {
         
     }
     
-    func commentAddPhoto(addPhotoClick view: XbsCommentEditView, sender: UIButton) {
+    func commentAddPhoto(addPhotoClick view: FlomoSendEditView, sender: UIButton) {
         
     }
     
-    func commentDismiss(dismissClick view: XbsCommentEditView, sender: UIButton?) {
+    func commentDismiss(dismissClick view: FlomoSendEditView, sender: UIButton?) {
         viewEdit.endEditing(true)
         viewEdit.isHidden = true
     }
     
-    func commentDelete(deleteClick view: XbsCommentEditView, index: Int) {
+    func commentDelete(deleteClick view: FlomoSendEditView, index: Int) {
         
     }
 
