@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		32500A9C64045C5369ABC81C /* Pods_quote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFC478867C899CDA75E7081 /* Pods_quote.framework */; };
 		7C1410BE28523B1A0013AD7B /* Defines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1410BD28523B1A0013AD7B /* Defines.swift */; };
+		7C2CDCDD28BE5872007AAD09 /* ViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2CDCDC28BE5872007AAD09 /* ViewExt.swift */; };
 		7C4B7BFC28A14DAE00D7CC4D /* FlomoSendEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4B7BFB28A14DAE00D7CC4D /* FlomoSendEditView.swift */; };
 		7C4B7C8528A29B9100D7CC4D /* Wrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4B7C8428A29B9100D7CC4D /* Wrapper.swift */; };
 		7C4B7C8928A29E1000D7CC4D /* UITextView+CMInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C4B7C8728A29E1000D7CC4D /* UITextView+CMInputView.m */; };
@@ -58,6 +59,7 @@
 /* Begin PBXFileReference section */
 		4CFC478867C899CDA75E7081 /* Pods_quote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_quote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C1410BD28523B1A0013AD7B /* Defines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Defines.swift; sourceTree = "<group>"; };
+		7C2CDCDC28BE5872007AAD09 /* ViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExt.swift; sourceTree = "<group>"; };
 		7C4B7BFB28A14DAE00D7CC4D /* FlomoSendEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlomoSendEditView.swift; sourceTree = "<group>"; };
 		7C4B7C8428A29B9100D7CC4D /* Wrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wrapper.swift; sourceTree = "<group>"; };
 		7C4B7C8728A29E1000D7CC4D /* UITextView+CMInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+CMInputView.m"; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 		7C4B7C8C28A3FAA300D7CC4D /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				7C2CDCDC28BE5872007AAD09 /* ViewExt.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -521,6 +524,7 @@
 				7CDE7243287ACADF003D20D8 /* HomeListCell.swift in Sources */,
 				7C9FE97F281ADEF3005D64C0 /* SwiftyJSON.swift in Sources */,
 				7CC51D0E2863541400D5CC00 /* WebViewViewController.swift in Sources */,
+				7C2CDCDD28BE5872007AAD09 /* ViewExt.swift in Sources */,
 				7CBC7A1E28295082005ECB4C /* ViewUtil.swift in Sources */,
 				7CBC7A1A28280DB4005ECB4C /* DataSourceOne.swift in Sources */,
 				7CD7996628183FCE007A04DA /* AppDelegate.swift in Sources */,

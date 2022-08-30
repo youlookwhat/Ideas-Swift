@@ -26,4 +26,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface UIView (Corners)
+
+@property (nonatomic, assign) UIRectCorner corners;
+
+@end
+
+@interface CALayer (Corners)
+
+/// Know issue: before iOS 11, layer that has set conners did not update its bounds via auto layout.
+@property (nonatomic, assign) UIRectCorner corners;
+
++ (void)noAnimation:(__attribute__((noescape)) void(^)(void))block;
+@end
+
 NS_ASSUME_NONNULL_END

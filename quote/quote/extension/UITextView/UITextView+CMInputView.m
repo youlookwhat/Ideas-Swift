@@ -241,3 +241,88 @@
 
 
 @end
+
+char *kMaskedCorners;
+
+@implementation UIView (Corners)
+
++ (void)load {
+    if (@available(iOS 11.0, *)) {
+        
+    } else {
+        // 处理ios 11 以下
+//        [UIView bp_swizzlingInstanceMethod:@selector(setFrame:) withMethod:@selector(bp_setFrame:)];
+    }
+}
+
+/// iOS 10 以下, UIView 的 frame 变动后, 需要重新设置 corners
+/// 2022-05-25
+- (void)bp_setFrame:(CGRect)frame API_DEPRECATED("iOS 10 Only", macosx(10.4,10.12), ios(2.0,11.0), watchos(2.0,3.0), tvos(9.0,10.0)) {
+    [self bp_setFrame:frame];
+    self.layer.corners = self.layer.corners;
+}
+
+- (void)setCorners:(UIRectCorner)corners {
+    self.layer.corners = corners;
+}
+
+- (UIRectCorner)corners {
+    return self.layer.corners;
+}
+
+@end
+
+@implementation CALayer (Corners)
+
+- (void)setCorners:(UIRectCorner)corners {
+    objc_setAssociatedObject(self, &kMaskedCorners, @(corners), OBJC_ASSOCIATION_COPY_NONATOMIC);
+    CGFloat cornerRadius = self.cornerRadius > 0.0 ? self.cornerRadius : CGRectGetHeight(self.frame) / 2.0f;
+    if (@available(iOS 11.0, *)) {
+    
+        CACornerMask maskedCorners = 0U;
+
+        if ((corners & UIRectCornerTopLeft) == UIRectCornerTopLeft) {
+            maskedCorners |= kCALayerMinXMinYCorner;
+        }
+
+        if ((corners & UIRectCornerTopRight) == UIRectCornerTopRight) {
+            maskedCorners |= kCALayerMaxXMinYCorner;
+        }
+
+        if ((corners & UIRectCornerBottomLeft) == UIRectCornerBottomLeft) {
+            maskedCorners |= kCALayerMinXMaxYCorner;
+        }
+
+        if ((corners & UIRectCornerBottomRight) == UIRectCornerBottomRight) {
+            maskedCorners |= kCALayerMaxXMaxYCorner;
+        }
+        // 按钮圆角
+        self.cornerRadius = cornerRadius;
+        self.maskedCorners = maskedCorners;
+        self.masksToBounds = true;
+    } else {
+        // 按钮圆角
+        CAShapeLayer *layer = [[CAShapeLayer alloc] init];
+        layer.path = [UIBezierPath bezierPathWithRoundedRect:self.bounds
+                                           byRoundingCorners:corners
+                                                 cornerRadii:CGSizeMake(cornerRadius, cornerRadius)].CGPath;
+        self.mask = layer;
+        self.cornerRadius = 0;
+        self.needsDisplayOnBoundsChange = true;
+    }
+}
+
+- (UIRectCorner)corners {
+    return [objc_getAssociatedObject(self, &kMaskedCorners) unsignedIntegerValue];
+}
+
++ (void)noAnimation:(__attribute__((noescape)) void(^)(void))block; {
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
+    if (block) {
+        block();
+    }
+    [CATransaction commit];
+}
+
+@end

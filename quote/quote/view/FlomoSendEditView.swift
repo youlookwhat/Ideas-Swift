@@ -27,13 +27,14 @@ class FlomoSendEditView: UIView {
         addGestureRecognizer(tapGesture)
         addSubview(backView)
 //        backView.addSubview(addPhotoBtn)
-//        backView.addSubview(tipsLabel)
+        backView.addSubview(tipsLabel)
         backView.addSubview(sendBtn)
         backView.addSubview(editBackView)
         editBackView.addSubview(commentTextView)
 //        editBackView.addSubview(commentPhotoView)
         editBackView.addSubview(tipsLabel222)
 
+        
         backView.snp.makeConstraints { make in
             make.left.right.bottom.equalToSuperview()
         }
@@ -45,18 +46,18 @@ class FlomoSendEditView: UIView {
         
         sendBtn.snp.makeConstraints { make in
             make.right.equalTo(-15)
-            make.centerY.equalToSuperview()
-//            make.centerY.equalTo(addPhotoBtn)
+            make.bottom.equalTo(-10)
+//            make.centerY.equalToSuperview()
             make.height.equalTo(28)
             make.width.equalTo(54)
         }
         
-//        tipsLabel.snp.makeConstraints { make in
-//            make.left.equalTo(addPhotoBtn.snp.right).offset(13)
-//            make.centerY.equalTo(addPhotoBtn)
-//            make.right.lessThanOrEqualTo(sendBtn.snp.left)
-//            make.height.equalTo(14)
-//        }
+        tipsLabel.snp.makeConstraints { make in
+            make.left.equalTo(15)
+            make.bottom.equalTo(-10)
+            make.height.equalTo(35)
+            make.width.equalTo(35)
+        }
         
         editBackView.snp.makeConstraints { make in
             make.left.top.equalTo(15)
@@ -167,17 +168,19 @@ class FlomoSendEditView: UIView {
         return textView
     }()
     
-    /// 提示语
+    /// 线，不可删
     lazy var tipsLabel222: UILabel = {
         let label = UILabel()
 //        label.font = .font14
         return label
     }()
     
-    /// 提示语
+    /// 井号
     lazy var tipsLabel: UILabel = {
         let label = UILabel()
-        label.font = .font14
+        label.textAlignment = .center
+        label.text = "#"
+        label.font = .font20M
         return label
     }()
     
@@ -212,11 +215,11 @@ class FlomoSendEditView: UIView {
     
     /// 底部view
     @objc lazy var backView: UIView = {
-        let icon = UIView()
-        icon.backgroundColor = .white
-        icon.layer.cornerRadius = 14
-//        icon.corners = [.topLeft, .topRight]
-        return icon
+        let uiView = UIView()
+        uiView.backgroundColor = .white
+        uiView.layer.cornerRadius = 14
+        uiView.corners = [.topLeft, .topRight]
+        return uiView
     }()
 }
 
