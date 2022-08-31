@@ -215,12 +215,7 @@ class FlomoViewController: BaseViewController, FlomoNavigation,UITextFieldDelega
     }
     
     // 发布内容
-    @objc func send(){
-//        let vc = WebViewViewController()
-//        vc.url = "https://github.com/youlookwhat/ByQuoteApp"
-//        vc.titleOut = "ByQuoteApp"
-//        navigationController?.pushViewController(vc, animated: true)
-        
+    @objc func send(){        
         viewEdit.isHidden = false
         viewEdit.commentTextView.becomeFirstResponder()
     }
@@ -362,20 +357,13 @@ extension FlomoViewController: UITableViewDataSource, UITableViewDelegate {
     
 
     func commentSend(sendBtnClik view: FlomoSendEditView, sender: UIButton) {
-        
+        print("点击了发布")
     }
     
-    func commentAddPhoto(addPhotoClick view: FlomoSendEditView, sender: UIButton) {
-        
-    }
     
     func commentDismiss(dismissClick view: FlomoSendEditView, sender: UIButton?) {
         viewEdit.endEditing(true)
         viewEdit.isHidden = true
-    }
-    
-    func commentDelete(deleteClick view: FlomoSendEditView, index: Int) {
-        
     }
 
 

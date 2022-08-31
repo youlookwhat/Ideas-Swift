@@ -8,12 +8,12 @@
 
 import UIKit
 
-/// 修宝说评论编辑弹窗
+/// 发布弹窗
 @objc protocol FlomoSendEditViewDelegate {
     func commentSend(sendBtnClik view: FlomoSendEditView, sender: UIButton)
-    func commentAddPhoto(addPhotoClick view: FlomoSendEditView, sender: UIButton)
+//    func commentAddPhoto(addPhotoClick view: FlomoSendEditView, sender: UIButton)
     func commentDismiss(dismissClick view: FlomoSendEditView, sender: UIButton?)
-    func commentDelete(deleteClick view: FlomoSendEditView, index: Int)
+//    func commentDelete(deleteClick view: FlomoSendEditView, index: Int)
 }
 class FlomoSendEditView: UIView {
     override init(frame: CGRect) {
@@ -128,9 +128,9 @@ class FlomoSendEditView: UIView {
         delegate?.commentSend(sendBtnClik: self, sender: sender)
     }
     /// 添加图片
-    @objc func addPhotoBtnClik(_ sender: UIButton) {
-        delegate?.commentAddPhoto(addPhotoClick: self, sender: sender)
-    }
+//    @objc func addPhotoBtnClik(_ sender: UIButton) {
+//        delegate?.commentAddPhoto(addPhotoClick: self, sender: sender)
+//    }
     
     @objc public weak var delegate: FlomoSendEditViewDelegate?
     
@@ -153,7 +153,7 @@ class FlomoSendEditView: UIView {
 //        return view
 //    }()
     
-    /// 评论内容
+    /// 发布内容
     @objc lazy var commentTextView: UITextView = {
         let textView = UITextView(frame: CGRect(x: 0, y: 0, width: kScreenWidth - 30, height: 58))
         textView.backgroundColor = .clear
@@ -181,6 +181,9 @@ class FlomoSendEditView: UIView {
         label.textAlignment = .center
         label.text = "#"
         label.font = .font20M
+        label.textColor = .colorB5
+        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(clickJin)))
+        label.isUserInteractionEnabled = true
         return label
     }()
     
@@ -188,7 +191,7 @@ class FlomoSendEditView: UIView {
     @objc lazy var addPhotoBtn: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "comment_add"), for: .normal)
-        button.addTarget(self, action: #selector(addPhotoBtnClik(_:)), for: .touchUpInside)
+//        button.addTarget(self, action: #selector(addPhotoBtnClik(_:)), for: .touchUpInside)
 //        button.setEnlargeEdgeWithTop(20, right: 20, bottom: 20, left: 20)
         return button
     }()
@@ -216,11 +219,22 @@ class FlomoSendEditView: UIView {
     /// 底部view
     @objc lazy var backView: UIView = {
         let uiView = UIView()
-        uiView.backgroundColor = .white
+        uiView.backgroundColor = UIColor(lightThemeColor: .white, darkThemeColor: UIColor.darkGray)
         uiView.layer.cornerRadius = 14
         uiView.corners = [.topLeft, .topRight]
         return uiView
     }()
+    
+    @objc func clickJin(){
+        // 加上井号
+        let strings = commentTextView.text.trimmingCharacters(in: .whitespaces)
+        if strings.count>0 {
+            commentTextView.text = "\(strings) #"
+        } else {
+            commentTextView.text = "\(strings)#"
+        }
+        
+    }
 }
 
 extension FlomoSendEditView: UITextViewDelegate {
