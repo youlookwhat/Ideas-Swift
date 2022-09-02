@@ -11,9 +11,13 @@ import UIKit
 class TimeUtil {
 
     // 时间戳转换时间格式
-    static func getDateFormatString(timeStamp:String) ->String{
+    static func getDateFormatString(timeStamp:String?) ->String{
 
-        let interval:TimeInterval=TimeInterval.init(timeStamp)!
+        if (timeStamp == nil) {
+            return ""
+        }
+        
+        let interval:TimeInterval=TimeInterval.init(timeStamp!)!
 
         let date = Date(timeIntervalSince1970: interval)
 

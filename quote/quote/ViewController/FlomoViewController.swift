@@ -8,13 +8,14 @@
 
 import UIKit
 import MJRefresh
+import RealmSwift
 
 class FlomoViewController: BaseViewController, FlomoNavigation,UITextFieldDelegate, FlomoSendEditViewDelegate{
 
     
     var sidebar:DCSidebar? = nil
     // 数据
-    var list:[OneContentListBean]?
+    var list:[NoteBean]?
     // P层
     var present:FlomoPresent?
     // 重试按钮
@@ -215,12 +216,12 @@ class FlomoViewController: BaseViewController, FlomoNavigation,UITextFieldDelega
     }
     
     // 发布内容
-    @objc func send(){        
+    @objc func send(){
         viewEdit.isHidden = false
         viewEdit.commentTextView.becomeFirstResponder()
     }
     
-    func onDataSuccess(bean: OneBean?) {
+    func onDataSuccess(bean: [NoteBean]?) {
         
         // 下拉刷新完成，收起
         self.tableView.mj_header?.endRefreshing()
@@ -230,30 +231,32 @@ class FlomoViewController: BaseViewController, FlomoNavigation,UITextFieldDelega
         btNoNet?.removeFromSuperview()
         tableView.isHidden = false
         
-        if (bean != nil && bean!.data != nil && bean!.data!.weather != nil){
-            let weather = bean!.data!.weather
-            let date = weather?.date
-            if (date!.contains("-")){
-                // 以 - 切割
-                let times = date?.components(separatedBy: "-")
-                if (times!.count == 3){
-                    labelTimeDay.text = times?[2]
-                    labelTimeYearMon.text = "\(times![1]) . \(times![0])"
-                }
-            }
-        }
-        if (bean != nil && bean!.data != nil && bean!.data!.content_list != nil) {
+//        if (bean != nil && bean!.data != nil && bean!.data!.weather != nil){
+//            let weather = bean!.data!.weather
+//            let date = weather?.date
+//            if (date!.contains("-")){
+//                // 以 - 切割
+//                let times = date?.components(separatedBy: "-")
+//                if (times!.count == 3){
+//                    labelTimeDay.text = times?[2]
+//                    labelTimeYearMon.text = "\(times![1]) . \(times![0])"
+//                }
+//            }
+//        }
+        if (bean != nil) {
             switch present?.num {
             case 0:
-                list  = bean!.data!.content_list
+                list = bean!
                 self.tableView.reloadData()
             default:
-                list?.insert(contentsOf: bean!.data!.content_list!, at: 0)
+                list = bean!
+                self.tableView.reloadData()
+//                list?.insert(contentsOf: bean![0], at: 0)
                 // 在第row行插入
-                let indexPath1:IndexPath = IndexPath.init(row: 0, section: 0)
-                tableView.beginUpdates()
-                tableView.insertRows(at: [indexPath1], with: .fade)
-                tableView.endUpdates()
+//                let indexPath1:IndexPath = IndexPath.init(row: 0, section: 0)
+//                tableView.beginUpdates()
+//                tableView.insertRows(at: [indexPath1], with: .fade)
+//                tableView.endUpdates()
             }
             
         } else if present!.num == 0{
@@ -331,14 +334,14 @@ extension FlomoViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let bean = list?[indexPath.row]
-        guard let bean = bean else { return }
+//        guard let bean = bean else { return }
         
-        if (bean.share_url != nil && bean.share_url != "") {
-            let vc = WebViewViewController()
-            vc.url = bean.share_url
-            vc.titleOut = bean.title ?? "loading"
-            navigationController?.pushViewController(vc, animated: true)
-        }
+//        if (bean.share_url != nil && bean.share_url != "") {
+//            let vc = WebViewViewController()
+//            vc.url = bean.share_url
+//            vc.titleOut = bean.title ?? "loading"
+//            navigationController?.pushViewController(vc, animated: true)
+//        }
     }
     
     // 点击更多
@@ -356,8 +359,24 @@ extension FlomoViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
 
-    func commentSend(sendBtnClik view: FlomoSendEditView, sender: UIButton) {
+    func commentSend(content:String) {
         print("点击了发布")
+        let note = NoteBean()
+        note.title = content
+        note.creatTime = TimeUtil.getCurrentTimeStamp()
+        note.id = (list?[0].id)! + 1// 一定要加不一样的主键，且不能为空
+        DatabaseUtil.insertNote(by: note)
+        
+        list?.insert(note, at: 0)
+        
+       // 在第row行插入
+       let indexPath1:IndexPath = IndexPath.init(row: 0, section: 0)
+       tableView.beginUpdates()
+       tableView.insertRows(at: [indexPath1], with: .fade)
+       tableView.endUpdates()
+        
+//        viewEdit.endEditing(true)
+//        viewEdit.isHidden = true
     }
     
     

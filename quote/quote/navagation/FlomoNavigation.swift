@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import RealmSwift
 
 protocol FlomoNavigation {
 
-    func onDataSuccess(bean : OneBean?)
+    func onDataSuccess(bean : [NoteBean]?)
     
 }

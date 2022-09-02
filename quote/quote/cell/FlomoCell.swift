@@ -28,7 +28,7 @@ class FlomoCell : UITableViewCell {
         }
     }
     
-    public var model: OneContentListBean? {
+    public var model: NoteBean? {
         didSet {
             guard let model = model else { return }
             
@@ -40,9 +40,9 @@ class FlomoCell : UITableViewCell {
             //样式属性集合
             let attributes = [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 15),
                               NSAttributedString.Key.paragraphStyle: paraph]
-            titleLabel.attributedText = NSAttributedString(string: (model.forward ?? "未知"), attributes: attributes)
+            titleLabel.attributedText = NSAttributedString(string: (model.title ?? "未知"), attributes: attributes)
 
-            desLabel.text = TimeUtil.getDateFormatString(timeStamp: TimeUtil.getCurrentTimeStamp())
+            desLabel.text = TimeUtil.getDateFormatString(timeStamp: model.creatTime)
             
             
             desLabel.snp.makeConstraints{ make in

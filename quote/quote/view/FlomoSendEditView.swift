@@ -10,7 +10,8 @@ import UIKit
 
 /// 发布弹窗
 @objc protocol FlomoSendEditViewDelegate {
-    func commentSend(sendBtnClik view: FlomoSendEditView, sender: UIButton)
+//    func commentSend(sendBtnClik view: FlomoSendEditView, sender: UIButton)
+    func commentSend(content:String)
 //    func commentAddPhoto(addPhotoClick view: FlomoSendEditView, sender: UIButton)
     func commentDismiss(dismissClick view: FlomoSendEditView, sender: UIButton?)
 //    func commentDelete(deleteClick view: FlomoSendEditView, index: Int)
@@ -125,7 +126,10 @@ class FlomoSendEditView: UIView {
     
     /// 发送
     @objc func sendBtnClik(_ sender: UIButton) {
-        delegate?.commentSend(sendBtnClik: self, sender: sender)
+//        delegate?.commentSend(sendBtnClik: self, sender: sender)
+        let content = commentTextView.text.trimmingCharacters(in: .whitespaces)
+        
+        delegate?.commentSend(content: content)
     }
     /// 添加图片
 //    @objc func addPhotoBtnClik(_ sender: UIButton) {

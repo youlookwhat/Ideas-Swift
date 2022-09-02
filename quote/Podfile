@@ -18,6 +18,7 @@ target 'quote' do
 # platform :ios, '10.0'
 #  pod 'SDWebImage'
   pod 'SDWebImage', '~> 5.0'
+  pod 'RealmSwift', '~>10'
 #pod 'SDWebImageWebPCoder'
 
   pod 'AFNetworking', '~> 4.0'
