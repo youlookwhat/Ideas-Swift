@@ -51,13 +51,16 @@ class FlomoViewController: BaseViewController, FlomoNavigation,UITextFieldDelega
 //        sidebar?.hideAnimationsTime = 0.2
         
         present = FlomoPresent(navigation: self)
-        present?.getOneData()
+//        present?.getOneData()
         
 //
 //        let viewEdit = XbsCommentEditView()
         viewEdit.isHidden = true
         viewEdit.delegate = self
         view.addSubview(viewEdit)
+        
+        // 下拉刷新
+        tableView.mj_header?.beginRefreshing()
   
 
         viewEdit.snp.makeConstraints{ make in
@@ -364,7 +367,11 @@ extension FlomoViewController: UITableViewDataSource, UITableViewDelegate {
         let note = NoteBean()
         note.title = content
         note.creatTime = TimeUtil.getCurrentTimeStamp()
-        note.id = (list?[0].id)! + 1// 一定要加不一样的主键，且不能为空
+        if(list==nil || list?.count==0){
+            note.id = 0
+        }else{
+            note.id = (list?[0].id)! + 1// 一定要加不一样的主键，且不能为空
+        }
         DatabaseUtil.insertNote(by: note)
         
         list?.insert(note, at: 0)
@@ -375,8 +382,9 @@ extension FlomoViewController: UITableViewDataSource, UITableViewDelegate {
        tableView.insertRows(at: [indexPath1], with: .fade)
        tableView.endUpdates()
         
-//        viewEdit.endEditing(true)
-//        viewEdit.isHidden = true
+        viewEdit.endEditing(true)
+        viewEdit.isHidden = true
+        viewEdit.commentTextView.text = ""
     }
     
     
