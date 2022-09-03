@@ -244,10 +244,7 @@ extension OneViewController: UITableViewDataSource, UITableViewDelegate {
         guard let bean = bean else { return }
         
         if (bean.share_url != nil && bean.share_url != "") {
-            let vc = WebViewViewController()
-            vc.url = bean.share_url
-            vc.titleOut = bean.title ?? "loading"
-            navigationController?.pushViewController(vc, animated: true)
+            WebViewViewController.start(nc: navigationController, url: bean.share_url, titleOut: bean.title)
         }
     }
 }

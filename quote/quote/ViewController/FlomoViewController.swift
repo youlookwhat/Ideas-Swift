@@ -212,10 +212,7 @@ class FlomoViewController: BaseViewController, FlomoNavigation,UITextFieldDelega
     
     // 点击关于
     @objc func openAbout(){
-        let vc = WebViewViewController()
-        vc.url = "https://github.com/youlookwhat/ByQuoteApp"
-        vc.titleOut = "ByQuoteApp"
-        navigationController?.pushViewController(vc, animated: true)
+        WebViewViewController.start(nc: navigationController, url: "https://github.com/youlookwhat/ByQuoteApp", titleOut: "ByQuoteApp")
     }
     
     // 发布内容

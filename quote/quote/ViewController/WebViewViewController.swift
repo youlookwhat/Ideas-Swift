@@ -296,4 +296,11 @@ class WebViewViewController: UIViewController, WKScriptMessageHandler, WKNavigat
 //        return false
 //    }
     
+    public class func start(nc : UINavigationController?, url:String?, titleOut:String?) {
+        let vc = WebViewViewController()
+        vc.url = url
+        vc.titleOut = titleOut ?? "详情"
+        nc?.pushViewController(vc, animated: true)
+    }
+    
 }
