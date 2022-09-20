@@ -232,6 +232,7 @@
 		7CBC7A072822BC7B005ECB4C /* cell */ = {
 			isa = PBXGroup;
 			children = (
+				7CDE7242287ACADF003D20D8 /* HomeListCell.swift */,
 				7CBC7A082822BCA7005ECB4C /* OneCellImage.swift */,
 				7CB0E66E28899D8F00EA40F1 /* FlomoCell.swift */,
 			);
@@ -311,7 +312,6 @@
 				7C5EF5E4284667B000AB80F7 /* ViewController */,
 				7CBC7A0B2822C164005ECB4C /* data */,
 				7CF8D535281E543300B83EDC /* present */,
-				7CDE7241287ACAC1003D20D8 /* adapter */,
 				7CBC7A1028241E0D005ECB4C /* Moya */,
 				7CB0E67028899FC500EA40F1 /* utils */,
 				7CF8D534281E542D00B83EDC /* navagation */,
@@ -331,14 +331,6 @@
 				7C9FE97C281ADEF3005D64C0 /* SwiftyJSON */,
 			);
 			path = library;
-			sourceTree = "<group>";
-		};
-		7CDE7241287ACAC1003D20D8 /* adapter */ = {
-			isa = PBXGroup;
-			children = (
-				7CDE7242287ACADF003D20D8 /* HomeListCell.swift */,
-			);
-			path = adapter;
 			sourceTree = "<group>";
 		};
 		7CF8D527281D78CA00B83EDC /* model */ = {

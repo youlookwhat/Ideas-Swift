@@ -88,3 +88,15 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+
+
+#CocoaPods
+#Pods/
+Pods
+.DS_Store
+Podfile.lock
+/.DS_Store
+Podfile.lock
+/Podfile.lock
+
+Pods/Target Support Files
