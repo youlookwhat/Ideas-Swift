@@ -128,8 +128,9 @@ class FlomoSendEditView: UIView {
     @objc func sendBtnClik(_ sender: UIButton) {
 //        delegate?.commentSend(sendBtnClik: self, sender: sender)
         let content = commentTextView.text.trimmingCharacters(in: .whitespaces)
-        
-        delegate?.commentSend(content: content)
+        if content.count > 0 {
+            delegate?.commentSend(content: content)
+        }
     }
     /// 添加图片
 //    @objc func addPhotoBtnClik(_ sender: UIButton) {
@@ -204,9 +205,10 @@ class FlomoSendEditView: UIView {
     @objc lazy var sendBtn: UIButton = {
         let button = UIButton(type: .custom)
         button.backgroundColor = .colorF7
-        button.setTitle("发送", for: .normal)
+        button.setTitle("记录", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 14
+        button.titleLabel?.font = UIFont.font13
 //        button.titleLabel?.font = UIFont.mediumSystemFont(ofSize: 14)
         button.addTarget(self, action: #selector(sendBtnClik(_:)), for: .touchUpInside)
         return button

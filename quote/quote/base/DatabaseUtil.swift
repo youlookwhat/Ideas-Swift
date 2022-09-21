@@ -90,6 +90,23 @@ extension DatabaseUtil {
             }
         }
 
+        /// 删除单个 note
+        public class func deleteNote(note : NoteBean) {
+            let defaultRealm = self.getDB()
+            try! defaultRealm.write {
+                defaultRealm.delete(note)
+            }
+        }
+        
+        /// 删除多个 note
+        public class func deleteNotes(notes : Results<NoteBean>) {
+            let defaultRealm = self.getDB()
+            try! defaultRealm.write {
+                defaultRealm.delete(notes)
+            }
+        }
+
+   
     
 
   

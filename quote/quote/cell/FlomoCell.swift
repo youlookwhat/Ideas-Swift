@@ -17,7 +17,7 @@ class FlomoCell : UITableViewCell {
         
         uiView.addSubview(titleLabel)
         uiView.addSubview(desLabel)
-        uiView.addSubview(moreImage)
+//        uiView.addSubview(moreImage)
         contentView.addSubview(uiView)
         
         uiView.snp.makeConstraints{ make in
@@ -54,10 +54,10 @@ class FlomoCell : UITableViewCell {
                 make.right.equalTo(-10)
                 make.bottom.equalToSuperview().offset(-10)
             }
-            moreImage.snp.makeConstraints{ make in
-                make.width.height.equalTo(36)
-                make.right.equalTo(-5)
-            }
+//            moreImage.snp.makeConstraints{ make in
+//                make.width.height.equalTo(36)
+//                make.right.equalTo(-5)
+//            }
         }
     }
     
@@ -103,15 +103,15 @@ class FlomoCell : UITableViewCell {
         return label
     }()
     
-    lazy var moreImage: UIImageView = {
-        let image = UIImage(named: "icon_more_flomo")?.withRenderingMode(.alwaysOriginal)
-        var imageView:UIImageView = UIImageView(image: image)
-        imageView.contentMode = .scaleAspectFit
+//    lazy var moreImage: UIImageView = {
+//        let image = UIImage(named: "icon_more_flomo")?.withRenderingMode(.alwaysOriginal)
+//        var imageView:UIImageView = UIImageView(image: image)
+//        imageView.contentMode = .scaleAspectFit
         // 给图片加点击事件
 //        let singleTapGesture = UITapGestureRecognizer(target: self, action: #selector(send))
 //        imageView.addGestureRecognizer(singleTapGesture)
 //        imageView.isUserInteractionEnabled = true
-        return imageView
-    }()
+//        return imageView
+//    }()
 
 }

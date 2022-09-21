@@ -161,7 +161,7 @@ class FlomoViewController: BaseViewController, FlomoNavigation,UITextFieldDelega
         let label = UILabel()
         label.textColor = UIColor(lightThemeColor: .black, darkThemeColor: .white)
         label.font = UIFont(name: "PingFangSC-Medium", size: 17)
-        label.text = "flomo"
+        label.text = "想法速记"
         label.textAlignment = .center
         return label
     }()
@@ -212,7 +212,7 @@ class FlomoViewController: BaseViewController, FlomoNavigation,UITextFieldDelega
     
     // 点击关于
     @objc func openAbout(){
-        WebViewViewController.start(nc: navigationController, url: "https://github.com/youlookwhat/ByQuoteApp", titleOut: "ByQuoteApp")
+        WebViewViewController.start(nc: navigationController, url: "https://github.com/youlookwhat/ByQuoteApp", titleOut: "loading")
     }
     
     // 发布内容
@@ -325,9 +325,9 @@ extension FlomoViewController: UITableViewDataSource, UITableViewDelegate {
         let topic = list?[indexPath.row]
         cell.model = topic
         
-        cell.moreImage.tag = indexPath.row
-        cell.moreImage.isUserInteractionEnabled = true
-        cell.moreImage.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(clickMore(_:))))
+//        cell.moreImage.tag = indexPath.row
+//        cell.moreImage.isUserInteractionEnabled = true
+//        cell.moreImage.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(clickMore(_:))))
         
         return cell
     }
@@ -344,12 +344,56 @@ extension FlomoViewController: UITableViewDataSource, UITableViewDelegate {
 //        }
     }
     
+    //设置哪些行可以编辑
+      func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+            if(indexPath.row == 0){
+                return true
+            }else{
+                return true
+            }
+        }
+    
+    
+    // 设置单元格的编辑的样式
+        func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+            return UITableViewCell.EditingStyle.delete
+        }
+    
+    
+    //设置点击删除之后的操作
+        func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+            if editingStyle == .delete {
+                DialogUtil.showDeleteAlert(vc: self, handle: {_ in
+                    let note = self.list?[indexPath.row]
+                    if note != nil {
+                        DatabaseUtil.deleteNote(note: note!)
+                        self.list?.remove(at: indexPath.row)
+                        
+                       // 删除第row行
+                       tableView.beginUpdates()
+                       tableView.deleteRows(at: [indexPath], with: .fade)
+                       tableView.endUpdates()
+                    }
+                })
+                
+                
+                // Delete the row from the data source
+//                workManager.updateCollection(withYear: yearForSearch, month: monthForSearch, row: indexPath.row - 1)
+//                count = count - 1
+//                tableView.deleteRows(at: [indexPath], with: .fade)
+//                tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
+            } else if editingStyle == .insert {
+                // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+            }
+        }
+    
+    
     // 点击更多
-   @objc func clickMore(_ tap: UITapGestureRecognizer) {
-       let img = tap.view as! UIImageView
-       let row = img.tag
-       print("editCar",row)
-   }
+//   @objc func clickMore(_ tap: UITapGestureRecognizer) {
+//       let img = tap.view as! UIImageView
+//       let row = img.tag
+//       print("editCar",row)
+//   }
 
     
     
@@ -379,9 +423,11 @@ extension FlomoViewController: UITableViewDataSource, UITableViewDelegate {
        tableView.insertRows(at: [indexPath1], with: .fade)
        tableView.endUpdates()
         
+        viewEdit.commentTextView.text = ""
         viewEdit.endEditing(true)
         viewEdit.isHidden = true
-        viewEdit.commentTextView.text = ""
+        viewEdit.sendBtn.backgroundColor = .colorF7
+        viewEdit.sendBtn.isUserInteractionEnabled = false
     }
     
     
