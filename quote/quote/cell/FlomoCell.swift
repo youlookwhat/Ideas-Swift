@@ -16,7 +16,7 @@ class FlomoCell : UITableViewCell {
         contentView.backgroundColor = UIColor(lightThemeColor: UIColor.colorF3F3F3, darkThemeColor: .black)
         
         uiView.addSubview(titleLabel)
-        uiView.addSubview(desLabel)
+        uiView.addSubview(timeLabel)
 //        uiView.addSubview(moreImage)
         contentView.addSubview(uiView)
         
@@ -38,21 +38,21 @@ class FlomoCell : UITableViewCell {
             //将行间距设置为28
             paraph.lineSpacing = 5
             //样式属性集合
-            let attributes = [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 15),
+            let attributes = [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 17),
                               NSAttributedString.Key.paragraphStyle: paraph]
-            titleLabel.attributedText = NSAttributedString(string: (model.title ?? "未知"), attributes: attributes)
+            titleLabel.attributedText = NSAttributedString(string: (model.title ), attributes: attributes)
 
-            desLabel.text = TimeUtil.getDateFormatString(timeStamp: model.creatTime)
+            timeLabel.text = TimeUtil.getDateFormatString(timeStamp: model.creatTime)
             
             
-            desLabel.snp.makeConstraints{ make in
+            timeLabel.snp.makeConstraints{ make in
                 make.left.top.equalTo(15)
             }
             titleLabel.snp.makeConstraints{ make in
-                make.top.equalTo(desLabel.snp.bottom).offset(15)
-                make.left.equalTo(desLabel)
-                make.right.equalTo(-10)
-                make.bottom.equalToSuperview().offset(-10)
+                make.top.equalTo(timeLabel.snp.bottom).offset(15)
+                make.left.equalTo(timeLabel)
+                make.right.equalTo(-15)
+                make.bottom.equalToSuperview().offset(-15)
             }
 //            moreImage.snp.makeConstraints{ make in
 //                make.width.height.equalTo(36)
@@ -67,8 +67,8 @@ class FlomoCell : UITableViewCell {
 
     lazy var uiView: UIView = {
         let label = UIView()
-        label.layer.cornerRadius = 4
-        label.backgroundColor = UIColor(lightThemeColor: .white, darkThemeColor: UIColor.darkGray)
+        label.layer.cornerRadius = 6
+        label.backgroundColor = UIColor(lightThemeColor: .white, darkThemeColor: UIColor.colorBlack0d6)
         return label
     }()
     
@@ -79,10 +79,11 @@ class FlomoCell : UITableViewCell {
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         label.font = UIFont.systemFont(ofSize: 17)
+        label.textColor = .color32
         return label
     }()
     
-    lazy var desLabel: UILabel = {
+    lazy var timeLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping

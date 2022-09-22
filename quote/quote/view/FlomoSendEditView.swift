@@ -163,7 +163,7 @@ class FlomoSendEditView: UIView {
         let textView = UITextView(frame: CGRect(x: 0, y: 0, width: kScreenWidth - 30, height: 58))
         textView.backgroundColor = .clear
         textView.font = .font14
-        textView.textColor = .colorTheme
+        textView.textColor = .color32
         textView.textContainerInset = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 10)
         textView.cm_placeholder = "现在的想法是..."
         textView.cm_placeholderColor = .colorB5

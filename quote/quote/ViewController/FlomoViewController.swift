@@ -74,6 +74,23 @@ class FlomoViewController: BaseViewController, FlomoNavigation,UITextFieldDelega
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
 
 
+        // 长按事件
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressed(sender:)))
+        tableView.addGestureRecognizer(longPressRecognizer)
+    }
+    
+    @objc func longPressed(sender: UILongPressGestureRecognizer) {
+            
+        if sender.state == UIGestureRecognizer.State.began {
+                let touchPoint = sender.location(in: self.tableView)
+                if let indexPath = tableView.indexPathForRow(at: touchPoint) {
+                    let bean = list?[indexPath.row]
+                    DialogUtil.showBottomAlert(vc: self, handle: {_ in
+                        Tools.copy(text: bean?.title)
+                        self.view.makeToast("复制成功", duration: 1.0, position: .center)
+                    })
+                }
+        }
     }
     
     func showButtonTouchUpInside(_ sender: Any) {
@@ -161,7 +178,7 @@ class FlomoViewController: BaseViewController, FlomoNavigation,UITextFieldDelega
         let label = UILabel()
         label.textColor = UIColor(lightThemeColor: .black, darkThemeColor: .white)
         label.font = UIFont(name: "PingFangSC-Medium", size: 17)
-        label.text = "想法速记"
+        label.text = "ideas"
         label.textAlignment = .center
         return label
     }()
@@ -333,7 +350,13 @@ extension FlomoViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let bean = list?[indexPath.row]
+
+        // 点击之后的操作
+//        let bean = list?[indexPath.row]
+//        DialogUtil.showBottomAlert(vc: self, handle: {_ in
+//            Tools.copy(text: bean?.title)
+//            self.view.makeToast("复制成功", duration: 1.0, position: .center)
+//        })
 //        guard let bean = bean else { return }
         
 //        if (bean.share_url != nil && bean.share_url != "") {
