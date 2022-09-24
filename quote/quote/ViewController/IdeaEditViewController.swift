@@ -9,7 +9,7 @@
 import UIKit
 
 // 编辑页
-class IdeaEditViewController: BaseViewController {
+class IdeaEditViewController: BaseViewController, IdeaEditNavigation {
     
     var id :Int? = 0
     var note:NoteBean? = nil
@@ -21,7 +21,7 @@ class IdeaEditViewController: BaseViewController {
         // 一定要设置背景
         view.backgroundColor = UIColor(lightThemeColor: UIColor.colorF3F3F3, darkThemeColor: .black)
 
-        present = IdeaEditPresent()
+        present = IdeaEditPresent(self)
         present?.setContentView(view)
         initData()
     }
@@ -33,6 +33,19 @@ class IdeaEditViewController: BaseViewController {
         }
     }
     
+    // 发布
+    func onSend(content: String) {
+        if note != nil {
+            // 不能直接改变数据库里直接获取的值，需要新建一个更新
+            // note?.title = content
+            var noteBean = NoteBean()
+            noteBean.id = note!.id
+            noteBean.title = content
+            noteBean.creatTime = note?.creatTime
+            DatabaseUtil.updateNote(note: noteBean)
+        }
+        finish()
+    }
     
     public class func start(nc : UINavigationController?, id:Int?) {
         let vc = IdeaEditViewController()
