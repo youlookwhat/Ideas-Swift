@@ -98,6 +98,11 @@ var kTabBarHeight: CGFloat {
     isIPhoneXAll ? 49.0 + 34.0 : 49.0
 }
 
+// 1像素的线高
+var lineHeight : CGFloat {
+    1 / UIScreen.main.scale
+}
+
 @objc
 class Screen: NSObject {
     // 当前屏幕尺寸

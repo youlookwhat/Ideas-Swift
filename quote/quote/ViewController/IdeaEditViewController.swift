@@ -29,7 +29,7 @@ class IdeaEditViewController: BaseViewController {
     func initData(){
         note = DatabaseUtil.getNote(from: id)
         if note != nil {
-            
+            present?.commentTextView.text = note?.title
         }
     }
     
