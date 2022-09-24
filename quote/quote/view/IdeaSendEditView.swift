@@ -9,14 +9,14 @@
 import UIKit
 
 /// 发布弹窗
-@objc protocol FlomoSendEditViewDelegate {
-//    func commentSend(sendBtnClik view: FlomoSendEditView, sender: UIButton)
+@objc protocol IdeaSendEditViewDelegate {
+
     func commentSend(content:String)
-//    func commentAddPhoto(addPhotoClick view: FlomoSendEditView, sender: UIButton)
-    func commentDismiss(dismissClick view: FlomoSendEditView, sender: UIButton?)
-//    func commentDelete(deleteClick view: FlomoSendEditView, index: Int)
+
+    func commentDismiss(dismissClick view: IdeaSendEditView, sender: UIButton?)
+
 }
-class FlomoSendEditView: UIView {
+class IdeaSendEditView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 //        self.backgroundColor = UIColor(rgb: 0x000000, alpha: 0.6)
@@ -137,7 +137,7 @@ class FlomoSendEditView: UIView {
 //        delegate?.commentAddPhoto(addPhotoClick: self, sender: sender)
 //    }
     
-    @objc public weak var delegate: FlomoSendEditViewDelegate?
+    @objc public weak var delegate: IdeaSendEditViewDelegate?
     
     /// 评论图片
 //    lazy var commentPhotoView: UICollectionView = {
@@ -167,7 +167,7 @@ class FlomoSendEditView: UIView {
         textView.textContainerInset = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 10)
         textView.cm_placeholder = "现在的想法是..."
         textView.cm_placeholderColor = .colorB5
-        textView.cm_maxNumberOfLines = 10
+        textView.cm_maxNumberOfLines = 15
         textView.delegate = self
         textViewDidChange(textView)
         return textView
@@ -239,11 +239,19 @@ class FlomoSendEditView: UIView {
         } else {
             commentTextView.text = "\(strings)#"
         }
-        
+    }
+    
+    // 隐藏弹框
+    public func hideSendView(){
+        commentTextView.text = ""
+        endEditing(true)
+        isHidden = true
+        sendBtn.backgroundColor = .colorF7
+        sendBtn.isUserInteractionEnabled = false
     }
 }
 
-extension FlomoSendEditView: UITextViewDelegate {
+extension IdeaSendEditView: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         
@@ -269,6 +277,7 @@ extension FlomoSendEditView: UITextViewDelegate {
             sendBtn.isUserInteractionEnabled = true
         }        
     }
+    
 }
 
 // MARK: UICollectionViewDataSource

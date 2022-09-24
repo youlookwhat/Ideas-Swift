@@ -11,19 +11,18 @@ import Alamofire
 import RealmSwift
 
 /*
- * Flomo首页
+ * Ideas首页
  */
-class FlomoPresent {
+class IdeasPresent {
 
-    var navigation :FlomoNavigation?
+    var navigation :IdeasNavigation?
     var num : Int = 0
     
-    init(navigation :FlomoNavigation) {
+    init(navigation :IdeasNavigation) {
         self.navigation = navigation
     }
     
-    // 一个
-    public func getOneData() {
+    public func getDBData() {
         // 看是否要放在异步获取
         let notes = DatabaseUtil.getSortedNotes()
         var list = [NoteBean]()
@@ -35,7 +34,7 @@ class FlomoPresent {
     
     // 刷新数据
     func refresh(){
-        getOneData()
+        getDBData()
     }
     
 }

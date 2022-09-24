@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow.init(frame: UIScreen.main.bounds)
 //        window?.backgroundColor = UIColor.white
-        let nc = BaseNc(rootViewController: FlomoViewController())
+        let nc = BaseNc(rootViewController: IdeasViewController())
         window?.rootViewController = nc
         window?.makeKeyAndVisible()
         

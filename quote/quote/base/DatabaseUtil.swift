@@ -77,7 +77,8 @@ extension DatabaseUtil {
     
     
     /// 获取 指定id (主键) 的 Note
-        public class func getNote(from id : Int) -> NoteBean? {
+        public class func getNote(from id : Int?) -> NoteBean? {
+            if id == nil {return nil}
             let defaultRealm = self.getDB()
             return defaultRealm.object(ofType: NoteBean.self, forPrimaryKey: id)
         }

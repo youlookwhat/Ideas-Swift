@@ -10,21 +10,23 @@ import UIKit
 import MJRefresh
 import RealmSwift
 
-class FlomoViewController: BaseViewController, FlomoNavigation,UITextFieldDelegate, FlomoSendEditViewDelegate{
+class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelegate, IdeaSendEditViewDelegate{
 
     
     var sidebar:DCSidebar? = nil
     // 数据
     var list:[NoteBean]?
     // P层
-    var present:FlomoPresent?
+    var present:IdeasPresent?
     // 重试按钮
     var btNoNet:UIButton?
-    var viewEdit = FlomoSendEditView()
+    // 发布弹框
+    var viewEdit = IdeaSendEditView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        hideTitleLayout();
         view.addSubview(tableView)
         
         // 隐藏导航栏(标题栏)
@@ -50,7 +52,7 @@ class FlomoViewController: BaseViewController, FlomoNavigation,UITextFieldDelega
 //        sidebar?.showAnimationsTime = 0.2
 //        sidebar?.hideAnimationsTime = 0.2
         
-        present = FlomoPresent(navigation: self)
+        present = IdeasPresent(navigation: self)
 //        present?.getOneData()
         
 //
@@ -295,7 +297,7 @@ class FlomoViewController: BaseViewController, FlomoNavigation,UITextFieldDelega
     // 重新加载
     @objc func reLoad(){
 //        view.addSubview(tableView)
-        present?.getOneData()
+        present?.getDBData()
     }
     
     lazy var tableView: UITableView = {
@@ -327,8 +329,10 @@ class FlomoViewController: BaseViewController, FlomoNavigation,UITextFieldDelega
 
 }
 
+// 记录点击的时间
+var taptime:Int = 0
 
-extension FlomoViewController: UITableViewDataSource, UITableViewDelegate {
+extension IdeasViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         list?.count ?? 0
     }
@@ -349,23 +353,20 @@ extension FlomoViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+    // 单击&双击的操作
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        // 点击之后的操作
-//        let bean = list?[indexPath.row]
-//        DialogUtil.showBottomAlert(vc: self, handle: {_ in
-//            Tools.copy(text: bean?.title)
-//            self.view.makeToast("复制成功", duration: 1.0, position: .center)
-//        })
-//        guard let bean = bean else { return }
-        
-//        if (bean.share_url != nil && bean.share_url != "") {
-//            let vc = WebViewViewController()
-//            vc.url = bean.share_url
-//            vc.titleOut = bean.title ?? "loading"
-//            navigationController?.pushViewController(vc, animated: true)
-//        }
+        //10位数时间戳
+        let current = Int(Date.init().timeIntervalSince1970)*1000
+        if (current - taptime < 500) {
+            // 双击事件
+            let bean = list?[indexPath.row]
+            if (bean?.id != nil) {
+                IdeaEditViewController.start(nc: navigationController, id: bean?.id)
+            }
+        }
+        taptime = current;
     }
+    
     
     //设置哪些行可以编辑
       func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -382,6 +383,10 @@ extension FlomoViewController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell.EditingStyle.delete
         }
     
+    
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        return "删除"
+    }
     
     //设置点击删除之后的操作
         func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -446,17 +451,12 @@ extension FlomoViewController: UITableViewDataSource, UITableViewDelegate {
        tableView.insertRows(at: [indexPath1], with: .fade)
        tableView.endUpdates()
         
-        viewEdit.commentTextView.text = ""
-        viewEdit.endEditing(true)
-        viewEdit.isHidden = true
-        viewEdit.sendBtn.backgroundColor = .colorF7
-        viewEdit.sendBtn.isUserInteractionEnabled = false
+        viewEdit.hideSendView()
     }
     
     
-    func commentDismiss(dismissClick view: FlomoSendEditView, sender: UIButton?) {
-        viewEdit.endEditing(true)
-        viewEdit.isHidden = true
+    func commentDismiss(dismissClick view: IdeaSendEditView, sender: UIButton?) {
+        viewEdit.hideSendView()
     }
 
 

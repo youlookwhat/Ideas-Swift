@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-protocol FlomoNavigation {
+protocol IdeasNavigation {
 
     func onDataSuccess(bean : [NoteBean]?)
     
