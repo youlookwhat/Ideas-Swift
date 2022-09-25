@@ -22,9 +22,13 @@ class IdeaEditPresent {
     var uiBottomView:UIView!
     
     // 设置布局
-    public func setContentView(_ view:UIView) {
+    public func setContentView(_ vc:IdeaEditViewController, _ view:UIView) {
+        
+        uiHeaderView.addSubview(timeLabel)
         // 输入框
-        view.addSubview(commentTextView)
+        uiHeaderView.addSubview(commentTextView)
+        // 头部的布局
+        view.addSubview(uiHeaderView)
         
         // 底部栏
         uiBottomView = UIView()
@@ -34,11 +38,26 @@ class IdeaEditPresent {
         uiBottomView.addSubview(sendBtn)
         view.addSubview(uiBottomView)
 
-        commentTextView.snp.makeConstraints{ make in
-            make.top.equalToSuperview().offset(kNavigationBarHeight)
+        uiHeaderView.snp.makeConstraints{ make in
+            make.top.equalToSuperview().offset(kNavigationBarHeight+10)
             // 这里设置才能使输入框一直在底部栏之上
-            make.bottom.equalTo(uiBottomView.snp.top).offset(1)
-            make.width.equalTo(Screen.width)
+            make.bottom.equalTo(uiBottomView.snp.top).offset(-10)
+            make.width.equalTo(Screen.width-30)
+            make.left.equalTo(15)
+            make.right.equalTo(-15)
+        }
+        timeLabel.snp.makeConstraints{ make in
+            make.top.equalToSuperview().offset(15)
+            make.left.equalTo(15)
+            make.right.equalTo(-15)
+        }
+        commentTextView.snp.makeConstraints{ make in
+            make.top.equalTo(timeLabel.snp.bottom).offset(15)
+            // 这里设置才能使输入框一直在底部栏之上
+            make.bottom.equalToSuperview().offset(-1)
+            make.width.equalTo(Screen.width-28-30)
+            make.left.equalTo(14)
+            make.right.equalTo(-14)
         }
         
         uiBottomView.snp.makeConstraints{ make in
@@ -72,12 +91,16 @@ class IdeaEditPresent {
 //            make.left.right.bottom.equalToSuperview()
 //        }
         
-        // 点击发布
+        sendBtn.backgroundColor = .colorTheme
+        sendBtn.isUserInteractionEnabled = true
+        
+        // 点击发布监听
         sendBtn.addTarget(self, action: #selector(sendBtnClik(_:)), for: .touchUpInside)
-        // 监听键盘
+        // 编辑框的监听
+        commentTextView.delegate = vc
+        // 键盘监听
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
 
-        
     }
     
     @objc func keyboardWillAppear(notification: NSNotification) {
@@ -154,7 +177,7 @@ class IdeaEditPresent {
     @objc var commentTextView: UITextView = {
         let textView = UITextView(frame: CGRect(x: 0, y: kNavigationBarHeight, width: kScreenWidth - 30, height: kScreenHeight-kNavigationBarHeight-kBottomMargin))
         textView.backgroundColor = .clear
-        textView.font = .font14
+        textView.font = .font18
         textView.textColor = .color32
         
 //        textView.textContainerInset = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 10)
@@ -168,7 +191,21 @@ class IdeaEditPresent {
         return textView
     }()
     
-
+    lazy var uiHeaderView: UIView = {
+        let label = UIView()
+        label.layer.cornerRadius = 6
+        label.backgroundColor = UIColor(lightThemeColor: .white, darkThemeColor: UIColor.colorBlack0d6)
+        return label
+    }()
+    
+    lazy var timeLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.textColor = UIColor(lightThemeColor: .gray, darkThemeColor: .white)
+        label.font = UIFont.systemFont(ofSize: 12)
+        return label
+    }()
     
     @objc func clickJin(){
         // 加上井号
@@ -179,19 +216,21 @@ class IdeaEditPresent {
             commentTextView.text = "\(strings)#"
         }
     }
+    
 }
 
-extension UITextView: UITextViewDelegate {
+// 基于ViewController的扩展
+extension IdeaEditViewController :UITextViewDelegate {
         
-    public func textViewDidChange(_ textView: UITextView,sendBtn: UIButton ) {
-        
+    public func textViewDidChange(_ textView: UITextView) {
+        // 改变按钮的样式
         let strings = textView.text.trimmingCharacters(in: .whitespaces)
         if String.isEmpty(strings) {
-            sendBtn.backgroundColor = .colorF7
-            sendBtn.isUserInteractionEnabled = false
+            self.present?.sendBtn.backgroundColor = .colorF7
+            self.present?.sendBtn.isUserInteractionEnabled = false
         } else {
-            sendBtn.backgroundColor = .colorTheme
-            sendBtn.isUserInteractionEnabled = true
+            self.present?.sendBtn.backgroundColor = .colorTheme
+            self.present?.sendBtn.isUserInteractionEnabled = true
         }
     }
     

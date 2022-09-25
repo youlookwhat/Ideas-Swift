@@ -10,8 +10,7 @@ import UIKit
 import MJRefresh
 import RealmSwift
 
-class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelegate, IdeaSendEditViewDelegate{
-
+class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelegate, IdeaSendEditViewDelegate, ValueBackDelegate{
     
     var sidebar:DCSidebar? = nil
     // 数据
@@ -361,7 +360,7 @@ extension IdeasViewController: UITableViewDataSource, UITableViewDelegate {
             // 双击事件
             let bean = list?[indexPath.row]
             if (bean?.id != nil) {
-                IdeaEditViewController.start(nc: navigationController, id: bean?.id)
+                IdeaEditViewController.start(nc: navigationController, id: bean?.id,position: indexPath.row, backDelegate: self)
             }
         }
         taptime = current;
@@ -379,9 +378,9 @@ extension IdeasViewController: UITableViewDataSource, UITableViewDelegate {
     
     
     // 设置单元格的编辑的样式
-        func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-            return UITableViewCell.EditingStyle.delete
-        }
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return UITableViewCell.EditingStyle.delete
+    }
     
     
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
@@ -389,31 +388,31 @@ extension IdeasViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     //设置点击删除之后的操作
-        func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-            if editingStyle == .delete {
-                DialogUtil.showDeleteAlert(vc: self, handle: {_ in
-                    let note = self.list?[indexPath.row]
-                    if note != nil {
-                        DatabaseUtil.deleteNote(note: note!)
-                        self.list?.remove(at: indexPath.row)
-                        
-                       // 删除第row行
-                       tableView.beginUpdates()
-                       tableView.deleteRows(at: [indexPath], with: .fade)
-                       tableView.endUpdates()
-                    }
-                })
-                
-                
-                // Delete the row from the data source
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            DialogUtil.showDeleteAlert(vc: self, handle: {_ in
+                let note = self.list?[indexPath.row]
+                if note != nil {
+                    DatabaseUtil.deleteNote(note: note!)
+                    self.list?.remove(at: indexPath.row)
+                    
+                   // 删除第row行
+                   tableView.beginUpdates()
+                   tableView.deleteRows(at: [indexPath], with: .fade)
+                   tableView.endUpdates()
+                }
+            })
+            
+            
+            // Delete the row from the data source
 //                workManager.updateCollection(withYear: yearForSearch, month: monthForSearch, row: indexPath.row - 1)
 //                count = count - 1
 //                tableView.deleteRows(at: [indexPath], with: .fade)
 //                tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
-            } else if editingStyle == .insert {
-                // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-            }
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
+    }
     
     
     // 点击更多
@@ -459,5 +458,11 @@ extension IdeasViewController: UITableViewDataSource, UITableViewDelegate {
         viewEdit.hideSendView()
     }
 
+    // 从编辑页回传的位置值
+    func valueBack(position: Int,note: NoteBean) {
+        let indexPath:IndexPath = IndexPath.init(row: position, section: 0)
+        list?[position] = note
+        tableView.reloadRows(at: [indexPath], with: .fade)
+    }
 
 }
