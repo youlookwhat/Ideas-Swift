@@ -29,7 +29,7 @@ class OneViewController: BaseViewController, OneNavigation {
         // 隐藏导航栏(标题栏)
         navigationController?.navigationBar.isHidden = true
 //        navigationItem.title = "一个"
-        view.backgroundColor = UIColor(lightThemeColor: .white, darkThemeColor: .black)
+        view.backgroundColor = UIColor(lightColor: .white, darkColor: .black)
         
         // 下拉刷新
         tableView.mj_header = MJRefreshNormalHeader { [weak self] in
@@ -94,7 +94,7 @@ class OneViewController: BaseViewController, OneNavigation {
     
     lazy var labelTimeDay: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor(lightThemeColor: .black, darkThemeColor: .white)
+        label.textColor = UIColor(lightColor: .black, darkColor: .white)
         label.font = UIFont(name: "PingFangSC-Medium", size: 28)
         label.textAlignment = .center
         label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(refreshAll)))
@@ -104,7 +104,7 @@ class OneViewController: BaseViewController, OneNavigation {
     
     lazy var labelTimeYearMon: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor(lightThemeColor: .black, darkThemeColor: .white)
+        label.textColor = UIColor(lightColor: .black, darkColor: .white)
 //        label.text = "07 . 2022"
         label.font = UIFont(name: "PingFangSC-Medium", size: 13)
 //        label.font = UIFont.systemFont(ofSize: 13)
@@ -118,7 +118,7 @@ class OneViewController: BaseViewController, OneNavigation {
         bt2.setTitle("ByQuoteApp", for: .normal)
         // 设置文字大小
         bt2.titleLabel?.font = UIFont.systemFont(ofSize: 13)
-        bt2.setTitleColor(UIColor(lightThemeColor: .gray, darkThemeColor: .white), for: .normal)
+        bt2.setTitleColor(UIColor(lightColor: .gray, darkColor: .white), for: .normal)
         bt2.addTarget(self, action: #selector(openAbout), for: .touchUpInside)
         return bt2;
     }()
@@ -178,7 +178,7 @@ class OneViewController: BaseViewController, OneNavigation {
             btNoNet!.setTitle("请检查网络，点击重试", for: .normal)
             // 设置文字大小
             btNoNet!.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-            btNoNet!.setTitleColor(UIColor(lightThemeColor: .black, darkThemeColor: .white), for: .normal)
+            btNoNet!.setTitleColor(UIColor(lightColor: .black, darkColor: .white), for: .normal)
             btNoNet!.addTarget(self, action: #selector(reLoad), for: .touchUpInside)
             view.addSubview(btNoNet!)
         } else {

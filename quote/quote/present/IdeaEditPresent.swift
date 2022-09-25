@@ -32,7 +32,8 @@ class IdeaEditPresent {
         
         // 底部栏
         uiBottomView = UIView()
-        uiBottomView.backgroundColor = .white
+        uiBottomView.backgroundColor = UIColor(lightColor: .white, darkColor: UIColor.color151517)
+        
         uiBottomView.addSubview(lineLabel)
         uiBottomView.addSubview(jinLabel)
         uiBottomView.addSubview(sendBtn)
@@ -127,7 +128,8 @@ class IdeaEditPresent {
     /// 线
     lazy var lineLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .gray
+        label.backgroundColor = .lightGray
+        label.alpha = 0.1
         return label
     }()
     
@@ -152,7 +154,6 @@ class IdeaEditPresent {
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 14
         button.titleLabel?.font = UIFont.font13
-//        button.titleLabel?.font = UIFont.mediumSystemFont(ofSize: 14)
 //        button.addTarget(viewController, action: #selector(sendBtnClik(_:)), for: .touchUpInside)
         return button
     }()
@@ -178,7 +179,7 @@ class IdeaEditPresent {
         let textView = UITextView(frame: CGRect(x: 0, y: kNavigationBarHeight, width: kScreenWidth - 30, height: kScreenHeight-kNavigationBarHeight-kBottomMargin))
         textView.backgroundColor = .clear
         textView.font = .font18
-        textView.textColor = .color32
+//        textView.textColor = .color32
         
 //        textView.textContainerInset = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 10)
         
@@ -194,7 +195,7 @@ class IdeaEditPresent {
     lazy var uiHeaderView: UIView = {
         let label = UIView()
         label.layer.cornerRadius = 6
-        label.backgroundColor = UIColor(lightThemeColor: .white, darkThemeColor: UIColor.colorBlack0d6)
+        label.backgroundColor = UIColor(lightColor: .white, darkColor: UIColor.color151517)
         return label
     }()
     
@@ -202,7 +203,7 @@ class IdeaEditPresent {
         let label = UILabel()
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
-        label.textColor = UIColor(lightThemeColor: .gray, darkThemeColor: .white)
+        label.textColor = .gray
         label.font = UIFont.systemFont(ofSize: 12)
         return label
     }()
@@ -226,7 +227,7 @@ extension IdeaEditViewController :UITextViewDelegate {
         // 改变按钮的样式
         let strings = textView.text.trimmingCharacters(in: .whitespaces)
         if String.isEmpty(strings) {
-            self.present?.sendBtn.backgroundColor = .colorF7
+            self.present?.sendBtn.backgroundColor = UIColor(lightColor: .colorF7, darkColor: .color151517)
             self.present?.sendBtn.isUserInteractionEnabled = false
         } else {
             self.present?.sendBtn.backgroundColor = .colorTheme

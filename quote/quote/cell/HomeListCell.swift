@@ -141,7 +141,7 @@ class HomeListCell: UITableViewCell {
                 }
                 
                 desLabel.font = UIFont.systemFont(ofSize: 13)
-                desLabel.textColor = UIColor(lightThemeColor: .gray, darkThemeColor: .gray)
+                desLabel.textColor = UIColor(lightColor: .gray, darkColor: .gray)
                 // 第三行标题
                 desLabel.snp.remakeConstraints { make in
                     if model.typeContent==0 || model.typeContent==nil {
@@ -180,7 +180,7 @@ class HomeListCell: UITableViewCell {
                 iconImageView.isHidden = false
 
                 // 标题
-                desLabel.textColor = UIColor(lightThemeColor: .black, darkThemeColor: .white)
+                desLabel.textColor = UIColor(lightColor: .black, darkColor: .white)
                 // 全粗
 //                desLabel.font = .boldSystemFont(ofSize: 18)
                 // 中等粗
@@ -301,7 +301,7 @@ class HomeListCell: UITableViewCell {
         let bgLayer1 = CALayer()
         bgLayer1.frame = CGRect(x: 15, y: 10, width: kScreenWidth - 30, height: Screen.width * (1175/2262.0) + 150.0)
         // 背景，去掉后看起来没有阴影了
-        bgLayer1.backgroundColor = UIColor(lightThemeColor: .white, darkThemeColor: .black).cgColor
+        bgLayer1.backgroundColor = UIColor(lightColor: .white, darkColor: .black).cgColor
 //        bgLayer1.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).cgColor
         bgLayer1.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.08).cgColor
         bgLayer1.shadowOffset = CGSize(width: 0, height: 0)

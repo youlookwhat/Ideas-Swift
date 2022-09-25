@@ -23,7 +23,7 @@ class WebViewViewController: UIViewController, WKScriptMessageHandler, WKNavigat
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor(lightThemeColor: .white, darkThemeColor: .black)
+        view.backgroundColor = UIColor(lightColor: .white, darkColor: .black)
         
         
 //        title = "网页"
@@ -89,7 +89,7 @@ class WebViewViewController: UIViewController, WKScriptMessageHandler, WKNavigat
         // 要将config配置后再传入进来
         webview = WKWebView(frame: viewBounds(top: 0, bottom: kBottomMargin), configuration: config)
         webview?.isOpaque = false
-        webview?.backgroundColor = UIColor(lightThemeColor: .white, darkThemeColor: .black)
+        webview?.backgroundColor = UIColor(lightColor: .white, darkColor: .black)
         self.view.addSubview(webview!)
         let url = URL(string: url!)
         let request = URLRequest(url: url!)
@@ -119,7 +119,7 @@ class WebViewViewController: UIViewController, WKScriptMessageHandler, WKNavigat
         // 返回图片
         let image = UIImage(named: "iv_left_back")?.withRenderingMode(.alwaysTemplate)
         ivBack = UIImageView(image: image)
-        ivBack.tintColor = UIColor(lightThemeColor: .black, darkThemeColor: .white)
+        ivBack.tintColor = UIColor(lightColor: .black, darkColor: .white)
         ivBack.contentMode = .scaleAspectFit
         ivBack.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
         // 给图片加点击事件
@@ -131,7 +131,7 @@ class WebViewViewController: UIViewController, WKScriptMessageHandler, WKNavigat
         
         // 标题
         lableTitle = UILabel(frame: CGRect(x: 44, y: 0, width: kScreenWidth - 88, height: 44))
-        lableTitle.textColor = UIColor(lightThemeColor: .black, darkThemeColor: .white)
+        lableTitle.textColor = UIColor(lightColor: .black, darkColor: .white)
         lableTitle.font = .systemFont(ofSize: 16, weight: .medium)
         lableTitle.isHidden = false
         lableTitle.text = titleOut
@@ -143,7 +143,7 @@ class WebViewViewController: UIViewController, WKScriptMessageHandler, WKNavigat
 //        bt2!.titleLabel?.font = UIFont(name: "PingFangSC-Medium", size: 12)
         // 设置文字大小
         bt2!.titleLabel?.font = UIFont.systemFont(ofSize: 13)
-        bt2!.setTitleColor(UIColor(lightThemeColor: .black, darkThemeColor: .white), for: .normal)
+        bt2!.setTitleColor(UIColor(lightColor: .black, darkColor: .white), for: .normal)
         bt2!.addTarget(self, action: #selector(goForward), for: .touchUpInside)
         bt2!.isHidden = true
         toolView.addSubview(bt2!)
@@ -260,7 +260,7 @@ class WebViewViewController: UIViewController, WKScriptMessageHandler, WKNavigat
     
     // 设置字体背景 暗黑 白色
     func changeTextBackgroundStyle(style : String = "dark"){
-        webview?.backgroundColor = UIColor(lightThemeColor: .white, darkThemeColor: .black)
+        webview?.backgroundColor = UIColor(lightColor: .white, darkColor: .black)
        if style == "dark" {
            //字体颜色
            self.webview.evaluateJavaScript("document.getElementsByTagName('body')[0].style.webkitTextFillColor= '#F8F8FF'", completionHandler: nil)

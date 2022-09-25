@@ -31,7 +31,7 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
         // 隐藏导航栏(标题栏)
         navigationController?.navigationBar.isHidden = true
         navigationItem.title = "flomo"
-        view.backgroundColor = UIColor(lightThemeColor: UIColor.colorF3F3F3, darkThemeColor: .black)
+        view.backgroundColor = UIColor(lightColor: UIColor.colorF3F3F3, darkColor: .black)
         
         // 下拉刷新
         tableView.mj_header = MJRefreshNormalHeader { [weak self] in
@@ -177,7 +177,7 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
     
     lazy var titleLable: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor(lightThemeColor: .black, darkThemeColor: .white)
+        label.textColor = UIColor(lightColor: .black, darkColor: .white)
         label.font = UIFont(name: "PingFangSC-Medium", size: 17)
         label.text = "ideas"
         label.textAlignment = .center
@@ -187,7 +187,7 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
     
     lazy var labelTimeDay: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor(lightThemeColor: .black, darkThemeColor: .white)
+        label.textColor = UIColor(lightColor: .black, darkColor: .white)
         label.font = UIFont(name: "PingFangSC-Medium", size: 28)
         label.textAlignment = .center
         label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(refreshAll)))
@@ -197,7 +197,7 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
     
     lazy var labelTimeYearMon: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor(lightThemeColor: .black, darkThemeColor: .white)
+        label.textColor = UIColor(lightColor: .black, darkColor: .white)
 //        label.text = "07 . 2022"
         label.font = UIFont(name: "PingFangSC-Medium", size: 13)
 //        label.font = UIFont.systemFont(ofSize: 13)
@@ -211,7 +211,7 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
         bt2.setTitle("ByQuoteApp", for: .normal)
         // 设置文字大小
         bt2.titleLabel?.font = UIFont.systemFont(ofSize: 13)
-        bt2.setTitleColor(UIColor(lightThemeColor: .gray, darkThemeColor: .white), for: .normal)
+        bt2.setTitleColor(UIColor(lightColor: .gray, darkColor: .white), for: .normal)
         bt2.addTarget(self, action: #selector(openAbout), for: .touchUpInside)
         return bt2;
     }()
@@ -288,7 +288,7 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
             btNoNet!.setTitle("请检查网络，点击重试", for: .normal)
             // 设置文字大小
             btNoNet!.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-            btNoNet!.setTitleColor(UIColor(lightThemeColor: .black, darkThemeColor: .white), for: .normal)
+            btNoNet!.setTitleColor(UIColor(lightColor: .black, darkColor: .white), for: .normal)
             btNoNet!.addTarget(self, action: #selector(reLoad), for: .touchUpInside)
             view.addSubview(btNoNet!)
         } else {
@@ -307,7 +307,7 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
         let tableView = UITableView(frame: viewBounds(), style: .plain)
 //        let tableView = UITableView(frame: self.view.frame, style: .plain)
 //        tableView.backgroundColor = .white
-        tableView.backgroundColor = UIColor(lightThemeColor: UIColor.colorF3F3F3, darkThemeColor: .black)
+        tableView.backgroundColor = UIColor(lightColor: UIColor.colorF3F3F3, darkColor: .black)
         // 这里的100是像素，不是文字对应的高度，要将高度转为像素
 //        tableView.rowHeight = Screen.width * (1175/2262.0) + 170.0
         // 自适应高度添加 1.这两行属性 初始高度和配置 2.最底部的一个cell配上bottom属性
@@ -322,7 +322,7 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
 //        tableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         
         tableView.tableFooterView = UIView()
-        tableView.register(FlomoCell.self, forCellReuseIdentifier: "CellIdentifier")
+        tableView.register(IdeaCell.self, forCellReuseIdentifier: "CellIdentifier")
 //        tableView.mj_footer = MJDIYFooter(refreshingBlock: {
 //            self.requestData()
 //        })
@@ -340,7 +340,7 @@ extension IdeasViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CellIdentifier", for: indexPath) as! FlomoCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CellIdentifier", for: indexPath) as! IdeaCell
 
         // 没有选中的样式，一般都没有
         cell.selectionStyle = .none

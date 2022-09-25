@@ -24,7 +24,7 @@ class BaseViewController: UIViewController {
         // 返回图片
         let image = UIImage(named: "iv_left_back")?.withRenderingMode(.alwaysTemplate)
         ivBack = UIImageView(image: image)
-        ivBack.tintColor = UIColor(lightThemeColor: .black, darkThemeColor: .white)
+        ivBack.tintColor = UIColor(lightColor: .black, darkColor: .white)
         ivBack.contentMode = .scaleAspectFit
         ivBack.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
         // 给图片加点击事件

@@ -163,7 +163,7 @@ class IdeaSendEditView: UIView {
         let textView = UITextView(frame: CGRect(x: 0, y: 0, width: kScreenWidth - 30, height: 58))
         textView.backgroundColor = .clear
         textView.font = .font14
-        textView.textColor = .color32
+        textView.textColor = UIColor.init(lightColor: .color32,darkColor: .white)
         textView.textContainerInset = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 10)
         textView.cm_placeholder = "现在的想法是..."
         textView.cm_placeholderColor = .colorB5
@@ -218,14 +218,14 @@ class IdeaSendEditView: UIView {
     @objc lazy var editBackView: UIView = {
         let icon = UIView()
         icon.layer.cornerRadius = 10
-        icon.backgroundColor = .colorF6
+        icon.backgroundColor = UIColor.init(lightColor: .colorF6, darkColor: .color151517)
         return icon
     }()
     
     /// 底部view
     @objc lazy var backView: UIView = {
         let uiView = UIView()
-        uiView.backgroundColor = UIColor(lightThemeColor: .white, darkThemeColor: UIColor.darkGray)
+        uiView.backgroundColor = UIColor(lightColor: .white, darkColor: .black)
         uiView.layer.cornerRadius = 14
         uiView.corners = [.topLeft, .topRight]
         return uiView
@@ -246,7 +246,7 @@ class IdeaSendEditView: UIView {
         commentTextView.text = ""
         endEditing(true)
         isHidden = true
-        sendBtn.backgroundColor = .colorF7
+        sendBtn.backgroundColor = UIColor(lightColor: .colorF7, darkColor: .color151517)
         sendBtn.isUserInteractionEnabled = false
     }
 }
@@ -270,7 +270,7 @@ extension IdeaSendEditView: UITextViewDelegate {
         }
                 
         if String.isEmpty(strings) {
-            sendBtn.backgroundColor = .colorF7
+            sendBtn.backgroundColor = UIColor(lightColor: .colorF7, darkColor: .color151517)
             sendBtn.isUserInteractionEnabled = false
         } else {
             sendBtn.backgroundColor = .colorTheme

@@ -161,24 +161,24 @@ extension UIColor {
 
     /// 便利构造函数(配合cssHex函数使用 更好)
     /// - Parameters:
-    ///   - lightThemeColor: 明亮主题的颜色
-    ///   - darkThemeColor: 黑暗主题的颜色
-    public convenience init(lightThemeColor: UIColor, darkThemeColor: UIColor? = nil) {
+    ///   - lightColor: 明亮主题的颜色
+    ///   - darkColor: 黑暗主题的颜色
+    public convenience init(lightColor: UIColor, darkColor: UIColor? = nil) {
         if #available(iOS 13.0, *) {
             self.init { (traitCollection) -> UIColor in
                 switch traitCollection.userInterfaceStyle {
                     case .light:
-                        return lightThemeColor
+                        return lightColor
                     case .unspecified:
-                        return lightThemeColor
+                        return lightColor
                     case .dark:
-                        return darkThemeColor ?? lightThemeColor
+                        return darkColor ?? lightColor
                    @unknown default:
                         fatalError()
                     }
                 }
             } else {
-                self.init(cgColor: lightThemeColor.cgColor)
+                self.init(cgColor: lightColor.cgColor)
             }
         }
 }
@@ -192,6 +192,7 @@ extension UIColor {
     static let colorF7 = "#F7F7F7".uiColor
     static let colorB5 = "#B5B5B5".uiColor
     static let color32 = "#323232".uiColor
+    static let color151517 = "#151517".uiColor// 纯黑色时的灰色，可以当做选项背景
     
     static let colorBlack = "#000000".uiColor
     static let colorBlack0d6 = "#000000".getColor(alpha: 0.6)

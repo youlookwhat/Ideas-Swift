@@ -23,7 +23,7 @@ class IdeaEditViewController: BaseViewController, IdeaEditNavigation {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
         // 一定要设置背景
-        view.backgroundColor = UIColor(lightThemeColor: UIColor.colorF3F3F3, darkThemeColor: .black)
+        view.backgroundColor = UIColor(lightColor: UIColor.colorF3F3F3, darkColor: .black)
         
         present = IdeaEditPresent(self)
         present?.setContentView(self, view)

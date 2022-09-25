@@ -8,12 +8,12 @@
 
 import UIKit
 
-class FlomoCell : UITableViewCell {
+class IdeaCell : UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        contentView.backgroundColor = UIColor(lightThemeColor: UIColor.colorF3F3F3, darkThemeColor: .black)
+        contentView.backgroundColor = UIColor(lightColor: UIColor.colorF3F3F3, darkColor: .black)
         
         uiView.addSubview(titleLabel)
         uiView.addSubview(timeLabel)
@@ -68,7 +68,7 @@ class FlomoCell : UITableViewCell {
     lazy var uiView: UIView = {
         let label = UIView()
         label.layer.cornerRadius = 6
-        label.backgroundColor = UIColor(lightThemeColor: .white, darkThemeColor: UIColor.colorBlack0d6)
+        label.backgroundColor = UIColor(lightColor: .white, darkColor: UIColor.color151517)
         return label
     }()
     
@@ -79,7 +79,6 @@ class FlomoCell : UITableViewCell {
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         label.font = UIFont.systemFont(ofSize: 17)
-        label.textColor = .color32
         return label
     }()
     
@@ -87,7 +86,7 @@ class FlomoCell : UITableViewCell {
         let label = UILabel()
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
-        label.textColor = UIColor(lightThemeColor: .gray, darkThemeColor: .white)
+        label.textColor = .gray
         label.font = UIFont.systemFont(ofSize: 12)
         return label
     }()
