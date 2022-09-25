@@ -35,29 +35,48 @@ class BaseViewController: UIViewController {
         toolView.addSubview(ivBack)
     }
     
+    // 隐藏标题栏
     public func hideTitleLayout(){
         toolView.isHidden = true
     }
     
-    // 后退
+    // 点击返回
     @objc func navBtnPress(){
         finish()
     }
 
+    // 退出页面
     func finish(){
-        // 退出页面
         if presentingViewController != nil && presentingViewController?.presentedViewController == self {
                 dismiss(animated: true, completion: nil)
-            } else if navigationController?.presentingViewController != nil && navigationController?.presentingViewController?.presentedViewController == navigationController {
+        } else if navigationController?.presentingViewController != nil && navigationController?.presentingViewController?.presentedViewController == navigationController {
                 if navigationController?.children.count ?? 0 > 1 {
                     navigationController?.popViewController(animated: true)
                 } else {
                     navigationController?.dismiss(animated: true, completion: nil)
                 }
-            } else {
-                navigationController?.popViewController(animated: true)
-            }
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
     }
-    
 
+}
+
+import SafariServices
+
+extension BaseViewController {
+    
+    func openUrl(urlString:String){
+        if let url = URL(string: urlString) {
+            // 使用浏览器打开 根据iOS系统版本，分别处理
+//            if #available(iOS 10, *) {
+//                UIApplication.shared.open(url, options: [:],completionHandler: {(success) in})
+//            } else {
+//                UIApplication.shared.openURL(url)
+//            }
+            // 应用内使用Safari打开
+            let safariVC = SFSafariViewController(url: url)
+            self.present(safariVC, animated: true, completion: nil)
+        }
+    }
 }

@@ -10,7 +10,7 @@ import UIKit
 import MJRefresh
 
 
-class OneViewController: UIViewController, OneNavigation {
+class OneViewController: BaseViewController, OneNavigation {
     
     var sidebar:DCSidebar? = nil
     // 数据
@@ -23,6 +23,7 @@ class OneViewController: UIViewController, OneNavigation {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        hideTitleLayout()
         view.addSubview(tableView)
         
         // 隐藏导航栏(标题栏)
@@ -130,10 +131,7 @@ class OneViewController: UIViewController, OneNavigation {
     
     // 点击关于
     @objc func openAbout(){
-        let vc = WebViewViewController()
-        vc.url = "https://github.com/youlookwhat/ByQuoteApp"
-        vc.titleOut = "ByQuoteApp"
-        navigationController?.pushViewController(vc, animated: true)
+        openUrl(urlString: "https://github.com/youlookwhat/flomo-offline")
     }
     
     func onDataSuccess(bean: OneBean?) {

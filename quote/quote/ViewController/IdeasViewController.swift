@@ -230,7 +230,10 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
     
     // 点击关于
     @objc func openAbout(){
-        WebViewViewController.start(nc: navigationController, url: "https://github.com/youlookwhat/ByQuoteApp", titleOut: "loading")
+        // 使用浏览器打开
+        openUrl(urlString: "https://github.com/youlookwhat/flomo-offline")
+        
+//        WebViewViewController.start(nc: navigationController, url: "https://github.com/youlookwhat/ByQuoteApp", titleOut: "loading")
     }
     
     // 发布内容
