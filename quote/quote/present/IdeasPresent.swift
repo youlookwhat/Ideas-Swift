@@ -16,7 +16,7 @@ import RealmSwift
 class IdeasPresent {
 
     var navigation :IdeasNavigation?
-    var num : Int = 0
+    var page : Int = 1
     
     init(navigation :IdeasNavigation) {
         self.navigation = navigation

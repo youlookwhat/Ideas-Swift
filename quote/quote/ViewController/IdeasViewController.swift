@@ -25,20 +25,37 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        hideTitleLayout();
-        view.addSubview(tableView)
-        
         // 隐藏导航栏(标题栏)
-        navigationController?.navigationBar.isHidden = true
-        navigationItem.title = "flomo"
+        navigationController?.navigationBar.isHidden = false
+        navigationItem.title = "ideas"
+        navigationController?.title = "ideas"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationItem.largeTitleDisplayMode = .automatic
         view.backgroundColor = UIColor(lightColor: UIColor.colorF3F3F3, darkColor: .black)
+
+        
+        hideTitleLayout();
+        
+        
+        view.addSubview(tableView)
+        view.addSubview(sendImage)
+        viewEdit.isHidden = true
+        viewEdit.delegate = self
+        view.addSubview(viewEdit)
+        
+        sendImage.snp.makeConstraints{ make in
+            make.bottom.equalToSuperview().offset(-30)
+            make.centerX.equalToSuperview()
+            make.width.height.equalTo(70)
+        }
         
         // 下拉刷新
-        tableView.mj_header = MJRefreshNormalHeader { [weak self] in
-            // load some data
-            self?.present?.refresh()
-          }.autoChangeTransparency(true)
-          .link(to: tableView)
+//        tableView.mj_header = MJRefreshNormalHeader { [weak self] in
+//            // load some data
+//            self?.present?.refresh()
+//          }.autoChangeTransparency(true)
+//          .link(to: tableView)
+        
         
         // 加载更多
         tableView.mj_footer = MJRefreshAutoNormalFooter{  [weak self] in
@@ -46,19 +63,15 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
         }.autoChangeTransparency(true)
        .link(to: tableView)
         
-        initTitleView()
+//        initTitleView()
 //        sidebar = DCSidebar(sideView: view)
 //        sidebar?.showAnimationsTime = 0.2
 //        sidebar?.hideAnimationsTime = 0.2
         
         present = IdeasPresent(navigation: self)
-//        present?.getOneData()
+        present?.refresh()
         
-//
-//        let viewEdit = XbsCommentEditView()
-        viewEdit.isHidden = true
-        viewEdit.delegate = self
-        view.addSubview(viewEdit)
+        
         
         // 下拉刷新
         tableView.mj_header?.beginRefreshing()
@@ -70,10 +83,7 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
         }
         
         // 监听键盘弹起
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-
 
         // 长按事件
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressed(sender:)))
@@ -81,7 +91,6 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
     }
     
     @objc func longPressed(sender: UILongPressGestureRecognizer) {
-            
         if sender.state == UIGestureRecognizer.State.began {
                 let touchPoint = sender.location(in: self.tableView)
                 if let indexPath = tableView.indexPathForRow(at: touchPoint) {
@@ -114,13 +123,6 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
         toolView.addSubview(titleLable)
         toolView.addSubview(aboutImage)
         toolView.addSubview(menuImage)
-        view.addSubview(sendImage)
-        
-        sendImage.snp.makeConstraints{ make in
-            make.bottom.equalToSuperview().offset(-30)
-            make.centerX.equalToSuperview()
-            make.width.height.equalTo(70)
-        }
         
         titleLable.snp.makeConstraints{ make in
             make.centerX.centerY.equalToSuperview()
@@ -224,7 +226,7 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
     
     // 点击日期，刷新所有
     @objc func refreshAll(){
-        present?.num = -1
+        present?.page = 1
         self.tableView.mj_header?.beginRefreshing()
     }
     
@@ -243,7 +245,6 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
     }
     
     func onDataSuccess(bean: [NoteBean]?) {
-        
         // 下拉刷新完成，收起
         self.tableView.mj_header?.endRefreshing()
         // 加载更多完成
@@ -252,54 +253,28 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
         btNoNet?.removeFromSuperview()
         tableView.isHidden = false
         
-//        if (bean != nil && bean!.data != nil && bean!.data!.weather != nil){
-//            let weather = bean!.data!.weather
-//            let date = weather?.date
-//            if (date!.contains("-")){
-//                // 以 - 切割
-//                let times = date?.components(separatedBy: "-")
-//                if (times!.count == 3){
-//                    labelTimeDay.text = times?[2]
-//                    labelTimeYearMon.text = "\(times![1]) . \(times![0])"
-//                }
-//            }
-//        }
-        if (bean != nil) {
-            switch present?.num {
-            case 0:
-                list = bean!
-                self.tableView.reloadData()
-            default:
-                list = bean!
-                self.tableView.reloadData()
-//                list?.insert(contentsOf: bean![0], at: 0)
-                // 在第row行插入
-//                let indexPath1:IndexPath = IndexPath.init(row: 0, section: 0)
-//                tableView.beginUpdates()
-//                tableView.insertRows(at: [indexPath1], with: .fade)
-//                tableView.endUpdates()
-            }
+        if (bean != nil && bean!.count > 0) {
+            list = bean!
+            self.tableView.reloadData()
             
-        } else if present!.num == 0{
+        } else {
             // 只有第一页才显示错误页面
 //            tableView.removeFromSuperview()
             tableView.isHidden = true
-            btNoNet = UIButton(frame: viewBounds())
-            btNoNet!.setTitle("请检查网络，点击重试", for: .normal)
+            btNoNet = UIButton(frame: CGRect(x: 0,y: kNavigationBarHeight + 50,width: kScreenWidth,height: 80))
+            btNoNet!.setTitle("点击添加笔记", for: .normal)
             // 设置文字大小
             btNoNet!.titleLabel?.font = UIFont.systemFont(ofSize: 14)
             btNoNet!.setTitleColor(UIColor(lightColor: .black, darkColor: .white), for: .normal)
             btNoNet!.addTarget(self, action: #selector(reLoad), for: .touchUpInside)
             view.addSubview(btNoNet!)
-        } else {
-            self.tableView.mj_footer?.endRefreshingWithNoMoreData()
         }
     }
 
     // 重新加载
     @objc func reLoad(){
-//        view.addSubview(tableView)
-        present?.getDBData()
+//        present?.getDBData()
+        send()
     }
     
     lazy var tableView: UITableView = {
@@ -403,6 +378,12 @@ extension IdeasViewController: UITableViewDataSource, UITableViewDelegate {
                    tableView.beginUpdates()
                    tableView.deleteRows(at: [indexPath], with: .fade)
                    tableView.endUpdates()
+                    
+                    // 最后一条被删除，显示空布局
+                    if self.list?.count == 0 && self.btNoNet != nil{
+                        self.view.addSubview(self.btNoNet!)
+                        tableView.isHidden = true
+                    }
                 }
             })
             
@@ -439,19 +420,25 @@ extension IdeasViewController: UITableViewDataSource, UITableViewDelegate {
         note.title = content
         note.creatTime = TimeUtil.getCurrentTimeStamp()
         if(list==nil || list?.count==0){
+            // 第一次发布
+            btNoNet?.removeFromSuperview()
+            tableView.isHidden = false
+            
             note.id = 0
-        }else{
+            list = [NoteBean]()
+            list?.append(note)
+            tableView.reloadData()
+        } else {
             note.id = (list?[0].id)! + 1// 一定要加不一样的主键，且不能为空
+            list?.insert(note, at: 0)
+            
+            // 在第row行插入
+            let indexPath1:IndexPath = IndexPath.init(row: 0, section: 0)
+            tableView.beginUpdates()
+            tableView.insertRows(at: [indexPath1], with: .fade)
+            tableView.endUpdates()
         }
         DatabaseUtil.insertNote(by: note)
-        
-        list?.insert(note, at: 0)
-        
-       // 在第row行插入
-       let indexPath1:IndexPath = IndexPath.init(row: 0, section: 0)
-       tableView.beginUpdates()
-       tableView.insertRows(at: [indexPath1], with: .fade)
-       tableView.endUpdates()
         
         viewEdit.hideSendView()
     }

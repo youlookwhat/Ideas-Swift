@@ -38,6 +38,7 @@ class BaseViewController: UIViewController {
     // 隐藏标题栏
     public func hideTitleLayout(){
         toolView.isHidden = true
+        toolView.removeFromSuperview()
     }
     
     // 点击返回

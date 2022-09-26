@@ -21,7 +21,9 @@ class IdeaEditViewController: BaseViewController, IdeaEditNavigation {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.isHidden = true
+//        navigationController?.navigationBar.isHidden = true
+        hideTitleLayout()
+        
         // 一定要设置背景
         view.backgroundColor = UIColor(lightColor: UIColor.colorF3F3F3, darkColor: .black)
         
