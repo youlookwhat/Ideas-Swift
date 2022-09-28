@@ -13,4 +13,5 @@ protocol IdeasNavigation {
 
     func onDataSuccess(bean : [NoteBean]?)
     
+    func sendData()
 }

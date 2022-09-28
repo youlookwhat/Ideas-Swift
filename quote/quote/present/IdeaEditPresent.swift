@@ -88,13 +88,9 @@ class IdeaEditPresent {
             make.centerY.equalToSuperview()
 //            make.top.equalTo(lineLabel.snp.bottom)
         }
-//        backView.snp.makeConstraints { make in
-//            make.left.right.bottom.equalToSuperview()
-//        }
         
         sendBtn.backgroundColor = .colorTheme
         sendBtn.isUserInteractionEnabled = true
-        
         // 点击发布监听
         sendBtn.addTarget(self, action: #selector(sendBtnClik(_:)), for: .touchUpInside)
         // 编辑框的监听

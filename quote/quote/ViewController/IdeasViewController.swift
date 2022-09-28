@@ -11,16 +11,16 @@ import MJRefresh
 import RealmSwift
 
 class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelegate, IdeaSendEditViewDelegate, ValueBackDelegate{
-    
+        
     var sidebar:DCSidebar? = nil
     // 数据
     var list:[NoteBean]?
     // P层
     var present:IdeasPresent?
     // 重试按钮
-    var btNoNet:UIButton?
+    var emptyLayout:UIView?
     // 发布弹框
-    var viewEdit = IdeaSendEditView()
+    var viewEdit : IdeaSendEditView? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,9 +39,9 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
         
         view.addSubview(tableView)
         view.addSubview(sendImage)
-        viewEdit.isHidden = true
-        viewEdit.delegate = self
-        view.addSubview(viewEdit)
+//        viewEdit.isHidden = true
+//        viewEdit.delegate = self
+//        view.addSubview(viewEdit)
         
         sendImage.snp.makeConstraints{ make in
             make.bottom.equalToSuperview().offset(-30)
@@ -76,11 +76,12 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
         // 下拉刷新
         tableView.mj_header?.beginRefreshing()
   
-
-        viewEdit.snp.makeConstraints{ make in
-            make.height.equalTo(Screen.height)
-            make.width.equalTo(Screen.width)
-        }
+//        viewEdit.isHidden = true
+//        //        viewEdit.delegate = self
+//        viewEdit.snp.makeConstraints{ make in
+//            make.height.equalTo(Screen.height)
+//            make.width.equalTo(Screen.width)
+//        }
         
         // 监听键盘弹起
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
@@ -238,10 +239,14 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
 //        WebViewViewController.start(nc: navigationController, url: "https://github.com/youlookwhat/ByQuoteApp", titleOut: "loading")
     }
     
+    func sendData() {
+        send()
+    }
+    
     // 发布内容
     @objc func send(){
-        viewEdit.isHidden = false
-        viewEdit.commentTextView.becomeFirstResponder()
+        viewEdit?.isHidden = false
+        viewEdit?.commentTextView.becomeFirstResponder()
     }
     
     func onDataSuccess(bean: [NoteBean]?) {
@@ -250,7 +255,7 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
         // 加载更多完成
         self.tableView.mj_footer?.endRefreshing()
         
-        btNoNet?.removeFromSuperview()
+        emptyLayout?.isHidden = true
         tableView.isHidden = false
         
         if (bean != nil && bean!.count > 0) {
@@ -259,23 +264,37 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
             
         } else {
             // 只有第一页才显示错误页面
-//            tableView.removeFromSuperview()
             tableView.isHidden = true
-            btNoNet = UIButton(frame: CGRect(x: 0,y: kNavigationBarHeight + 50,width: kScreenWidth,height: 80))
-            btNoNet!.setTitle("点击添加笔记", for: .normal)
-            // 设置文字大小
-            btNoNet!.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-            btNoNet!.setTitleColor(UIColor(lightColor: .black, darkColor: .white), for: .normal)
-            btNoNet!.addTarget(self, action: #selector(reLoad), for: .touchUpInside)
-            view.addSubview(btNoNet!)
+            
+            if emptyLayout == nil {
+                emptyLayout = present?.addEmptyLayout(view:self.view)
+            } else {
+                emptyLayout?.isHidden = false
+            }
+        }
+        if viewEdit == nil {
+            viewEdit = IdeaSendEditView()
+            view.addSubview(viewEdit!)
+            viewEdit!.isHidden = true
+            viewEdit!.delegate = self
+            viewEdit!.snp.makeConstraints{ make in
+                make.height.equalTo(Screen.height)
+                make.width.equalTo(Screen.width)
+            }
         }
     }
 
-    // 重新加载
-    @objc func reLoad(){
-//        present?.getDBData()
-        send()
+    @objc func sendBtnClik() {
+        
+        sendData()
     }
+    
+    
+    // 重新加载
+//    @objc func reLoad(){
+////        present?.getDBData()
+//        send()
+//    }
     
     lazy var tableView: UITableView = {
         // viewBounds() 限制了tableView的宽高，距上状态栏+44
@@ -380,8 +399,12 @@ extension IdeasViewController: UITableViewDataSource, UITableViewDelegate {
                    tableView.endUpdates()
                     
                     // 最后一条被删除，显示空布局
-                    if self.list?.count == 0 && self.btNoNet != nil{
-                        self.view.addSubview(self.btNoNet!)
+                    if self.list?.count == 0 {
+                        if self.emptyLayout == nil {
+                            self.emptyLayout = self.present?.addEmptyLayout(view: self.view)
+                        } else {
+                            self.emptyLayout?.isHidden = false
+                        }
                         tableView.isHidden = true
                     }
                 }
@@ -410,7 +433,7 @@ extension IdeasViewController: UITableViewDataSource, UITableViewDelegate {
     
     @objc func keyboardWillAppear(notification: NSNotification) {
         print("弹起键盘了")
-        viewEdit.keyboardWillChangeFrame(notifi: notification as Notification)
+        viewEdit?.keyboardWillChangeFrame(notifi: notification as Notification)
     }
     
 
@@ -421,8 +444,9 @@ extension IdeasViewController: UITableViewDataSource, UITableViewDelegate {
         note.creatTime = TimeUtil.getCurrentTimeStamp()
         if(list==nil || list?.count==0){
             // 第一次发布
-            btNoNet?.removeFromSuperview()
+//            btNoNet?.removeFromSuperview()
             tableView.isHidden = false
+            emptyLayout?.isHidden = true
             
             note.id = 0
             list = [NoteBean]()
@@ -440,12 +464,12 @@ extension IdeasViewController: UITableViewDataSource, UITableViewDelegate {
         }
         DatabaseUtil.insertNote(by: note)
         
-        viewEdit.hideSendView()
+        viewEdit?.hideSendView()
     }
     
     
     func commentDismiss(dismissClick view: IdeaSendEditView, sender: UIButton?) {
-        viewEdit.hideSendView()
+        viewEdit?.hideSendView()
     }
 
     // 从编辑页回传的位置值
