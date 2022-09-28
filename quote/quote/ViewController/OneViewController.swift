@@ -28,7 +28,7 @@ class OneViewController: BaseViewController, OneNavigation {
         
         // 隐藏导航栏(标题栏)
         navigationController?.navigationBar.isHidden = true
-//        navigationItem.title = "一个"
+        navigationItem.title = "一个"
         view.backgroundColor = UIColor(lightColor: .white, darkColor: .black)
         
         // 下拉刷新

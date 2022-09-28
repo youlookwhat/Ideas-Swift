@@ -22,6 +22,15 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
     // 发布弹框
     var viewEdit : IdeaSendEditView? = nil
     
+    override func viewDidAppear(_ animated: Bool) {
+        print("已经显示")
+//        navigationController?.navigationBar.isHidden = false
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("将要显示了")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,13 +41,25 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationItem.largeTitleDisplayMode = .automatic
         view.backgroundColor = UIColor(lightColor: UIColor.colorF3F3F3, darkColor: .black)
+        let item1=UIBarButtonItem(title:"关于",style: UIBarButtonItem.Style.plain,target:self,action:#selector(openAbout))
+//        let item2=UIBarButtonItem(title:"一个",style: UIBarButtonItem.Style.plain,target:self,action:#selector(openMenu))
+        self.navigationItem.rightBarButtonItem=item1
+//        self.navigationItem.rightBarButtonItems=[item1,item2]
+        
+//        let items1=UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.pause,target:self,action:nil)
+//        let items2=UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action,target:self,action:nil)
+//        self.navigationItem.rightBarButtonItems=[items1,items2]
 
         
         hideTitleLayout();
         
-        
         view.addSubview(tableView)
         view.addSubview(sendImage)
+        present = IdeasPresent(navigation: self)
+        emptyLayout = present?.addEmptyLayout(view:self.view)
+        emptyLayout?.isHidden = true
+        addIdeaSendEditView()
+        
 //        viewEdit.isHidden = true
 //        viewEdit.delegate = self
 //        view.addSubview(viewEdit)
@@ -68,7 +89,6 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
 //        sidebar?.showAnimationsTime = 0.2
 //        sidebar?.hideAnimationsTime = 0.2
         
-        present = IdeasPresent(navigation: self)
         present?.refresh()
         
         
@@ -255,23 +275,23 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
         // 加载更多完成
         self.tableView.mj_footer?.endRefreshing()
         
-        emptyLayout?.isHidden = true
-        tableView.isHidden = false
-        
         if (bean != nil && bean!.count > 0) {
+            emptyLayout?.isHidden = true
+            tableView.isHidden = false
+            
             list = bean!
             self.tableView.reloadData()
             
         } else {
             // 只有第一页才显示错误页面
             tableView.isHidden = true
-            
-            if emptyLayout == nil {
-                emptyLayout = present?.addEmptyLayout(view:self.view)
-            } else {
-                emptyLayout?.isHidden = false
-            }
+            emptyLayout?.isHidden = false
         }
+        addIdeaSendEditView()
+    }
+    
+    // 添加发布布局
+    func addIdeaSendEditView(){
         if viewEdit == nil {
             viewEdit = IdeaSendEditView()
             view.addSubview(viewEdit!)
@@ -283,18 +303,6 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
             }
         }
     }
-
-    @objc func sendBtnClik() {
-        
-        sendData()
-    }
-    
-    
-    // 重新加载
-//    @objc func reLoad(){
-////        present?.getDBData()
-//        send()
-//    }
     
     lazy var tableView: UITableView = {
         // viewBounds() 限制了tableView的宽高，距上状态栏+44
@@ -400,12 +408,8 @@ extension IdeasViewController: UITableViewDataSource, UITableViewDelegate {
                     
                     // 最后一条被删除，显示空布局
                     if self.list?.count == 0 {
-                        if self.emptyLayout == nil {
-                            self.emptyLayout = self.present?.addEmptyLayout(view: self.view)
-                        } else {
-                            self.emptyLayout?.isHidden = false
-                        }
-                        tableView.isHidden = true
+                        self.emptyLayout?.isHidden = false
+                        self.tableView.isHidden = true
                     }
                 }
             })
