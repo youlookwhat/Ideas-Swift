@@ -77,7 +77,7 @@ class IdeasPresent {
     lazy var btNoNet: UIButton = {
         let btNoNet = UIButton(frame: CGRect(x: 0, y: 0, width: 120, height: 40))
         btNoNet.layer.cornerRadius = 20
-        btNoNet.setTitle("添加笔记", for: .normal)
+        btNoNet.setTitle("添加想法", for: .normal)
         btNoNet.backgroundColor = .colorTheme
         // 设置文字大小
         btNoNet.titleLabel?.font = UIFont.systemFont(ofSize: 14)

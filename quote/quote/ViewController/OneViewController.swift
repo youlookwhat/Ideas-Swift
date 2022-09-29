@@ -27,8 +27,10 @@ class OneViewController: BaseViewController, OneNavigation {
         view.addSubview(tableView)
         
         // 隐藏导航栏(标题栏)
-        navigationController?.navigationBar.isHidden = true
+//        navigationController?.navigationBar.isHidden = true
         navigationItem.title = "一个"
+//        navigationController?.navigationBar.prefersLargeTitles = false
+//        navigationController?.navigationItem.largeTitleDisplayMode = .never
         view.backgroundColor = UIColor(lightColor: .white, darkColor: .black)
         
         // 下拉刷新
@@ -66,39 +68,50 @@ class OneViewController: BaseViewController, OneNavigation {
     // 标题栏
     func initTitleView(){
         let toolView = UIView(frame: CGRect(x: 0, y: statusBarHeight, width: self.view.frame.width, height: 44))
-//        toolView.backgroundColor = UIColor.white
+        toolView.backgroundColor = UIColor.init(lightColor: .white,darkColor: .black)
         self.view.addSubview(toolView)
         
         toolView.addSubview(labelTimeDay)
         toolView.addSubview(labelTimeYearMon)
-        toolView.addSubview(labelAbout)
+//        toolView.addSubview(labelAbout)
         
         // 使用时需要一个Superview
         labelTimeDay.snp.makeConstraints { make in
-            make.left.equalTo(15)
+            make.right.equalToSuperview()
+            make.right.equalTo(15)
             make.height.equalTo(44)
             // 垂直居中
             make.centerY.equalToSuperview()
         }
         labelTimeYearMon.snp.makeConstraints { make in
-            make.left.equalTo(labelTimeDay.snp.right).offset(10)
+            make.right.equalTo(labelTimeDay.snp.left).offset(-10)
             make.bottom.equalTo(labelTimeDay.snp.bottom).offset(-8)
         }
-        labelAbout.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.right.equalTo(-15)
-//            make.width.equalTo(54)
-            make.height.equalTo(44)
-        }
+//        labelAbout.snp.makeConstraints { make in
+//            make.top.equalToSuperview()
+//            make.right.equalTo(-15)
+////            make.width.equalTo(54)
+//            make.height.equalTo(44)
+//        }
     }
     
     lazy var labelTimeDay: UILabel = {
         let label = UILabel()
         label.textColor = UIColor(lightColor: .black, darkColor: .white)
-        label.font = UIFont(name: "PingFangSC-Medium", size: 28)
+        label.font = UIFont(name: "PingFangSC-Medium", size: 32)
         label.textAlignment = .center
         label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(refreshAll)))
         label.isUserInteractionEnabled = true
+        return label
+    }()
+    
+    lazy var labelTimeZhou: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor(lightColor: .black, darkColor: .white)
+//        label.text = "周一"
+//        label.font = UIFont(name: "PingFangSC-Medium", size: 13)
+        label.font = UIFont.systemFont(ofSize: 13)
+        label.textAlignment = .center
         return label
     }()
     
@@ -112,16 +125,16 @@ class OneViewController: BaseViewController, OneNavigation {
         return label
     }()
     
-    lazy var labelAbout: UIButton = {
-        // 添加关于按钮
-        let bt2 = UIButton()
-        bt2.setTitle("ByQuoteApp", for: .normal)
-        // 设置文字大小
-        bt2.titleLabel?.font = UIFont.systemFont(ofSize: 13)
-        bt2.setTitleColor(UIColor(lightColor: .gray, darkColor: .white), for: .normal)
-        bt2.addTarget(self, action: #selector(openAbout), for: .touchUpInside)
-        return bt2;
-    }()
+//    lazy var labelAbout: UIButton = {
+//        // 添加关于按钮
+//        let bt2 = UIButton()
+//        bt2.setTitle("ByQuoteApp", for: .normal)
+//        // 设置文字大小
+//        bt2.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+//        bt2.setTitleColor(UIColor(lightColor: .gray, darkColor: .white), for: .normal)
+//        bt2.addTarget(self, action: #selector(openAbout), for: .touchUpInside)
+//        return bt2;
+//    }()
     
     // 点击日期，刷新所有
     @objc func refreshAll(){
@@ -130,9 +143,9 @@ class OneViewController: BaseViewController, OneNavigation {
     }
     
     // 点击关于
-    @objc func openAbout(){
-        openUrl(urlString: "https://github.com/youlookwhat/flomo-offline")
-    }
+//    @objc func openAbout(){
+//        openUrl(urlString: "https://github.com/youlookwhat/flomo-offline")
+//    }
     
     func onDataSuccess(bean: OneBean?) {
         
@@ -194,8 +207,8 @@ class OneViewController: BaseViewController, OneNavigation {
     
     lazy var tableView: UITableView = {
         // viewBounds() 限制了tableView的宽高，距上状态栏+44
-        let tableView = UITableView(frame: viewBounds(), style: .plain)
-//        let tableView = UITableView(frame: self.view.frame, style: .plain)
+//        let tableView = UITableView(frame: viewBounds(), style: .plain)
+        let tableView = UITableView(frame: self.view.frame, style: .plain)
 //        tableView.backgroundColor = .white
         // 这里的100是像素，不是文字对应的高度，要将高度转为像素
 //        tableView.rowHeight = Screen.width * (1175/2262.0) + 170.0

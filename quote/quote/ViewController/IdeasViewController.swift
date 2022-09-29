@@ -25,6 +25,7 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
     override func viewDidAppear(_ animated: Bool) {
         print("已经显示")
 //        navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,13 +41,15 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
         navigationController?.title = "ideas"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationItem.largeTitleDisplayMode = .automatic
-        view.backgroundColor = UIColor(lightColor: UIColor.colorF3F3F3, darkColor: .black)
-        let item1=UIBarButtonItem(title:"关于",style: UIBarButtonItem.Style.plain,target:self,action:#selector(openAbout))
-//        let item2=UIBarButtonItem(title:"一个",style: UIBarButtonItem.Style.plain,target:self,action:#selector(openMenu))
-        self.navigationItem.rightBarButtonItem=item1
-//        self.navigationItem.rightBarButtonItems=[item1,item2]
+//        view.backgroundColor = UIColor(lightColor: UIColor.colorF3F3F3, darkColor: .black)
         
-//        let items1=UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.pause,target:self,action:nil)
+        let item1=UIBarButtonItem(title:"关于",style: UIBarButtonItem.Style.plain,target:self,action:#selector(openAbout))
+//        let item1=UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.trash,target:self,action:#selector(openAbout))
+        let item2=UIBarButtonItem(title:"一个",style: UIBarButtonItem.Style.plain,target:self,action:#selector(openMenu))
+//        self.navigationItem.rightBarButtonItem=item1
+        self.navigationItem.rightBarButtonItems=[item1,item2]
+        
+        let items1=UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.pause,target:self,action:nil)
 //        let items2=UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action,target:self,action:nil)
 //        self.navigationItem.rightBarButtonItems=[items1,items2]
 
@@ -305,10 +308,9 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
     }
     
     lazy var tableView: UITableView = {
-        // viewBounds() 限制了tableView的宽高，距上状态栏+44
-        let tableView = UITableView(frame: viewBounds(), style: .plain)
-//        let tableView = UITableView(frame: self.view.frame, style: .plain)
-//        tableView.backgroundColor = .white
+        // viewBounds() 限制了tableView的宽高，距上状态栏+44，这样写二级页面返回时大标题会收起来
+//        let tableView = UITableView(frame: viewBounds(), style: .plain)
+        let tableView = UITableView(frame: self.view.frame, style: .plain)
         tableView.backgroundColor = UIColor(lightColor: UIColor.colorF3F3F3, darkColor: .black)
         // 这里的100是像素，不是文字对应的高度，要将高度转为像素
 //        tableView.rowHeight = Screen.width * (1175/2262.0) + 170.0
@@ -360,15 +362,19 @@ extension IdeasViewController: UITableViewDataSource, UITableViewDelegate {
     // 单击&双击的操作
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //10位数时间戳
-        let current = Int(Date.init().timeIntervalSince1970)*1000
-        if (current - taptime < 500) {
-            // 双击事件
-            let bean = list?[indexPath.row]
-            if (bean?.id != nil) {
-                IdeaEditViewController.start(nc: navigationController, id: bean?.id,position: indexPath.row, backDelegate: self)
-            }
+//        let current = Int(Date.init().timeIntervalSince1970)*1000
+//        if (current - taptime < 500) {
+//            // 双击事件
+//            let bean = list?[indexPath.row]
+//            if (bean?.id != nil) {
+//                IdeaEditViewController.start(nc: navigationController, id: bean?.id,position: indexPath.row, backDelegate: self)
+//            }
+//        }
+//        taptime = current;
+        let bean = list?[indexPath.row]
+        if (bean?.id != nil) {
+            IdeaEditViewController.start(nc: navigationController, id: bean?.id,position: indexPath.row, backDelegate: self)
         }
-        taptime = current;
     }
     
     
@@ -395,25 +401,25 @@ extension IdeasViewController: UITableViewDataSource, UITableViewDelegate {
     //设置点击删除之后的操作
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            DialogUtil.showDeleteAlert(vc: self, handle: {_ in
-                let note = self.list?[indexPath.row]
-                if note != nil {
-                    DatabaseUtil.deleteNote(note: note!)
-                    self.list?.remove(at: indexPath.row)
-                    
-                   // 删除第row行
-                   tableView.beginUpdates()
-                   tableView.deleteRows(at: [indexPath], with: .fade)
-                   tableView.endUpdates()
-                    
-                    // 最后一条被删除，显示空布局
-                    if self.list?.count == 0 {
-                        self.emptyLayout?.isHidden = false
-                        self.tableView.isHidden = true
-                    }
+//            DialogUtil.showDeleteAlert(vc: self, handle: {_ in
+//
+//            })
+            let note = self.list?[indexPath.row]
+            if note != nil {
+                DatabaseUtil.deleteNote(note: note!)
+                self.list?.remove(at: indexPath.row)
+                
+               // 删除第row行
+               tableView.beginUpdates()
+               tableView.deleteRows(at: [indexPath], with: .fade)
+               tableView.endUpdates()
+                
+                // 最后一条被删除，显示空布局
+                if self.list?.count == 0 {
+                    self.emptyLayout?.isHidden = false
+                    self.tableView.isHidden = true
                 }
-            })
-            
+            }
             
             // Delete the row from the data source
 //                workManager.updateCollection(withYear: yearForSearch, month: monthForSearch, row: indexPath.row - 1)
