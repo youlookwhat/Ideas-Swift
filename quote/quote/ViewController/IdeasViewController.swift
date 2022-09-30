@@ -41,7 +41,7 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
         navigationController?.title = "ideas"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationItem.largeTitleDisplayMode = .automatic
-//        view.backgroundColor = UIColor(lightColor: UIColor.colorF3F3F3, darkColor: .black)
+        view.backgroundColor = UIColor(lightColor: UIColor.colorF3F3F3, darkColor: .black)
         
         let item1=UIBarButtonItem(title:"关于",style: UIBarButtonItem.Style.plain,target:self,action:#selector(openAbout))
 //        let item1=UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.trash,target:self,action:#selector(openAbout))

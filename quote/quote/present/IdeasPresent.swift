@@ -39,7 +39,8 @@ class IdeasPresent {
     
     // 获取空视图
     public func addEmptyLayout(view : UIView) -> UIView {
-        let uiView = UIView(frame: CGRect(x: 0,y: kNavigationBarHeight + 50,width: kScreenWidth,height: 350))
+        let uiView = UIView(frame: CGRect(x: 0,y: 0,width: kScreenWidth,height: kScreenHeight))
+//        uiView.backgroundColor = UIColor(lightColor: UIColor.colorF3F3F3, darkColor: .black)
         uiView.addSubview(emptyImage)
         uiView.addSubview(btNoNet)
         view.addSubview(uiView)
