@@ -19,6 +19,15 @@ class IdeaEditViewController: BaseViewController, IdeaEditNavigation {
     var note:NoteBean? = nil
     var present:IdeaEditPresent?
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationItem.largeTitleDisplayMode = .never
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationItem.largeTitleDisplayMode = .automatic
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 //        navigationController?.navigationBar.isHidden = true

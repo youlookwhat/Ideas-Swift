@@ -19,6 +19,15 @@ class WebViewViewController: UIViewController, WKScriptMessageHandler, WKNavigat
     var url:String? = nil
     var titleOut:String? = nil
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("WebViewViewController将要显示了")
+        self.navigationItem.largeTitleDisplayMode = .never
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationItem.largeTitleDisplayMode = .automatic
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,34 +35,15 @@ class WebViewViewController: UIViewController, WKScriptMessageHandler, WKNavigat
         view.backgroundColor = UIColor(lightColor: .white, darkColor: .black)
         
         
-//        title = "网页"
         // 隐藏标题栏这里把所有的navigationBar都隐藏了，就是说首页的也隐藏了。
-        navigationController?.navigationBar.isHidden = true
+//        navigationController?.navigationBar.isHidden = true
         // 去掉导航栏(UINavigationController)上的返回按钮的文字
 //        navigationController!.navigationBar.topItem!.title = ""
+        // 导航栏上的标题
+//        navigationItem.title = "loading"
         
         initWKWebView()
         addToolView()
-
-        
-//        let image = UIImage(named: "iv_left_back")
-        // alwaysOriginal 显示图标的原始颜色 alwaysTemplate 根据Tint Color绘制图片
-//        let back = UIBarButtonItem(image: UIImage.init(named: "icon_back_base")?.withRenderingMode(UIImage.RenderingMode.automatic),
-//                                   style: .plain,
-//                                   target: self,
-//                                   action: #selector(navBtnPress))
-//        let back = UIBarButtonItem(title: "back",
-//                                   style: .plain,
-//                                   target: self,
-//                                   action: #selector(navBtnPress));
-//        self.navigationItem.leftBarButtonItem = back
-        
-//        let btn1 = UIButton()
-//        btn1.setImage(image, for: .normal)
-//        btn1.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-//        bt1!.addTarget(self, action: #selector(navBtnPress), for: .touchUpInside)
-//        self.navigationItem.setLeftBarButtonItem(UIBarButtonItem(customView: btn1), animated: true);
-        
     }
     
     func initWKWebView(){
@@ -126,14 +116,14 @@ class WebViewViewController: UIViewController, WKScriptMessageHandler, WKNavigat
         let singleTapGesture = UITapGestureRecognizer(target: self, action: #selector(navBtnPress))
         ivBack.addGestureRecognizer(singleTapGesture)
         ivBack.isUserInteractionEnabled = true
-        ivBack.isHidden = false
+        ivBack.isHidden = true
         toolView.addSubview(ivBack)
         
         // 标题
         lableTitle = UILabel(frame: CGRect(x: 44, y: 0, width: kScreenWidth - 88, height: 44))
         lableTitle.textColor = UIColor(lightColor: .black, darkColor: .white)
         lableTitle.font = .systemFont(ofSize: 16, weight: .medium)
-        lableTitle.isHidden = false
+        lableTitle.isHidden = true
         lableTitle.text = titleOut
         toolView.addSubview(lableTitle)
         
@@ -177,6 +167,8 @@ class WebViewViewController: UIViewController, WKScriptMessageHandler, WKNavigat
         
         if "title" == keyPath {
             lableTitle.text = webview!.title
+            // 系统导航栏的标题
+            navigationItem.title = webview!.title
         } else if "estimatedProgress" == keyPath {
             progress?.progress = Float(webview!.estimatedProgress)
             print("----进度 \(progress!.progress)")

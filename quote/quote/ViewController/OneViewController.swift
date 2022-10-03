@@ -19,20 +19,58 @@ class OneViewController: BaseViewController, OneNavigation {
     var present:OnePresent?
     // 重试按钮
     var btNoNet:UIButton?
+    // 系统自己的下拉刷新，不松手也可以刷新，新布局没显示出来就end会跳动
+    var refresh:UIRefreshControl?
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("OneViewController将要显示了")
+        // 注意这里的方式，不是使用navigationController?.navigationBar.prefersLargeTitles = true
+        // https://so.muouseo.com/qa/q8m52v4de6wr.html
+        self.navigationItem.largeTitleDisplayMode = .never
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationItem.largeTitleDisplayMode = .automatic
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        print("OneViewController已经消失了")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         hideTitleLayout()
-        view.addSubview(tableView)
+        
         
         // 隐藏导航栏(标题栏)
 //        navigationController?.navigationBar.isHidden = true
+        // 这个是下面的大标题显示
         navigationItem.title = "一个"
-//        navigationController?.navigationBar.prefersLargeTitles = false
-//        navigationController?.navigationItem.largeTitleDisplayMode = .never
+        // 这个是转场后的箭头右侧的标题
+//        navigationController?.title = "一个"
+//        navigationController?.title = nil
         view.backgroundColor = UIColor(lightColor: .white, darkColor: .black)
         
+        view.addSubview(tableView)
+        
+        // 先转场过来，不显示大标题，内容在导航栏下就覆盖了大标题。然后加载完内容时，隐藏大标题且设置内容全屏(为了可以看到导航栏下的半透明)。
+        tableView.snp.makeConstraints{ make in
+//            make.top.equalToSuperview().offset(kNavigationBarHeight)
+            make.top.equalToSuperview()
+            // 这里设置才能使输入框一直在底部栏之上
+            make.bottom.equalToSuperview()
+            make.width.equalTo(Screen.width)
+            make.height.equalTo(kScreenHeight-kNavigationBarHeight)
+        }
+        
+//        refresh = UIRefreshControl()
+//        tableView.refreshControl = refresh
+//        refresh!.addTarget(self, action: #selector(refreshSystem), for: .valueChanged)
+//        refresh!.beginRefreshing()
         // 下拉刷新
         tableView.mj_header = MJRefreshNormalHeader { [weak self] in
             // load some data
@@ -55,6 +93,10 @@ class OneViewController: BaseViewController, OneNavigation {
         present?.getOneData()
     }
     
+    @objc func refreshSystem(){
+        present?.refresh()
+    }
+    
     @IBAction func showButtonTouchUpInside(_ sender: Any) {
         sidebar?.show()
     }
@@ -68,7 +110,7 @@ class OneViewController: BaseViewController, OneNavigation {
     // 标题栏
     func initTitleView(){
         let toolView = UIView(frame: CGRect(x: 0, y: statusBarHeight, width: self.view.frame.width, height: 44))
-        toolView.backgroundColor = UIColor.init(lightColor: .white,darkColor: .black)
+//        toolView.backgroundColor = UIColor.init(lightColor: .white,darkColor: .black)
         self.view.addSubview(toolView)
         
         toolView.addSubview(labelTimeDay)
@@ -77,15 +119,15 @@ class OneViewController: BaseViewController, OneNavigation {
         
         // 使用时需要一个Superview
         labelTimeDay.snp.makeConstraints { make in
+            make.right.equalTo(labelTimeYearMon.snp.left).offset(-10)
+            make.bottom.equalTo(labelTimeYearMon.snp.bottom).offset(-8)
+        }
+        labelTimeYearMon.snp.makeConstraints { make in
             make.right.equalToSuperview()
-            make.right.equalTo(15)
+            make.right.equalTo(-15)
             make.height.equalTo(44)
             // 垂直居中
             make.centerY.equalToSuperview()
-        }
-        labelTimeYearMon.snp.makeConstraints { make in
-            make.right.equalTo(labelTimeDay.snp.left).offset(-10)
-            make.bottom.equalTo(labelTimeDay.snp.bottom).offset(-8)
         }
 //        labelAbout.snp.makeConstraints { make in
 //            make.top.equalToSuperview()
@@ -98,7 +140,7 @@ class OneViewController: BaseViewController, OneNavigation {
     lazy var labelTimeDay: UILabel = {
         let label = UILabel()
         label.textColor = UIColor(lightColor: .black, darkColor: .white)
-        label.font = UIFont(name: "PingFangSC-Medium", size: 32)
+        label.font = UIFont(name: "PingFangSC-Medium", size: 30)
         label.textAlignment = .center
         label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(refreshAll)))
         label.isUserInteractionEnabled = true
@@ -136,19 +178,16 @@ class OneViewController: BaseViewController, OneNavigation {
 //        return bt2;
 //    }()
     
-    // 点击日期，刷新所有
+    // 点击日期，刷新所有，好像被标题栏覆盖了点不了，不过可以返回后重新进入刷新
     @objc func refreshAll(){
         present?.num = -1
         self.tableView.mj_header?.beginRefreshing()
     }
     
-    // 点击关于
-//    @objc func openAbout(){
-//        openUrl(urlString: "https://github.com/youlookwhat/flomo-offline")
-//    }
-    
     func onDataSuccess(bean: OneBean?) {
         
+        
+        refresh?.endRefreshing()
         // 下拉刷新完成，收起
         self.tableView.mj_header?.endRefreshing()
         // 加载更多完成
@@ -197,6 +236,16 @@ class OneViewController: BaseViewController, OneNavigation {
         } else {
             self.tableView.mj_footer?.endRefreshingWithNoMoreData()
         }
+        
+        // 加载成功处理导航栏
+//        navigationItem.title = "一个"
+//        navigationController?.navigationBar.prefersLargeTitles = false
+//        tableView.snp.updateConstraints{ make in
+//            make.top.equalToSuperview()
+//            make.bottom.equalToSuperview()
+//            make.width.equalTo(Screen.width)
+//            make.height.equalTo(kScreenHeight)
+//        }
     }
 
     // 重新加载
@@ -209,6 +258,7 @@ class OneViewController: BaseViewController, OneNavigation {
         // viewBounds() 限制了tableView的宽高，距上状态栏+44
 //        let tableView = UITableView(frame: viewBounds(), style: .plain)
         let tableView = UITableView(frame: self.view.frame, style: .plain)
+//        let tableView = UITableView(frame: CGRect(x: 0, y: kNavigationBarHeight, width: kScreenWidth, height: kScreenHeight-kNavigationBarHeight), style: .plain)
 //        tableView.backgroundColor = .white
         // 这里的100是像素，不是文字对应的高度，要将高度转为像素
 //        tableView.rowHeight = Screen.width * (1175/2262.0) + 170.0

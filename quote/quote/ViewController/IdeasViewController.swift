@@ -1,6 +1,6 @@
 //
-//  FlomoViewController.swift
-//  quote
+//  IdeasViewController.swift
+//  quote，点击 quote.xcworkspace
 //
 //  Created by 景彬 on 2022/7/20.
 //  Copyright © 2022 景彬. All rights reserved.
@@ -23,13 +23,14 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
     var viewEdit : IdeaSendEditView? = nil
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         print("已经显示")
-//        navigationController?.navigationBar.isHidden = false
-        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("将要显示了")
+        super.viewWillAppear(animated)
+        print("IdeasViewController将要显示了")
+        self.navigationItem.largeTitleDisplayMode = .automatic
     }
     
     override func viewDidLoad() {
@@ -49,7 +50,7 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
 //        self.navigationItem.rightBarButtonItem=item1
         self.navigationItem.rightBarButtonItems=[item1,item2]
         
-        let items1=UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.pause,target:self,action:nil)
+//        let items1=UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.pause,target:self,action:nil)
 //        let items2=UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action,target:self,action:nil)
 //        self.navigationItem.rightBarButtonItems=[items1,items2]
 
@@ -245,6 +246,8 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
     // 打开菜单
     @objc func openMenu(){
         let vc = OneViewController()
+//        navigationController?.t
+//        navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.pushViewController(vc, animated: true)
     }
     
