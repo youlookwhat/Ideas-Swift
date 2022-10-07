@@ -89,6 +89,16 @@ class WebViewViewController: UIViewController, WKScriptMessageHandler, WKNavigat
         
         // 执行网页中的js方法
 //        webview?.evaluateJavaScript("javaScript:userFunc()", completionHandler: nil)
+        
+        // 为了适应横竖屏切换
+        webview.snp.makeConstraints{ make in
+            make.top.equalToSuperview()
+            make.bottom.equalTo(-kBottomMargin)
+            make.left.right.equalToSuperview()
+            make.width.equalTo(Screen.width)
+            // 没有减去导航栏盖度，为了使内容透过去
+            make.height.equalTo(Screen.height - kBottomMargin)
+        }
     }
     
     

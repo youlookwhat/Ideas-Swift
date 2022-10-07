@@ -170,6 +170,7 @@ class HomeListCell: UITableViewCell {
                     make.top.equalTo(desLabel.snp.bottom).offset(15)
                     // 自适应高度的话，最后一个item需要bottom
                     make.bottom.equalTo(0)
+                    make.left.right.equalToSuperview()
                     make.width.equalTo(Screen.width)
                     make.height.equalTo(1)
                 }
@@ -237,6 +238,7 @@ class HomeListCell: UITableViewCell {
                     make.bottom.equalTo(0)
                     make.width.equalTo(Screen.width)
                     make.height.equalTo(1)
+                    make.left.right.equalToSuperview()
                 }
             }
         }

@@ -81,6 +81,16 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
 //          }.autoChangeTransparency(true)
 //          .link(to: tableView)
         
+        print("viewDidLoad---")
+        
+        
+        tableView.snp.remakeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.width.equalTo(Screen.width)
+            make.height.equalTo(Screen.height)
+        }
         
         // 加载更多
         tableView.mj_footer = MJRefreshAutoNormalFooter{  [weak self] in
@@ -125,6 +135,38 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
                         self.view.makeToast("复制成功", duration: 1.0, position: .center)
                     })
                 }
+        }
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        print("viewWillTransition--")
+        
+        if (size.width > size.height) {
+//            // 横屏布局
+            
+//            tableView.snp.remakeConstraints { make in
+//                make.left.equalTo(kNavigationBarHeight+10)
+//                make.right.equalTo(-kNavigationBarHeight-10)
+//                make.top.equalToSuperview()
+//                make.bottom.equalToSuperview()
+//                make.width.equalTo(Screen.width - 2*kNavigationBarHeight-20)
+//                make.height.equalTo(Screen.height)
+//            }
+        } else {
+//            // 竖屏布局
+//            tableView.snp.remakeConstraints { make in
+//                make.left.right.equalToSuperview()
+//                make.top.equalToSuperview()
+//                make.bottom.equalToSuperview()
+//                make.width.equalTo(Screen.width)
+//                make.height.equalTo(Screen.height)
+//            }
         }
     }
     
