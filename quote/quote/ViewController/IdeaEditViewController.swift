@@ -30,7 +30,6 @@ class IdeaEditViewController: BaseViewController, IdeaEditNavigation {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        navigationController?.navigationBar.isHidden = true
         hideTitleLayout()
         
         // 一定要设置背景
@@ -40,6 +39,50 @@ class IdeaEditViewController: BaseViewController, IdeaEditNavigation {
         present?.setContentView(self, view)
         initData()
     }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        // 每一次ui变化都会更新
+        print("viewWillLayoutSubviews--IdeaEditViewController\(kSafeAreaInset)")
+    }
+
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        // 将要屏幕旋转，执行时kSafeAreaInset里的值还没有更新，取的是上一次状态的值。安全的top或left就是状态栏高度
+        print("屏幕旋转\(kSafeAreaInset)")
+        var left = 0.0
+        var top = 0.0
+        if size.width > size.height {
+            // 将要为横屏，之前为竖屏，取的是竖屏的top
+            left = kSafeAreaInset.top
+            top = kSafeAreaInset.top
+        } else {
+            // 将要为竖屏，之前为横屏，取的是竖屏的left
+            left = 0.0
+            top = kSafeAreaInset.left+44
+        }
+        present?.uiBottomView.snp.remakeConstraints{ make in
+            make.height.equalTo(50)
+            make.width.equalTo(Screen.width)
+            // 要处理指示器的高度，需要单独在uiBottomView底部设置
+            make.bottom.equalToSuperview()
+            make.left.equalToSuperview().offset(left)
+            make.right.equalToSuperview().offset(-left)
+        }
+        
+        present?.uiHeaderView.snp.remakeConstraints { make in
+            // 减去安全区域的宽度
+            make.width.equalTo(Screen.width-30-2*left)
+            make.left.equalToSuperview().offset(left+15)
+            make.right.equalToSuperview().offset(-left-15)
+            make.top.equalToSuperview().offset(top+10)
+            // 这里设置才能使输入框一直在底部栏之上
+            make.bottom.equalTo(present!.uiBottomView.snp.top).offset(-10)
+        }
+    }
+    
+    
     
     func initData(){
         note = DatabaseUtil.getNote(from: id)

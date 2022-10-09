@@ -21,6 +21,7 @@ class OneViewController: BaseViewController, OneNavigation {
     var btNoNet:UIButton?
     // 系统自己的下拉刷新，不松手也可以刷新，新布局没显示出来就end会跳动
     var refresh:UIRefreshControl?
+    var titleButton:UIBarButtonItem?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -50,21 +51,19 @@ class OneViewController: BaseViewController, OneNavigation {
 //        navigationController?.navigationBar.isHidden = true
         // 这个是下面的大标题显示
         navigationItem.title = "一个"
-        // 这个是转场后的箭头右侧的标题
-//        navigationController?.title = "一个"
-//        navigationController?.title = nil
+        titleButton = UIBarButtonItem(title:"",style: UIBarButtonItem.Style.plain,target:self,action:#selector(refreshAll))
+        titleButton?.tintColor = .gray
+        self.navigationItem.rightBarButtonItem = titleButton
+        
         view.backgroundColor = UIColor(lightColor: .white, darkColor: .black)
         
         view.addSubview(tableView)
         
-        // 先转场过来，不显示大标题，内容在导航栏下就覆盖了大标题。然后加载完内容时，隐藏大标题且设置内容全屏(为了可以看到导航栏下的半透明)。
         tableView.snp.makeConstraints{ make in
-//            make.top.equalToSuperview().offset(kNavigationBarHeight)
-            make.top.equalToSuperview()
-            // 这里设置才能使输入框一直在底部栏之上
-            make.bottom.equalToSuperview()
+            make.top.bottom.equalToSuperview()
+            make.left.right.equalToSuperview()
             make.width.equalTo(Screen.width)
-            make.height.equalTo(kScreenHeight-kNavigationBarHeight)
+            make.height.equalTo(Screen.height)
         }
         
 //        refresh = UIRefreshControl()
@@ -84,7 +83,7 @@ class OneViewController: BaseViewController, OneNavigation {
         }.autoChangeTransparency(true)
        .link(to: tableView)
         
-        initTitleView()
+//        initTitleView()
 //        sidebar = DCSidebar(sideView: view)
 //        sidebar?.showAnimationsTime = 0.2
 //        sidebar?.hideAnimationsTime = 0.2
@@ -107,15 +106,27 @@ class OneViewController: BaseViewController, OneNavigation {
         }
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        print("viewWillTransition--OneViewController")
+    }
+    
     // 标题栏
     func initTitleView(){
-        let toolView = UIView(frame: CGRect(x: 0, y: statusBarHeight, width: self.view.frame.width, height: 44))
-//        toolView.backgroundColor = UIColor.init(lightColor: .white,darkColor: .black)
-        self.view.addSubview(toolView)
+        let toolDayView = UIView(frame: CGRect(x: 0, y: statusBarHeight, width: self.view.frame.width, height: 44))
+        self.view.addSubview(toolDayView)
         
-        toolView.addSubview(labelTimeDay)
-        toolView.addSubview(labelTimeYearMon)
+        toolDayView.addSubview(labelTimeDay)
+        toolDayView.addSubview(labelTimeYearMon)
 //        toolView.addSubview(labelAbout)
+        
+        toolDayView.snp.makeConstraints { make in
+//            make.right.equalTo(self.navigationItem.titleView!.snp.right)
+            make.top.equalTo(Screen.statusBarHeight())
+            make.left.right.equalToSuperview()
+            make.width.equalTo(Screen.width)
+            make.height.equalTo(44)
+        }
         
         // 使用时需要一个Superview
         labelTimeDay.snp.makeConstraints { make in
@@ -123,8 +134,8 @@ class OneViewController: BaseViewController, OneNavigation {
             make.bottom.equalTo(labelTimeYearMon.snp.bottom).offset(-8)
         }
         labelTimeYearMon.snp.makeConstraints { make in
-            make.right.equalToSuperview()
-            make.right.equalTo(-15)
+            make.top.equalToSuperview()
+            make.right.equalToSuperview().offset(-15)
             make.height.equalTo(44)
             // 垂直居中
             make.centerY.equalToSuperview()
@@ -205,6 +216,7 @@ class OneViewController: BaseViewController, OneNavigation {
                 if (times!.count == 3){
                     labelTimeDay.text = times?[2]
                     labelTimeYearMon.text = "\(times![1]) . \(times![0])"
+                    titleButton?.title = "\(times![1])月\(times![2])日"
                 }
             }
         }
@@ -214,6 +226,11 @@ class OneViewController: BaseViewController, OneNavigation {
                 list  = bean!.data!.content_list
                 self.tableView.reloadData()
             default:
+                if list == nil {
+                    list = bean!.data!.content_list
+                    self.tableView.reloadData()
+                    return
+                }
                 list?.insert(contentsOf: bean!.data!.content_list!, at: 0)
                 // 在第row行插入
                 let indexPath1:IndexPath = IndexPath.init(row: 0, section: 0)

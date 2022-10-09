@@ -38,16 +38,18 @@ class IdeaEditPresent {
         uiBottomView.addSubview(jinLabel)
         uiBottomView.addSubview(sendBtn)
         view.addSubview(uiBottomView)
-
-        uiHeaderView.snp.makeConstraints{ make in
+        
+        
+        uiHeaderView.snp.remakeConstraints{ make in
+            // 减去安全区域的宽度
+            make.width.equalTo(Screen.width-30-2*kSafeAreaInset.left)
+            make.left.equalToSuperview().offset(kSafeAreaInset.left+15)
+            make.right.equalToSuperview().offset(-kSafeAreaInset.right-15)
             make.top.equalToSuperview().offset(kNavigationBarHeight+10)
             // 这里设置才能使输入框一直在底部栏之上
             make.bottom.equalTo(uiBottomView.snp.top).offset(-10)
-            make.width.equalTo(Screen.width-30)
-            make.left.equalTo(15)
-            make.right.equalTo(-15)
         }
-        timeLabel.snp.makeConstraints{ make in
+        timeLabel.snp.remakeConstraints{ make in
             make.top.equalToSuperview().offset(15)
             make.left.equalTo(15)
             make.right.equalTo(-15)
@@ -65,7 +67,9 @@ class IdeaEditPresent {
             make.height.equalTo(50)
             make.width.equalTo(Screen.width)
             // 要处理指示器的高度，需要单独在uiBottomView底部设置
-            make.left.right.bottom.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.left.equalToSuperview().offset(kSafeAreaInset.left)
+            make.right.equalToSuperview().offset(-kSafeAreaInset.right)
         }
         
         lineLabel.snp.makeConstraints { make in
@@ -189,7 +193,7 @@ class IdeaEditPresent {
     }()
     
     lazy var uiHeaderView: UIView = {
-        let label = UIView()
+        let label = UIView(frame: viewBounds())
         label.layer.cornerRadius = 6
         label.backgroundColor = UIColor(lightColor: .white, darkColor: UIColor.color151517)
         return label
