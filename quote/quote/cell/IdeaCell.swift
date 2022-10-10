@@ -13,8 +13,6 @@ class IdeaCell : UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        contentView.backgroundColor = UIColor(lightColor: UIColor.colorF3F3F3, darkColor: .black)
-        
         uiView.addSubview(titleLabel)
         uiView.addSubview(timeLabel)
 //        uiView.addSubview(moreImage)

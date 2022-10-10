@@ -85,6 +85,16 @@ var kTopMargin: CGFloat {
     max(Screen.statusBarHeight() - 20, 0)
 }
 
+// 安全区域，可以通过.left适配横竖屏，ios11以上。top或left就是状态栏高度
+var kSafeAreaInset: UIEdgeInsets {
+    UIApplication.shared.delegate?.window??.safeAreaInsets ?? UIEdgeInsets.zero
+}
+
+// 顶部或侧边的高度，指的是刘海的高度
+var kSafeAreaHeightAllways: CGFloat {
+    max(kSafeAreaInset.top, kSafeAreaInset.left)
+}
+
 // 底部的高度
 var kBottomMargin: CGFloat {
     isIPhoneXAll ? 24 : 0

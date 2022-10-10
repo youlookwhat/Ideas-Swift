@@ -19,11 +19,9 @@ import UIKit
 class IdeaSendEditView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        self.backgroundColor = UIColor(rgb: 0x000000, alpha: 0.6)
         self.backgroundColor = .colorBlack0d6
         
         
-    
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTouched))
         addGestureRecognizer(tapGesture)
         addSubview(backView)
@@ -36,14 +34,21 @@ class IdeaSendEditView: UIView {
         editBackView.addSubview(tipsLabel222)
 
         
-        backView.snp.makeConstraints { make in
-            make.left.right.bottom.equalToSuperview()
+        if (Screen.width > Screen.height) {
+            // 横屏布局
+            backView.snp.remakeConstraints{ make in
+                make.left.equalToSuperview().offset(kSafeAreaHeightAllways)
+                make.right.equalToSuperview().offset(-kSafeAreaHeightAllways)
+                make.width.equalTo(Screen.width-2*kSafeAreaHeightAllways)
+                make.bottom.equalToSuperview()
+            }
+        } else {
+            // 竖屏布局
+            backView.snp.remakeConstraints{ make in
+                make.left.right.bottom.equalToSuperview()
+                make.width.equalTo(Screen.width)
+            }
         }
-        
-//        addPhotoBtn.snp.makeConstraints { make in
-//            make.left.equalTo(15)
-//            make.bottom.equalTo(-17)
-//        }
         
         sendBtn.snp.makeConstraints { make in
             make.right.equalTo(-15)
@@ -65,19 +70,19 @@ class IdeaSendEditView: UIView {
             make.right.equalTo(-15)
             make.bottom.equalTo(-48)
         }
+//        commentTextView.snp.makeConstraints { make in
+//            make.left.equalTo(15)
+//            make.right.equalTo(-15)
+//            make.height.equalTo(58)
+//            make.width.equalTo(kScreenWidth - 30)
+//            make.top.equalToSuperview()
+//        }
         tipsLabel222.snp.makeConstraints{make in
             make.width.equalTo(kScreenWidth)
             make.bottom.equalTo(-10)
             make.top.equalTo(commentTextView.snp.bottom).offset(10)
             make.height.equalTo(1)
         }
-//        commentPhotoView.snp.makeConstraints { make in
-//            make.left.equalTo(13)
-//            make.top.equalTo(commentTextView.snp.bottom).offset(20)
-//            make.height.equalTo(0)
-//            make.width.equalTo(160)
-//            make.bottom.equalTo(-10)
-//        }
     }
 
     @objc func keyboardWillChangeFrame(notifi: Notification) {
@@ -96,21 +101,6 @@ class IdeaSendEditView: UIView {
             self.layoutIfNeeded()
         }
     }
-
-//    @objc public var images: [[String: AnyObject]]? {
-//        didSet {
-//            if images?.count ?? 0 > 0 {
-//                commentPhotoView.snp.updateConstraints { make in
-//                    make.height.equalTo(48)
-//                }
-//            } else {
-//                commentPhotoView.snp.updateConstraints { make in
-//                    make.height.equalTo(0)
-//                }
-//            }
-//            commentPhotoView.reloadData()
-//        }
-//    }
         
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -132,31 +122,9 @@ class IdeaSendEditView: UIView {
             delegate?.commentSend(content: content)
         }
     }
-    /// 添加图片
-//    @objc func addPhotoBtnClik(_ sender: UIButton) {
-//        delegate?.commentAddPhoto(addPhotoClick: self, sender: sender)
-//    }
     
     @objc public weak var delegate: IdeaSendEditViewDelegate?
-    
-    /// 评论图片
-//    lazy var commentPhotoView: UICollectionView = {
-//        let layout = UICollectionViewFlowLayout()
-//        layout.scrollDirection = .vertical
-//        layout.itemSize = CGSize(width: 48, height: 48)
-//        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-//        layout.minimumInteritemSpacing = 6
-//        layout.minimumLineSpacing = 6
-//
-//        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
-//        view.backgroundColor = .clear
-//        view.dataSource = self
-//        view.delegate = self
-//        view.register(BPSingleImageDelCell.self)
-//        view.showsVerticalScrollIndicator = false
-//        view.showsHorizontalScrollIndicator = false
-//        return view
-//    }()
+
     
     /// 发布内容
     @objc lazy var commentTextView: UITextView = {

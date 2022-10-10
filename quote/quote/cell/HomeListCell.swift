@@ -19,7 +19,8 @@ class HomeListCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        imageHeight = Int((Screen.width-30) * (1175/2262.0))
+        // 考虑到横竖屏，取最低的去计算
+        imageHeight = Int((min(Screen.width, Screen.height) - 30) * (1175/2262.0))
         
         //这里生成后就不会变了
         // 阴影
@@ -89,13 +90,9 @@ class HomeListCell: UITableViewCell {
                     iconImageView.isHidden = false
                     // 图片 使用 remakeConstraints ，如果使用makeConstraints可能会布局异常
                     iconImageView.snp.remakeConstraints { make in
-    //                    make.top.equalTo(lineView.snp.bottom).offset(10)
                         make.top.equalTo(15)
-//                        make.top.equalToSuperview().offset(15)
                         make.left.equalTo(15)
                         make.right.equalTo(-15)
-                        // 这个属性是上下居中
-            //            make.centerY.equalToSuperview()
                         make.width.equalTo(Screen.width-30)
                         make.height.equalTo(imageHeight).priority(.high)
                     }
@@ -110,8 +107,6 @@ class HomeListCell: UITableViewCell {
                         make.top.equalTo(iconImageView.snp.bottom).offset(10)
                         // 水平居中
                         make.centerX.equalToSuperview()
-                        // 高度
-//                        make.height.equalTo(15)
                     }
                 }else {
                     tagLabel.isHidden = true
@@ -190,13 +185,9 @@ class HomeListCell: UITableViewCell {
                 
                 // 第三行标题
                 desLabel.snp.remakeConstraints { make in
-//                    make.top.equalTo(lineView.snp.bottom).offset(30)
                     make.top.equalTo(20)
                     make.left.equalTo(15)
                     make.right.equalTo(-15)
-                    // 水平居中 make.centerX.equalToSuperview()
-                    // 高度
-//                    make.height.equalTo(18)
                 }
                 
                 // 作者
@@ -293,7 +284,6 @@ class HomeListCell: UITableViewCell {
 //        label.font = .mediumSystemFont(ofSize: 12)
         label.text = ""
         label.clipsToBounds = true
-//        label.layer.cornerRadius = 4
         label.textAlignment = .center
         return label
     }()

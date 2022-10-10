@@ -55,12 +55,12 @@ class IdeaEditViewController: BaseViewController, IdeaEditNavigation {
         var top = 0.0
         if size.width > size.height {
             // 将要为横屏，之前为竖屏，取的是竖屏的top
-            left = kSafeAreaInset.top
-            top = kSafeAreaInset.top
+            left = kSafeAreaHeightAllways
+            top = kSafeAreaHeightAllways
         } else {
             // 将要为竖屏，之前为横屏，取的是竖屏的left
             left = 0.0
-            top = kSafeAreaInset.left+44
+            top = kSafeAreaHeightAllways+44
         }
         present?.uiBottomView.snp.remakeConstraints{ make in
             make.height.equalTo(50)

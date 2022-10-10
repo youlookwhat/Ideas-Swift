@@ -46,14 +46,22 @@ class IdeasPresent {
         view.addSubview(uiView)
         
         // 要先addSubview，再设置frame
-        uiView.snp.makeConstraints {make in
-            make.width.equalTo(kScreenWidth)
-            make.height.equalTo(350)
-            make.top.equalTo(kNavigationBarHeight + 50)
+        if Screen.width < Screen.height{
+            uiView.snp.makeConstraints {make in
+                make.left.right.equalTo(0)
+                make.height.equalTo(350)
+                make.top.equalTo(kNavigationBarHeight + 120)
+            }
+        } else {
+            uiView.snp.makeConstraints {make in
+                make.left.right.equalTo(0)
+                make.height.equalTo(350)
+                make.top.equalTo(kNavigationBarHeight)
+            }
         }
         emptyImage.snp.makeConstraints {make in
             make.width.height.equalTo(180)
-            make.top.equalTo(70)
+            make.top.equalToSuperview()
             make.centerX.equalToSuperview()
         }
         btNoNet.snp.makeConstraints {make in

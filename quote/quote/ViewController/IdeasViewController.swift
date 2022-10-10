@@ -147,27 +147,42 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
         super.viewWillTransition(to: size, with: coordinator)
         print("viewWillTransition--")
         
-        if (size.width > size.height) {
-//            // 横屏布局
-            
-//            tableView.snp.remakeConstraints { make in
-//                make.left.equalTo(kNavigationBarHeight+10)
-//                make.right.equalTo(-kNavigationBarHeight-10)
-//                make.top.equalToSuperview()
-//                make.bottom.equalToSuperview()
-//                make.width.equalTo(Screen.width - 2*kNavigationBarHeight-20)
-//                make.height.equalTo(Screen.height)
-//            }
-        } else {
-//            // 竖屏布局
-//            tableView.snp.remakeConstraints { make in
-//                make.left.right.equalToSuperview()
-//                make.top.equalToSuperview()
-//                make.bottom.equalToSuperview()
-//                make.width.equalTo(Screen.width)
-//                make.height.equalTo(Screen.height)
-//            }
+        // 这里如果使用Screen.width可能还是上一次的宽高
+        viewEdit?.snp.remakeConstraints{ make in
+            make.height.equalTo(size.height)
+            make.width.equalTo(size.width)
         }
+        // 改变输入框的宽度
+        viewEdit?.commentTextView.frame = CGRect(x: 0, y: 0, width: size.width - 30, height: 58)
+        
+        if (size.width > size.height) {
+            // 横屏布局
+            viewEdit?.backView.snp.remakeConstraints{ make in
+                make.left.equalToSuperview().offset(kSafeAreaHeightAllways)
+                make.right.equalToSuperview().offset(-kSafeAreaHeightAllways)
+                make.width.equalTo(Screen.width-2*kSafeAreaHeightAllways)
+                make.bottom.equalToSuperview()
+            }
+            emptyLayout?.snp.makeConstraints {make in
+                make.left.right.equalTo(0)
+                make.height.equalTo(350)
+                make.top.equalTo(kNavigationBarHeight)
+            }
+        } else {
+            let h = self.navigationController?.navigationBar.frame.size.height
+            // 竖屏布局
+            viewEdit?.backView.snp.remakeConstraints{ make in
+                make.left.right.equalToSuperview()
+                make.width.equalTo(Screen.width)
+                make.bottom.equalToSuperview()
+            }
+            emptyLayout?.snp.makeConstraints {make in
+                make.left.right.equalTo(0)
+                make.height.equalTo(350)
+                make.top.equalTo(kSafeAreaHeightAllways + h! + 44 + 120)
+            }
+        }
+        
     }
     
     func showButtonTouchUpInside(_ sender: Any) {
@@ -346,6 +361,7 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
             viewEdit!.isHidden = true
             viewEdit!.delegate = self
             viewEdit!.snp.makeConstraints{ make in
+                make.left.right.equalToSuperview()
                 make.height.equalTo(Screen.height)
                 make.width.equalTo(Screen.width)
             }
@@ -354,9 +370,12 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
     
     lazy var tableView: UITableView = {
         // viewBounds() 限制了tableView的宽高，距上状态栏+44，这样写二级页面返回时大标题会收起来
-//        let tableView = UITableView(frame: viewBounds(), style: .plain)
         let tableView = UITableView(frame: self.view.frame, style: .plain)
         tableView.backgroundColor = UIColor(lightColor: UIColor.colorF3F3F3, darkColor: .black)
+
+        // 可以使cell延伸到安全区域
+//        tableView.insetsContentViewsToSafeArea = false
+        
         // 这里的100是像素，不是文字对应的高度，要将高度转为像素
 //        tableView.rowHeight = Screen.width * (1175/2262.0) + 170.0
         // 自适应高度添加 1.这两行属性 初始高度和配置 2.最底部的一个cell配上bottom属性
@@ -391,6 +410,11 @@ extension IdeasViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CellIdentifier", for: indexPath) as! IdeaCell
 
+        // 去掉默认颜色，可去掉侧边的白色
+        cell.contentView.backgroundColor = .clear
+        cell.backgroundColor = .clear
+        
+        
         // 没有选中的样式，一般都没有
         cell.selectionStyle = .none
         
