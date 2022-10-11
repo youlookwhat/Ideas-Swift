@@ -147,6 +147,8 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
         super.viewWillTransition(to: size, with: coordinator)
         print("viewWillTransition--")
         
+        // 注意使用：remakeConstraints
+        
         // 这里如果使用Screen.width可能还是上一次的宽高
         viewEdit?.snp.remakeConstraints{ make in
             make.height.equalTo(size.height)
@@ -163,23 +165,22 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
                 make.width.equalTo(Screen.width-2*kSafeAreaHeightAllways)
                 make.bottom.equalToSuperview()
             }
-            emptyLayout?.snp.makeConstraints {make in
+            emptyLayout?.snp.remakeConstraints {make in
                 make.left.right.equalTo(0)
                 make.height.equalTo(350)
                 make.top.equalTo(kNavigationBarHeight)
             }
         } else {
-            let h = self.navigationController?.navigationBar.frame.size.height
             // 竖屏布局
             viewEdit?.backView.snp.remakeConstraints{ make in
                 make.left.right.equalToSuperview()
                 make.width.equalTo(Screen.width)
                 make.bottom.equalToSuperview()
             }
-            emptyLayout?.snp.makeConstraints {make in
+            emptyLayout?.snp.remakeConstraints {make in
                 make.left.right.equalTo(0)
                 make.height.equalTo(350)
-                make.top.equalTo(kSafeAreaHeightAllways + h! + 44 + 120)
+                make.top.equalTo(Screen.navigationBarHeight(self.navigationController) + 120)
             }
         }
         

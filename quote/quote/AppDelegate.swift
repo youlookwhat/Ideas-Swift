@@ -33,7 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        window?.makeKeyAndVisible()
         
         window = UIWindow.init(frame: UIScreen.main.bounds)
-//        window?.backgroundColor = UIColor.white
+        // 全局页面背景
+//        window?.backgroundColor = UIColor(lightColor: UIColor.colorF3F3F3, darkColor: .black)
         let nc = BaseNc(rootViewController: IdeasViewController())
         window?.rootViewController = nc
         window?.makeKeyAndVisible()
@@ -56,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //    }
 
     func showLauchImage() {
-            let url_string = "http://image.wufazhuce.com/FqWc5Ddw32045kUodXqxIdOujndM"
+//            let url_string = "http://image.wufazhuce.com/FqWc5Ddw32045kUodXqxIdOujndM"
             
     //        Alamofire.request(url_string,
     //               method: .get,

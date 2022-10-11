@@ -90,6 +90,7 @@ class OneViewController: BaseViewController, OneNavigation {
         
         present = OnePresent(navigation: self)
         present?.getOneData()
+        showLoading()
     }
     
     @objc func refreshSystem(){
@@ -197,7 +198,7 @@ class OneViewController: BaseViewController, OneNavigation {
     
     func onDataSuccess(bean: OneBean?) {
         
-        
+        stopLoading()
         refresh?.endRefreshing()
         // 下拉刷新完成，收起
         self.tableView.mj_header?.endRefreshing()
@@ -241,7 +242,6 @@ class OneViewController: BaseViewController, OneNavigation {
             
         } else if present!.num == 0{
             // 只有第一页才显示错误页面
-//            tableView.removeFromSuperview()
             tableView.isHidden = true
             btNoNet = UIButton(frame: viewBounds())
             btNoNet!.setTitle("请检查网络，点击重试", for: .normal)
@@ -250,6 +250,9 @@ class OneViewController: BaseViewController, OneNavigation {
             btNoNet!.setTitleColor(UIColor(lightColor: .black, darkColor: .white), for: .normal)
             btNoNet!.addTarget(self, action: #selector(reLoad), for: .touchUpInside)
             view.addSubview(btNoNet!)
+            btNoNet!.snp.remakeConstraints { make in
+                make.left.right.top.bottom.equalToSuperview()
+            }
         } else {
             self.tableView.mj_footer?.endRefreshingWithNoMoreData()
         }

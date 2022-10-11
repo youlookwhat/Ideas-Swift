@@ -128,6 +128,9 @@ class Screen: NSObject {
     static let width = UIScreen.main.bounds.size.width
     static let height = UIScreen.main.bounds.size.height
     static let size = UIScreen.main.bounds.size
+    // 状态栏+导航栏高度（导航栏可能有大标题，所以不是固定的44）
+    class func navigationBarHeight(_ nv:UINavigationController?) -> CGFloat { kSafeAreaHeightAllways + (nv?.navigationBar.frame.size.height ?? 44) 
+ }
 }
 
 @objc

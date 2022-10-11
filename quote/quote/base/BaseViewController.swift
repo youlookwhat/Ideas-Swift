@@ -12,6 +12,7 @@ class BaseViewController: UIViewController {
 
     var ivBack:UIImageView! = nil
     var toolView:UIView! = nil
+    var indicatorView:UIActivityIndicatorView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +59,31 @@ class BaseViewController: UIViewController {
                 }
         } else {
             navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    // 显示加载菊花
+    func showLoading() {
+        if indicatorView == nil {
+            indicatorView = UIActivityIndicatorView (style: .gray)
+            indicatorView?.color = .gray;
+            self.view.addSubview(indicatorView!)
+            indicatorView?.snp.remakeConstraints { make in
+                make.left.right.top.bottom.equalToSuperview()
+            }
+        }
+        if !indicatorView!.isAnimating {
+            indicatorView?.startAnimating()
+        }
+    }
+    // 取消加载
+    func stopLoading(){
+        if indicatorView != nil {
+            if indicatorView!.isAnimating {
+                indicatorView?.stopAnimating()
+            }
+            indicatorView?.removeFromSuperview()
+            indicatorView = nil
         }
     }
 
