@@ -47,6 +47,7 @@ playground.xcworkspace
 # .swiftpm
 
 .build/
+build/
 
 # CocoaPods
 #
@@ -89,14 +90,15 @@ fastlane/test_output
 
 iOSInjectionProject/
 
+# Pods 忽略文件夹下文件
+Pods/
 
-#CocoaPods
-#Pods/
-Pods
+# project jinbeen
 .DS_Store
-Podfile.lock
-/.DS_Store
-Podfile.lock
-/Podfile.lock
+*.pbxuser
+!default.pbxuser
+xcuserdata/
+.project_cache/
 
-Pods/Target Support Files
+**/.svn/
+*/oclint.xml
