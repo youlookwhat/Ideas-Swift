@@ -23,7 +23,7 @@ iOS 使用 Swift5 开发的想法记录App。
 ### 用到的第三方库
 
  - [SDWebImage](https://github.com/SDWebImage/SDWebImage)：图片加载
- - [realm-swift](https://github.com/realm/realm-swift)
+ - [realm-swift](https://github.com/realm/realm-swift)：移动端数据库
  - [MJRefresh 3.2.2](https://github.com/CoderMJLee/MJRefresh)：下拉刷新，加载更多
  - [SnapKit](https://github.com/SnapKit/SnapKit)：自动布局
  - [AFNetworking 4.0](https://github.com/AFNetworking/AFNetworking)：数据请求
@@ -35,7 +35,7 @@ iOS 使用 Swift5 开发的想法记录App。
 
 ### Documents
 
-- [开发中的问题记录](https://raw.githubusercontent.com/youlookwhat/Ideas-Swift/main/file/ideas-questions.md)
+- [开发中的问题记录](https://github.com/youlookwhat/Ideas-Swift/blob/main/file/ideas-questions.md)
 - [quotes](https://github.com/vv314/quotes)：收集了一些每日一句的接口与网站。
 
 ## About me
