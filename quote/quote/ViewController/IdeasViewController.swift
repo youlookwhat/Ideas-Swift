@@ -544,12 +544,11 @@ extension IdeasViewController: UITableViewDataSource, UITableViewDelegate {
         }
         DatabaseUtil.insertNote(by: note)
         
-        viewEdit?.hideSendView()
+        viewEdit?.hideSendView(clearText: true)
     }
     
-    
     func commentDismiss(dismissClick view: IdeaSendEditView, sender: UIButton?) {
-        viewEdit?.hideSendView()
+        viewEdit?.hideSendView(clearText: false)
     }
 
     // 从编辑页回传的位置值

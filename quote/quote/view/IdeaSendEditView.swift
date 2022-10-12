@@ -210,12 +210,15 @@ class IdeaSendEditView: UIView {
     }
     
     // 隐藏弹框
-    public func hideSendView(){
-        commentTextView.text = ""
+    public func hideSendView(clearText:Bool){
+        if clearText {
+            // 是否清空输入框
+            commentTextView.text = ""
+            sendBtn.backgroundColor = UIColor(lightColor: .colorF7, darkColor: .color151517)
+            sendBtn.isUserInteractionEnabled = false
+        }
         endEditing(true)
         isHidden = true
-        sendBtn.backgroundColor = UIColor(lightColor: .colorF7, darkColor: .color151517)
-        sendBtn.isUserInteractionEnabled = false
     }
 }
 
