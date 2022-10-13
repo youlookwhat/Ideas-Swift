@@ -10,6 +10,8 @@ iOS 使用 Swift5 开发的想法记录App。
 
 
 ## Screenshots
+![](https://raw.githubusercontent.com/youlookwhat/Ideas-Swift/main/file/images.png)
+![](https://raw.githubusercontent.com/youlookwhat/Ideas-Swift/main/file/images2.png)
 
 
 ## Features 特性
