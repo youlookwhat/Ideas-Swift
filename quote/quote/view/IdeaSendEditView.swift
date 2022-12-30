@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 /// 发布弹窗
 @objc protocol IdeaSendEditViewDelegate {

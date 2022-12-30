@@ -16,7 +16,6 @@ PODS:
     - AFNetworking/NSURLSession
   - Alamofire (5.5.0)
   - HandyJSON (5.0.2)
-  - MagazineLayout (1.6.5)
   - MJRefresh (3.7.5)
   - Realm (10.26.0):
     - Realm/Headers (= 10.26.0)
@@ -32,7 +31,6 @@ DEPENDENCIES:
   - AFNetworking (~> 4.0)
   - Alamofire (~> 5.5.0)
   - HandyJSON (~> 5.0.2)
-  - MagazineLayout
   - MJRefresh
   - RealmSwift (~> 10)
   - SDWebImage (~> 5.0)
@@ -43,7 +41,6 @@ SPEC REPOS:
     - AFNetworking
     - Alamofire
     - HandyJSON
-    - MagazineLayout
     - MJRefresh
     - Realm
     - RealmSwift
@@ -54,13 +51,12 @@ SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
   HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
-  MagazineLayout: aa7a1a70aac10791a08a29790320de0670e3f4ba
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
   Realm: 97bc2540088e1e88a4b2051ba4b8eac85be0039a
   RealmSwift: 1bc3cbcb1681c5a9262df5883280123aa2d1d4cf
   SDWebImage: 0905f1b7760fc8ac4198cae0036600d67478751e
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: b5974144d1befb90b0776a524493606348295221
+PODFILE CHECKSUM: 632db706fde68deaa19a5fa23d9d045488b94412
 
 COCOAPODS: 1.11.3

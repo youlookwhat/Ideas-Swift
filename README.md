@@ -30,10 +30,48 @@ iOS 使用 Swift5 开发的想法记录App。
  - [SnapKit](https://github.com/SnapKit/SnapKit)：自动布局
  - [AFNetworking 4.0](https://github.com/AFNetworking/AFNetworking)：数据请求
 
+
+
 <!--
  - [YYModel](https://github.com/ibireme/YYModel)：json转bean
  - [SDWebImageWebPCoder](https://github.com/SDWebImage/SDWebImageWebPCoder)：图片加载webp
 -->
+
+
+### 打开项目
+#### 1、安装cocoapods
+1、去国内镜像地址手动下载
+`https://github.com/CocoaPods/Specs`
+但是由于科学上网的原因，下载的异常慢，可以去国内镜像地址下载：
+`https://gitee.com/mirrors/CocoaPods-Specs`
+
+2、然后解压 放到
+![cocoapods地址](https://img-blog.csdnimg.cn/47c884bbb43e47c89fddd2d2fca70855.png)
+
+3、终端进入
+`cd /Users/jingbin/.cocoapods/repos/cocoapods `
+
+4、git 初始化
+`git init`
+
+会出现：
+```
+jingbin@jingbindeMBP cocoapods % git init
+Initialized empty Git repository in /Users/jingbin/.cocoapods/repos/cocoapods/.git/
+```
+
+5、关联仓库
+`git remote add origin https://github.com/CocoaPods/Specs`
+
+6、查看是否正常
+查看 `.git/config`里的配置
+![](https://img-blog.csdnimg.cn/c9b6c50b8b574418a13b1755a03847b2.png)
+
+#### 2、去项目根目录执行：`pod install`
+
+#### 3、打开：`quote.xcworkspace`
+如果找不到 snp 等，就单独引入 : `import SnapKit`
+
 
 ### Documents
 

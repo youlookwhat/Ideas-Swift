@@ -6,7 +6,7 @@
 //  Copyright © 2022 景彬. All rights reserved.
 //
 
-import MagazineLayout
+
 import Foundation
 import HandyJSON
 
@@ -56,7 +56,6 @@ class AuthorBean:Decodable {
 }
 
 class ItemOneBean {
-    var sizeMode: MagazineLayoutItemSizeMode? = nil
     var category:String? = nil
     var img_url:String? = nil
     var forward:String? = nil

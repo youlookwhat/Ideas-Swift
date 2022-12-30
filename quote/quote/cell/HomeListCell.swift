@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SnapKit
+import SDWebImage
 
 /*
  * 主页的cell adapter
