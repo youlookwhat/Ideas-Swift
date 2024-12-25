@@ -23,6 +23,10 @@ class OneViewController: BaseViewController, OneNavigation {
     // 系统自己的下拉刷新，不松手也可以刷新，新布局没显示出来就end会跳动
     var refresh:UIRefreshControl?
     var titleButton:UIBarButtonItem?
+    private var tabCollectionView: UICollectionView!
+    private var selectedTabIndex: Int = 0
+    private let tabs = ["三重门", "零下一度", "像少年啦飞驰", "毒", "通稿2003", "长安乱", "就这么漂来漂去", "一座城池","光荣日","杂的文","他的国","草","可爱的洪水猛兽","1988：我想和这个世界谈谈","我所理解的生活","告白与告别"]
+    private let tabCellId = "TabCell"
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -60,11 +64,33 @@ class OneViewController: BaseViewController, OneNavigation {
         
         view.addSubview(tableView)
         
-        tableView.snp.makeConstraints{ make in
-            make.top.bottom.equalToSuperview()
+        // 设置横向滚动的 tab 布局
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumInteritemSpacing = 5
+        layout.minimumLineSpacing = 5
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        
+        // 创建 CollectionView
+        tabCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        tabCollectionView.backgroundColor = .clear
+        tabCollectionView.showsHorizontalScrollIndicator = false
+        tabCollectionView.delegate = self
+        tabCollectionView.dataSource = self
+        tabCollectionView.register(CategoryTabCell.self, forCellWithReuseIdentifier: tabCellId)
+        view.addSubview(tabCollectionView)
+        
+        // 设置约束
+        tabCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.left.right.equalToSuperview()
-            make.width.equalTo(Screen.width)
-            make.height.equalTo(Screen.height)
+            make.height.equalTo(44)
+        }
+        
+        // 更新 tableView 的约束
+        tableView.snp.makeConstraints{ make in
+            make.top.equalTo(tabCollectionView.snp.bottom)
+            make.left.right.bottom.equalToSuperview()
         }
         
 //        refresh = UIRefreshControl()
@@ -281,7 +307,7 @@ class OneViewController: BaseViewController, OneNavigation {
         let tableView = UITableView(frame: self.view.frame, style: .plain)
 //        let tableView = UITableView(frame: CGRect(x: 0, y: kNavigationBarHeight, width: kScreenWidth, height: kScreenHeight-kNavigationBarHeight), style: .plain)
 //        tableView.backgroundColor = .white
-        // 这里的100是像素，不是文字对应的高度，要将高度转为像素
+        // ��里的100是像素，不是文字对应的高度要将高度转为像素
 //        tableView.rowHeight = Screen.width * (1175/2262.0) + 170.0
         // 自适应高度添加 1.这两行属性 初始高度和配置 2.最底部的一个cell配上bottom属性
         tableView.estimatedRowHeight = Screen.width * (1175/2262.0) + 170.0
@@ -328,5 +354,56 @@ extension OneViewController: UITableViewDataSource, UITableViewDelegate {
         if (bean.share_url != nil && bean.share_url != "") {
             WebViewViewController.start(nc: navigationController, url: bean.share_url, titleOut: bean.title)
         }
+    }
+}
+
+extension OneViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return tabs.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: tabCellId, for: indexPath) as! CategoryTabCell
+        cell.configure(with: tabs[indexPath.item])
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let title = tabs[indexPath.item]
+        // 计算文字宽度
+        let font = indexPath.item == selectedTabIndex ? 
+            UIFont.boldSystemFont(ofSize: 16) : 
+            UIFont.systemFont(ofSize: 15)
+        let width = (title as NSString).boundingRect(
+            with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: 44),
+            options: .usesLineFragmentOrigin,
+            attributes: [.font: font],
+            context: nil
+        ).width
+        
+        // 给文字左右加上一些边距
+        return CGSize(width: width + 20, height: 44)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedTabIndex = indexPath.item
+        
+        // 获取选中cell的布局属性
+        guard let attributes = collectionView.layoutAttributesForItem(at: indexPath) else { return }
+        let cellFrame = attributes.frame
+        
+        // 计算目标位置，使选中的 cell 位于中间
+        let collectionViewCenter = collectionView.bounds.width / 2
+        let targetOffset = cellFrame.midX - collectionViewCenter
+        
+        // 确保不会滚动超出范围
+        let maxOffset = collectionView.contentSize.width - collectionView.bounds.width
+        let finalOffsetX = max(0, min(targetOffset, maxOffset))
+        
+        // 平滑滚动到目标位置
+        collectionView.setContentOffset(CGPoint(x: finalOffsetX, y: 0), animated: true)
+        
+        // 这里可以添加切换内容的逻辑
+        // present?.switchTab(to: indexPath.item)
     }
 }
