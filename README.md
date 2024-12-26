@@ -78,7 +78,5 @@ Initialized empty Git repository in /Users/jingbin/.cocoapods/repos/cocoapods/.g
 - [quotes](https://github.com/vv314/quotes)：收集了一些每日一句的接口与网站。
 
 
-## About me
- - **QQ：** 770413277
- - **简书：**[Jinbeen](https://www.jianshu.com/u/e43c6e979831)
- - **Blog：**[http://jinbeen.com](http://jinbeen.com)
+## App
+基于此，已上线的App：[夜有所梦](https://apps.apple.com/cn/app/id1668533045)，欢迎下载体验。
