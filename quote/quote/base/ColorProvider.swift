@@ -196,4 +196,6 @@ extension UIColor {
     
     static let colorBlack = "#000000".uiColor
     static let colorBlack0d6 = "#000000".getColor(alpha: 0.6)
+    static let colorBlack0d97 = "#000000".getColor(alpha: 0.97)
+    static let colorBlack0d95 = "#000000".getColor(alpha: 0.95)
 }

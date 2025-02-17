@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		3227C2472D1B95A100654FE9 /* CategoryTabCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3227C2462D1B958900654FE9 /* CategoryTabCell.swift */; };
+		3227C24E2D1B9D5C00654FE9 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3227C24C2D1B9D5C00654FE9 /* ItemCell.swift */; };
+		3227C24F2D1B9D5C00654FE9 /* SubCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3227C24D2D1B9D5C00654FE9 /* SubCategoryCell.swift */; };
+		3227C2502D1B9D5C00654FE9 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3227C24B2D1B9D5C00654FE9 /* CategoryCell.swift */; };
+		3227C2522D1B9D6C00654FE9 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3227C2512D1B9D6C00654FE9 /* CategoryViewController.swift */; };
 		32D64AC2295D95610083E0A1 /* app_lauch.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 32D64AC1295D95610083E0A1 /* app_lauch.jpg */; };
 		7C1410BE28523B1A0013AD7B /* Defines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1410BD28523B1A0013AD7B /* Defines.swift */; };
 		7C2CDCDD28BE5872007AAD09 /* ViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2CDCDC28BE5872007AAD09 /* ViewExt.swift */; };
@@ -61,6 +65,10 @@
 
 /* Begin PBXFileReference section */
 		3227C2462D1B958900654FE9 /* CategoryTabCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTabCell.swift; sourceTree = "<group>"; };
+		3227C24B2D1B9D5C00654FE9 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		3227C24C2D1B9D5C00654FE9 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
+		3227C24D2D1B9D5C00654FE9 /* SubCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryCell.swift; sourceTree = "<group>"; };
+		3227C2512D1B9D6C00654FE9 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		32D64AC1295D95610083E0A1 /* app_lauch.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = app_lauch.jpg; sourceTree = "<group>"; };
 		4CFC478867C899CDA75E7081 /* Pods_quote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_quote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C1410BD28523B1A0013AD7B /* Defines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Defines.swift; sourceTree = "<group>"; };
@@ -170,6 +178,7 @@
 		7C5EF5E4284667B000AB80F7 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				3227C2512D1B9D6C00654FE9 /* CategoryViewController.swift */,
 				7C5EF5E5284667D800AB80F7 /* OneViewController.swift */,
 				7CC51D0D2863541400D5CC00 /* WebViewViewController.swift */,
 				7CB0E65B28883E1600EA40F1 /* IdeasViewController.swift */,
@@ -240,6 +249,9 @@
 		7CBC7A072822BC7B005ECB4C /* cell */ = {
 			isa = PBXGroup;
 			children = (
+				3227C24B2D1B9D5C00654FE9 /* CategoryCell.swift */,
+				3227C24C2D1B9D5C00654FE9 /* ItemCell.swift */,
+				3227C24D2D1B9D5C00654FE9 /* SubCategoryCell.swift */,
 				3227C2462D1B958900654FE9 /* CategoryTabCell.swift */,
 				7CDE7242287ACADF003D20D8 /* HomeListCell.swift */,
 				7CB0E66E28899D8F00EA40F1 /* IdeaCell.swift */,
@@ -525,6 +537,10 @@
 				7CDE7243287ACADF003D20D8 /* HomeListCell.swift in Sources */,
 				7C9FE97F281ADEF3005D64C0 /* SwiftyJSON.swift in Sources */,
 				7CC51D0E2863541400D5CC00 /* WebViewViewController.swift in Sources */,
+				3227C24E2D1B9D5C00654FE9 /* ItemCell.swift in Sources */,
+				3227C2522D1B9D6C00654FE9 /* CategoryViewController.swift in Sources */,
+				3227C24F2D1B9D5C00654FE9 /* SubCategoryCell.swift in Sources */,
+				3227C2502D1B9D5C00654FE9 /* CategoryCell.swift in Sources */,
 				7C2CDD6328C0FC5C007AAD09 /* DatabaseUtil.swift in Sources */,
 				7C2CDCDD28BE5872007AAD09 /* ViewExt.swift in Sources */,
 				7CBC7A1E28295082005ECB4C /* ViewUtil.swift in Sources */,
@@ -701,7 +717,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5J8DQFNWK3;
 				INFOPLIST_FILE = quote/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -724,7 +740,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5J8DQFNWK3;
 				INFOPLIST_FILE = quote/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

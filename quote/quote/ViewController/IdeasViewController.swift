@@ -318,8 +318,12 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
     // 点击关于
     @objc func openAbout(){
         // 使用浏览器打开
-        openUrl(urlString: "https://github.com/youlookwhat/flomo-offline")
+//        openUrl(urlString: "https://github.com/youlookwhat/flomo-offline")
         
+        let vc = CategoryViewController()
+//        navigationController?.t
+//        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.pushViewController(vc, animated: true)
 //        WebViewViewController.start(nc: navigationController, url: "https://github.com/youlookwhat/ByQuoteApp", titleOut: "loading")
     }
     
