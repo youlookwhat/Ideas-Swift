@@ -12,6 +12,7 @@
 		3227C24F2D1B9D5C00654FE9 /* SubCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3227C24D2D1B9D5C00654FE9 /* SubCategoryCell.swift */; };
 		3227C2502D1B9D5C00654FE9 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3227C24B2D1B9D5C00654FE9 /* CategoryCell.swift */; };
 		3227C2522D1B9D6C00654FE9 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3227C2512D1B9D6C00654FE9 /* CategoryViewController.swift */; };
+		325D913C2D7EEA4800DFE2DD /* DataSyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325D913B2D7EEA4800DFE2DD /* DataSyncViewController.swift */; };
 		32D64AC2295D95610083E0A1 /* app_lauch.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 32D64AC1295D95610083E0A1 /* app_lauch.jpg */; };
 		7C1410BE28523B1A0013AD7B /* Defines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1410BD28523B1A0013AD7B /* Defines.swift */; };
 		7C2CDCDD28BE5872007AAD09 /* ViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2CDCDC28BE5872007AAD09 /* ViewExt.swift */; };
@@ -69,6 +70,7 @@
 		3227C24C2D1B9D5C00654FE9 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		3227C24D2D1B9D5C00654FE9 /* SubCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryCell.swift; sourceTree = "<group>"; };
 		3227C2512D1B9D6C00654FE9 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		325D913B2D7EEA4800DFE2DD /* DataSyncViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSyncViewController.swift; sourceTree = "<group>"; };
 		32D64AC1295D95610083E0A1 /* app_lauch.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = app_lauch.jpg; sourceTree = "<group>"; };
 		4CFC478867C899CDA75E7081 /* Pods_quote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_quote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C1410BD28523B1A0013AD7B /* Defines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Defines.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 		7C5EF5E4284667B000AB80F7 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				325D913B2D7EEA4800DFE2DD /* DataSyncViewController.swift */,
 				3227C2512D1B9D6C00654FE9 /* CategoryViewController.swift */,
 				7C5EF5E5284667D800AB80F7 /* OneViewController.swift */,
 				7CC51D0D2863541400D5CC00 /* WebViewViewController.swift */,
@@ -567,6 +570,7 @@
 				7C4B7C8528A29B9100D7CC4D /* Wrapper.swift in Sources */,
 				7CB0E65C28883E1600EA40F1 /* IdeasViewController.swift in Sources */,
 				7C4B7C8928A29E1000D7CC4D /* UITextView+CMInputView.m in Sources */,
+				325D913C2D7EEA4800DFE2DD /* DataSyncViewController.swift in Sources */,
 				7CF8D539281E549300B83EDC /* OneNavigation.swift in Sources */,
 				7CF8D529281D78FF00B83EDC /* OneModel.swift in Sources */,
 				7CBC7A1228241E2F005ECB4C /* HttpRequest.swift in Sources */,
