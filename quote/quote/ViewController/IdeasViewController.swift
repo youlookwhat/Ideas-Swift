@@ -44,11 +44,15 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
         navigationController?.navigationItem.largeTitleDisplayMode = .automatic
         view.backgroundColor = UIColor(lightColor: UIColor.colorF3F3F3, darkColor: .black)
         
-        let item1=UIBarButtonItem(title:"关于",style: UIBarButtonItem.Style.plain,target:self,action:#selector(openAbout))
+//        let item1=UIBarButtonItem(title:"关于",style: UIBarButtonItem.Style.plain,target:self,action:#selector(openAbout))
 //        let item1=UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.trash,target:self,action:#selector(openAbout))
-        let item2=UIBarButtonItem(title:"一个",style: UIBarButtonItem.Style.plain,target:self,action:#selector(openMenu))
+//        let item2=UIBarButtonItem(title:"实验室",style: UIBarButtonItem.Style.plain,target:self,action:#selector(openMenu))
+//        ddNewItem = UIBarButtonItem(title:"", image: UIImage(systemName: .icon_ellipsis_circle), primaryAction: nil menu: createMenuIOS13())
+        let item2 = UIBarButtonItem(title:"",image: UIImage(systemName: "ellipsis.circle"), menu: createMenuIOS15())
+//        addNewItem = UIBarButtonItem(title:"", image: UIImage(systemName: .icon_ellipsis_circle), primaryAction: nil, menu: createMenuIOS13())
 //        self.navigationItem.rightBarButtonItem=item1
-        self.navigationItem.rightBarButtonItems=[item1,item2]
+//        self.navigationItem.rightBarButtonItems=[item1,item2]
+        self.navigationItem.rightBarButtonItems=[item2]
         
 //        let items1=UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.pause,target:self,action:nil)
 //        let items2=UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action,target:self,action:nil)
@@ -301,11 +305,39 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
         return bt2;
     }()
     
+    // 菜单只创建一次，暂时没找到中途修改方法，重新赋值
+    func createMenuIOS15() -> UIMenu {
+        // 第一个菜单
+        let photo = UIAction(title: "图片管理") { _ in
+            let vc = ImageManagerViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        let data = UIAction(title: "iCloud数据校对") { _ in
+            let vc = DataSyncViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        let category = UIAction(title: "多级分类") { _ in
+            let vc = CategoryViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        let one = UIAction(title: "仿一个AppP首页") { _ in
+            let vc = OneViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        let about = UIAction(title: "关于本App") { _ in
+            self.openUrl(urlString: "https://github.com/youlookwhat/Ideas-Swift")
+        }
+        let menuActions = [photo,data,category,one,about]
+
+        let addNewMenu = UIMenu(
+            title: "",
+            children: menuActions)
+        return addNewMenu
+    }
+    
     // 打开菜单
     @objc func openMenu(){
         let vc = OneViewController()
-//        navigationController?.t
-//        navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -318,13 +350,11 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
     // 点击关于
     @objc func openAbout(){
         // 使用浏览器打开
-//        openUrl(urlString: "https://github.com/youlookwhat/flomo-offline")
+        openUrl(urlString: "https://github.com/youlookwhat/Ideas-Swift")
         
-        let vc = CategoryViewController()
-//        navigationController?.t
-//        navigationController?.navigationBar.prefersLargeTitles = false
-        navigationController?.pushViewController(vc, animated: true)
-//        WebViewViewController.start(nc: navigationController, url: "https://github.com/youlookwhat/ByQuoteApp", titleOut: "loading")
+//        let vc = CategoryViewController()
+//        navigationController?.pushViewController(vc, animated: true)
+//        WebViewViewController.start(nc: navigationController, url: "https://github.com/youlookwhat/Ideas-Swift", titleOut: "loading")
     }
     
     func sendData() {
