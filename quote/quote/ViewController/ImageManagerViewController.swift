@@ -57,12 +57,33 @@ class ImageManagerViewController: BaseViewController {
         return button
     }()
     
+    // 添加菜单按钮和相关属性
+    private let menuButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "ellipsis"), for: .normal)
+        button.tintColor = .black
+        return button
+    }()
+    
+    private let menuView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 8
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOffset = CGSize(width: 0, height: 2)
+        view.layer.shadowOpacity = 0.2
+        view.layer.shadowRadius = 4
+        view.isHidden = true
+        return view
+    }()
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         hideTitleLayout()
         setupUI()
         loadSavedImages()
+        setupMenuButton()
     }
     
     // MARK: - Setup
@@ -295,6 +316,52 @@ class ImageManagerViewController: BaseViewController {
         } catch {
             print("Error saving image: \(error)")
         }
+    }
+    
+    private func setupMenuButton() {
+        view.addSubview(menuButton)
+        view.addSubview(menuView)
+        
+        // 使用 SnapKit 设置 menuButton 约束
+        menuButton.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+            make.trailing.equalToSuperview().offset(-16)
+        }
+        
+        // 使用 SnapKit 设置 menuView 约束
+        menuView.snp.makeConstraints { make in
+            make.top.equalTo(menuButton.snp.bottom).offset(8)
+            make.trailing.equalTo(menuButton)
+            make.width.equalTo(120)
+        }
+        
+        // 添加菜单项
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 8
+        menuView.addSubview(stackView)
+        
+        // 使用 SnapKit 设置 stackView 约束
+        stackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
+        }
+        
+        // 添加菜单项按钮
+        let menuItems = ["选项 1", "选项 2", "选项 3"]
+        for item in menuItems {
+            let itemButton = UIButton(type: .system)
+            itemButton.setTitle(item, for: .normal)
+            itemButton.contentHorizontalAlignment = .left
+            itemButton.setTitleColor(.black, for: .normal)
+            stackView.addArrangedSubview(itemButton)
+        }
+        
+        // 添加点击事件
+        menuButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc private func menuButtonTapped() {
+        menuView.isHidden.toggle()
     }
 }
 

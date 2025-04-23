@@ -34,6 +34,9 @@ class BaseViewController: UIViewController {
         ivBack.isUserInteractionEnabled = true
         ivBack.isHidden = false
         toolView.addSubview(ivBack)
+        
+        
+        hideTitleLayout()
     }
     
     // 隐藏标题栏

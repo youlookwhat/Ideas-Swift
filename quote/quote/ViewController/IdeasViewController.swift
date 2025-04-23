@@ -308,26 +308,35 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
     // 菜单只创建一次，暂时没找到中途修改方法，重新赋值
     func createMenuIOS15() -> UIMenu {
         // 第一个菜单
-        let photo = UIAction(title: "图片管理") { _ in
-            let vc = ImageManagerViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
-        let data = UIAction(title: "iCloud数据校对") { _ in
-            let vc = DataSyncViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
-        let category = UIAction(title: "多级分类") { _ in
-            let vc = CategoryViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
-        let one = UIAction(title: "仿一个AppP首页") { _ in
+        let one = UIAction(title: "仿“一个”首页") { _ in
             let vc = OneViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }
-        let about = UIAction(title: "关于本App") { _ in
+        let photo = UIAction(title: "1.图片管理") { _ in
+            let vc = ImageManagerViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        let data = UIAction(title: "2.iCloud数据校对") { _ in
+            let vc = DataSyncViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        let category = UIAction(title: "3.多级分类") { _ in
+            let vc = CategoryViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        let scan = UIAction(title: "4.扫描文本") { _ in
+            let vc = TextScannerViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+        let about1 = UIAction(title: "关于本App") { _ in
             self.openUrl(urlString: "https://github.com/youlookwhat/Ideas-Swift")
         }
-        let menuActions = [photo,data,category,one,about]
+        let about = UIMenu(
+            title: "",
+            options: .displayInline,
+            children: [one,about1])
+        let menuActions = [photo,data,category,one,scan,about]
 
         let addNewMenu = UIMenu(
             title: "",
