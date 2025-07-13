@@ -328,6 +328,13 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
             let vc = TextScannerViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }
+        let slip = UIAction(title: "5.左右滑动") { _ in
+            // 在需要跳转的地方
+            let slidingVC = SlidingViewController()
+            slidingVC.setTotalPages(10) // 设置总页数为8
+            slidingVC.jumpToPage(1) // 跳转到第4页
+            self.navigationController?.pushViewController(slidingVC, animated: true)
+        }
         
         let about1 = UIAction(title: "关于本App") { _ in
             self.openUrl(urlString: "https://github.com/youlookwhat/Ideas-Swift")
@@ -336,7 +343,7 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
             title: "",
             options: .displayInline,
             children: [one,about1])
-        let menuActions = [photo,data,category,one,scan,about]
+        let menuActions = [photo,data,category,one,scan,slip,about]
 
         let addNewMenu = UIMenu(
             title: "",
