@@ -15,7 +15,6 @@ class SlidingViewController: BaseViewController {
     private var currentPage: Int = 0
     private var loadedPages: Set<Int> = []
     private var isTransitioning = false // 添加过渡状态标记
-    private var pageViewGestureRecognizers: [UIGestureRecognizer] = []
     
     // MARK: - UI Components
     private lazy var pageViewController: UIPageViewController = {

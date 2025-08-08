@@ -328,6 +328,10 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
             let vc = TextScannerViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }
+        let saveimage = UIAction(title: "6.保存图片") { _ in
+            let vc = ShareImageGeneratorViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
         let slip = UIAction(title: "5.左右滑动") { _ in
             // 在需要跳转的地方
             let slidingVC = SlidingViewController()
@@ -343,7 +347,7 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
             title: "",
             options: .displayInline,
             children: [one,about1])
-        let menuActions = [photo,data,category,one,scan,slip,about]
+        let menuActions = [photo,data,category,one,scan,slip,saveimage,about]
 
         let addNewMenu = UIMenu(
             title: "",
