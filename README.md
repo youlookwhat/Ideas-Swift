@@ -79,4 +79,4 @@ Initialized empty Git repository in /Users/jingbin/.cocoapods/repos/cocoapods/.g
 
 
 ## App
-基于此，已上线的App：[夜有所梦](https://apps.apple.com/cn/app/id1668533045)，欢迎下载体验。
+基于此，已上线的App：[所思笔记](https://apps.apple.com/cn/app/id1668533045)，欢迎下载体验。
