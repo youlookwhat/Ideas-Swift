@@ -339,6 +339,10 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
             slidingVC.jumpToPage(1) // 跳转到第4页
             self.navigationController?.pushViewController(slidingVC, animated: true)
         }
+        let livePhoto = UIAction(title: "7.Live Photo选择") { _ in
+            let vc = LivePhotoViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
         
         let about1 = UIAction(title: "关于本App") { _ in
             self.openUrl(urlString: "https://github.com/youlookwhat/Ideas-Swift")
@@ -347,7 +351,7 @@ class IdeasViewController: BaseViewController, IdeasNavigation,UITextFieldDelega
             title: "",
             options: .displayInline,
             children: [one,about1])
-        let menuActions = [photo,data,category,one,scan,slip,saveimage,about]
+        let menuActions = [photo,data,category,one,scan,slip,saveimage,livePhoto,about]
 
         let addNewMenu = UIMenu(
             title: "",
