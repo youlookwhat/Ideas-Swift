@@ -3,6 +3,28 @@
 ## Overview
 The Live Photo feature allows users to select and view Live Photos from their photo library. This feature integrates seamlessly with the existing Ideas-Swift application.
 
+## User Flow
+
+```
+Main Screen (IdeasViewController)
+    ↓
+[Tap ⋯ Menu Button]
+    ↓
+[Select "7.Live Photo选择"]
+    ↓
+Live Photo Screen (LivePhotoViewController)
+    ↓
+[Tap "选择Live Photo" Button]
+    ↓
+System Photo Picker (PHPickerViewController)
+    ↓
+[User selects a Live Photo]
+    ↓
+Live Photo displayed in PHLivePhotoView
+    ↓
+[User can long-press to play animation]
+```
+
 ## Features
 - Select Live Photos from the device's photo library using PHPickerViewController
 - Display selected Live Photos with interactive playback
