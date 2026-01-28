@@ -27,7 +27,7 @@ The Live Photo feature allows users to select and view Live Photos from their ph
 - **instructionLabel**: Provides usage guidance for interacting with the Live Photo
 
 #### Permission Handling
-The app requests photo library access permission before allowing users to select Live Photos. If permission is denied, users are guided to the Settings app.
+The app uses PHPickerViewController which handles photo library permissions internally. The Info.plist key `NSPhotoLibraryUsageDescription` is still required for the system permission dialog.
 
 #### Photo Selection
 Uses `PHPickerViewController` with a filter set to `.livePhotos` to ensure only Live Photos can be selected.
@@ -42,7 +42,7 @@ Uses `PHPickerViewController` with a filter set to `.livePhotos` to ensure only 
 
 ### Selecting a Live Photo
 1. Tap the "选择Live Photo" button
-2. Grant photo library permission if prompted
+2. The system photo picker will appear
 3. Select a Live Photo from your library
 4. The Live Photo will be displayed on the screen
 
@@ -51,7 +51,7 @@ Uses `PHPickerViewController` with a filter set to `.livePhotos` to ensure only 
 - Tap "重新选择" to select a different Live Photo
 
 ## Technical Requirements
-- iOS 12.0+
+- iOS 14.0+ (required for PHPickerViewController)
 - Swift 5.0+
 - PhotosUI framework
 - Photos framework

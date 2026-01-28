@@ -102,52 +102,9 @@ class LivePhotoViewController: BaseViewController {
     
     // MARK: - Actions
     @objc private func selectLivePhoto() {
-        checkPhotoLibraryPermission { [weak self] granted in
-            if granted {
-                self?.presentPHPicker()
-            } else {
-                self?.showPermissionAlert()
-            }
-        }
-    }
-    
-    private func checkPhotoLibraryPermission(completion: @escaping (Bool) -> Void) {
-        if #available(iOS 14, *) {
-            let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
-            
-            switch status {
-            case .authorized, .limited:
-                completion(true)
-            case .denied, .restricted:
-                completion(false)
-            case .notDetermined:
-                PHPhotoLibrary.requestAuthorization(for: .readWrite) { newStatus in
-                    DispatchQueue.main.async {
-                        completion(newStatus == .authorized || newStatus == .limited)
-                    }
-                }
-            @unknown default:
-                completion(false)
-            }
-        } else {
-            // Fallback for iOS 13 and earlier
-            let status = PHPhotoLibrary.authorizationStatus()
-            
-            switch status {
-            case .authorized:
-                completion(true)
-            case .denied, .restricted:
-                completion(false)
-            case .notDetermined:
-                PHPhotoLibrary.requestAuthorization { newStatus in
-                    DispatchQueue.main.async {
-                        completion(newStatus == .authorized)
-                    }
-                }
-            @unknown default:
-                completion(false)
-            }
-        }
+        // PHPickerViewController handles permissions internally
+        // No need for explicit permission check
+        presentPHPicker()
     }
     
     private func presentPHPicker() {
@@ -158,23 +115,6 @@ class LivePhotoViewController: BaseViewController {
         let picker = PHPickerViewController(configuration: configuration)
         picker.delegate = self
         present(picker, animated: true)
-    }
-    
-    private func showPermissionAlert() {
-        let alert = UIAlertController(
-            title: "需要照片权限",
-            message: "请在设置中允许访问照片库以选择Live Photo",
-            preferredStyle: .alert
-        )
-        
-        alert.addAction(UIAlertAction(title: "取消", style: .cancel))
-        alert.addAction(UIAlertAction(title: "去设置", style: .default) { _ in
-            if let settingsUrl = URL(string: UIApplication.openSettingsURLString) {
-                UIApplication.shared.open(settingsUrl)
-            }
-        })
-        
-        present(alert, animated: true)
     }
     
     private func displayLivePhoto(_ livePhoto: PHLivePhoto) {
