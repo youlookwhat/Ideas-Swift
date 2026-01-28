@@ -112,21 +112,41 @@ class LivePhotoViewController: BaseViewController {
     }
     
     private func checkPhotoLibraryPermission(completion: @escaping (Bool) -> Void) {
-        let status = PHPhotoLibrary.authorizationStatus()
-        
-        switch status {
-        case .authorized, .limited:
-            completion(true)
-        case .denied, .restricted:
-            completion(false)
-        case .notDetermined:
-            PHPhotoLibrary.requestAuthorization { newStatus in
-                DispatchQueue.main.async {
-                    completion(newStatus == .authorized || newStatus == .limited)
+        if #available(iOS 14, *) {
+            let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+            
+            switch status {
+            case .authorized, .limited:
+                completion(true)
+            case .denied, .restricted:
+                completion(false)
+            case .notDetermined:
+                PHPhotoLibrary.requestAuthorization(for: .readWrite) { newStatus in
+                    DispatchQueue.main.async {
+                        completion(newStatus == .authorized || newStatus == .limited)
+                    }
                 }
+            @unknown default:
+                completion(false)
             }
-        @unknown default:
-            completion(false)
+        } else {
+            // Fallback for iOS 13 and earlier
+            let status = PHPhotoLibrary.authorizationStatus()
+            
+            switch status {
+            case .authorized:
+                completion(true)
+            case .denied, .restricted:
+                completion(false)
+            case .notDetermined:
+                PHPhotoLibrary.requestAuthorization { newStatus in
+                    DispatchQueue.main.async {
+                        completion(newStatus == .authorized)
+                    }
+                }
+            @unknown default:
+                completion(false)
+            }
         }
     }
     
